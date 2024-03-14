@@ -33,7 +33,13 @@ class DataControl: ObservableObject {
                                  "sensor_id": user ,/*UserDefaults.standard.string(forKey: "username") ?? ""*/
                                  "data_time": dateUnix ?? 0,
                                 ],
-                        "body": [sensor_id: value]
+                        "body": ["event": value,
+                                 "value": value,
+                                 "eventPosition_x": value,
+                                 "eventPosition_y": value,
+                                 "window_w": value,
+                                 "window_h": value,]
+//                        "body": [sensor_id: value]
                         ] as [String: Any]
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: sendData)
