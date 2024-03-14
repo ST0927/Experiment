@@ -10,6 +10,8 @@ import Combine
 
 class FeatureStore : ObservableObject {
     @Published var tapCount:Int = 0
+    
+    
     @Published var userID = ""
     @Published var email = ""
 }
