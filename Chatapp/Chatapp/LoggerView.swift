@@ -9,17 +9,9 @@ import SwiftUI
 import Combine
 import Firebase
 
-class FeatureStore : ObservableObject {
-    @Published var tapCount: Int = 0
-    @Published var userID = ""
-    @Published var email = ""
-}
-
 struct Logger : View {
     @EnvironmentObject var timerController: TimerCount
     @EnvironmentObject var userStore: UserStore
-    @EnvironmentObject var dataControl: DataControl
-    @EnvironmentObject var featureStore: FeatureStore
     
     @State var tapNum:Int = 0
     @State var LeftChoice:Int = 0
@@ -55,19 +47,103 @@ struct Logger : View {
                 c.wrappedValue += 0.1
             }
     }
+    
+    @State var event: String = ""
+    @State var responseData: String = ""
+    @State var screenWidth:CGFloat = 0
+    @State var screenHeight:CGFloat = 0
+    @State var tapPosition_x:CGFloat = 0
+    @State var tapPosition_y:CGFloat = 0
+    func sendLoggerData() {
+        //日付をjsonで使える形に変換する、冗長だから後で省略化する
+        let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            formatter.timeStyle = .medium
+            formatter.dateStyle = .medium
+            formatter.locale = Locale(identifier: "ja_JP")
+        let now = Date()
+        let now_str: String = formatter.string(from: now)
+        let date: NSDate? = formatter.date(from: now_str) as NSDate?
+        let dateUnix: TimeInterval? = date?.timeIntervalSince1970
+        
+        //HTTPPOSTの形式を指定
+        let url = URL(string: "https://datalake.iopt.jp/v1/sensor_data")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        //送信する内容のリスト
+        let sendData = ["key": "t9eX8tyr7G_ZQk-2",
+                        "meta": ["area": 1927,
+                                 "type": 1927,
+                                 "sensor_id": userStore.email,
+                                 "data_time": dateUnix ?? 0,
+                                ],
+                        "body": ["event": event,
+                                 
+                                 "screen_width":screenWidth,
+                                 "screen_height":screenHeight,
+                                 
+                                 "tap_count":tapNum,
+                                 "tap_interval":TimeCount,
+                                 "tap_position_x":"",
+                                 "tap_position_y":"",
+                                 
+                                 "choice_left":LeftChoice,
+                                 "choice_right":RightChoice,
+                                 
+                                 "view_position":abs(offsetY - initOffsetY),
+                                 "scroll_length":abs(endposition - startposition),
+                                 "scroll_time":ScrollingTime,
+                                 "scroll_speed":abs(ScrollSpeed)
+                                 ]
+                        ] as [String: Any]
+        
+        //送信する内容をJSON形式に変更してHTTPリクエストのボディに設定
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: sendData)
+            request.httpBody = jsonData
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        //HTTPリクエストの実行
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data = data {
+                if let responseString = String(data: data, encoding: .utf8) {
+                    DispatchQueue.main.async {
+                        self.responseData = responseString
+                    }
+                }
+            } else if let error = error {
+                print("Error: \(error)")
+            }
+        }.resume()
+        
+        
+    }
 
     var body: some View {
+        
         //透明なビューを設置してタップ回数のカウント
-        Color.clear
-            .contentShape(Rectangle())
-            .onTapGesture {
-                tapNum += 1
-                TimeCount = 0
-                restartTime(c: $TimeCount)
-                dataControl.sendData(user : userStore.email,sensor_id: "tapCount", value: tapNum)
-                //画面タップでキーボードを閉じる
-                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-            }
+        GeometryReader { geometry in
+            Color.clear
+                .contentShape(Rectangle())
+                .onTapGesture { tap in
+                    event = "tapCount"
+                    screenWidth = geometry.size.width
+                    screenHeight = geometry.size.height
+                    tapPosition_x = tap.x
+                    tapPosition_y = tap.y
+                    tapNum += 1
+                    TimeCount = 0
+                    restartTime(c: $TimeCount)
+                    sendLoggerData()
+                    //画面タップでキーボードを閉じる
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
+        }
+       
         
         //動作確認用
         HStack {

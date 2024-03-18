@@ -10,7 +10,7 @@ import Foundation
 //データレイクに送信
 class DataControl: ObservableObject {
     @Published var responseData: String = ""
-    func sendData<T: Numeric>(user: String, sensor_id: String, value: T) {
+    func sendData<T: Numeric>(user: String, event: String, value: T,x: T?,y: T?,width: T?,height: T?) {
         //日付をjsonで使える形に変換
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -30,15 +30,15 @@ class DataControl: ObservableObject {
         let sendData = ["key": "t9eX8tyr7G_ZQk-2",
                         "meta": ["area": 1927,
                                  "type": 1927,
-                                 "sensor_id": user ,/*UserDefaults.standard.string(forKey: "username") ?? ""*/
+                                 "sensor_id": user ,
                                  "data_time": dateUnix ?? 0,
                                 ],
-                        "body": ["event": value,
+                        "body": ["event": event,
                                  "value": value,
-                                 "eventPosition_x": value,
-                                 "eventPosition_y": value,
-                                 "window_w": value,
-                                 "window_h": value,]
+                                 "eventPosition_x": x ?? "",
+                                 "eventPosition_y": y ?? "",
+                                 "window_w": width ?? "",
+                                 "window_h": height ?? "",]
 //                        "body": [sensor_id: value]
                         ] as [String: Any]
         do {
