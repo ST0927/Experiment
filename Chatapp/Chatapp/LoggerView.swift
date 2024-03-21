@@ -186,6 +186,8 @@ struct Choice : View {
     @Binding var ResponseTimeCount:Double
     @Binding var ResponseTimeCounts:[Double]
     
+    @State var buttonEnable: Bool = true
+    
     func B_text(s: String) -> some View {
         Text(s)
             .padding(30)
