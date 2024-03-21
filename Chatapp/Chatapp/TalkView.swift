@@ -19,7 +19,6 @@ struct Talk: View {
     @State var key_history:[String] = []
     @State var message_len:[String] = []
     @State var history: [Message] = []
-    @State var isButtonDisabled: Bool = false
     @State var start:Bool = true
     @State var offsetY: CGFloat = 0
     @State var initOffsetY: CGFloat = 0
@@ -73,7 +72,7 @@ struct Talk: View {
         }.padding(.horizontal, 10)
     }
     
-    func I_frame(i: String) -> some View {
+    func imageFrame(i: String) -> some View {
             Image(i)
                 .resizable()
                 .frame(width: 200, height: 200)
@@ -105,7 +104,7 @@ struct Talk: View {
                                     })
                                     {
                                         Text("はい").frame(width: 200).padding(10).background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1)))
-                                    }.disabled(isButtonDisabled)
+                                    }
                                 }
                                 Spacer()
                             }.padding(.top, 10)
@@ -117,8 +116,8 @@ struct Talk: View {
                                     choiceQuestion()
                                     HStack(spacing: 0) {
                                         if Num/2 <= (Q.ImageName.count/4) {
-                                            I_frame(i:Q.ImageName[Num*2 - 2])
-                                            I_frame(i:Q.ImageName[Num*2 - 1])
+                                            imageFrame(i:Q.ImageName[Num*2 - 2])
+                                            imageFrame(i:Q.ImageName[Num*2 - 1])
                                         }
                                     }
                                 }
