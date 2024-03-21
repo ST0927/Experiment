@@ -39,6 +39,8 @@ struct Talk: View {
     @State var unScrollTimeCount:Double = 0
     @State var UnScrollTimeCount:Double = 0
     @State var Delete: Int = 0
+    @State var ButtonDisabled: Bool = false
+    @State var TextfieldDisabled: Bool = true
     
     func choiceQuestion() -> some View {
         HStack(alignment: .top) {
@@ -226,7 +228,7 @@ struct Talk: View {
             }
             //Logger
             if start == true {
-                Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts)
+                Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled)
                     .environmentObject(TimerCount()).environmentObject(DataControl())
             }
             
@@ -246,6 +248,7 @@ struct Talk: View {
                                 }
                             }
                         }
+                        
                     Button(action: {
                         let db = Firestore.firestore()
                         db.collection("messages").addDocument(data: ["text":self.message]) { err in
@@ -257,13 +260,15 @@ struct Talk: View {
                         }
                         message_len.append("\(message)")
                         self.message = ""
-                        //キーボードを閉じる
+                        ButtonDisabled = false
+                        TextfieldDisabled = true
+                        //送信したらキーボードを閉じる
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }) {
                         Image(systemName:"paperplane.fill")
                             .frame(width: 55,height: 55)
                             .background(Color.white)
-                    }
+                    }.disabled(TextfieldDisabled)
                 }
             }
         }

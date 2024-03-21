@@ -36,6 +36,9 @@ struct Logger : View {
     @Binding var ResponseTimeCount:Double
     @Binding var ResponseTimeCounts:[Double]
     
+    @Binding var ButtonDisabled: Bool
+    @Binding var TextfieldDisabled: Bool
+    
     func restartTime(c: Binding<Double>) {
         if let _timer = time{
             _timer.cancel()
@@ -172,7 +175,7 @@ struct Logger : View {
                 
             }
         }
-        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts)
+        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled)
     }
 }
 
@@ -186,7 +189,8 @@ struct Choice : View {
     @Binding var ResponseTimeCount:Double
     @Binding var ResponseTimeCounts:[Double]
     
-    @State var buttonEnable: Bool = true
+    @Binding var ButtonDisabled: Bool
+    @Binding var TextfieldDisabled: Bool
     
     func B_text(s: String) -> some View {
         Text(s)
@@ -224,10 +228,12 @@ struct Choice : View {
                             print("sent")
                         }
                     }
+                    ButtonDisabled = true
+                    TextfieldDisabled = false
                 })
                 {
                     B_text(s: "左")
-                }
+                }.disabled(ButtonDisabled)
                 Button(action: {
                     ResponseTimeCounts.append(ResponseTimeCount)
                     ResponseTimeCount = 0
@@ -251,10 +257,12 @@ struct Choice : View {
                             print("sent")
                         }
                     }
+                    ButtonDisabled = true
+                    TextfieldDisabled = false
                 })
                 {
                     B_text(s: "右")
-                }
+                }.disabled(ButtonDisabled)
             }.padding(.bottom, 55)
         }.keyboardObserving()
     }
