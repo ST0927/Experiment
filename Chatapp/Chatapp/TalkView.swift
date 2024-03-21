@@ -41,20 +41,38 @@ struct Talk: View {
     @State var UnScrollTimeCount:Double = 0
     @State var Delete: Int = 0
     
-    func Q_frame(s: String) -> some View {
+    func choiceQuestion() -> some View {
         HStack(alignment: .top) {
             AvatarView()
-            Text(s).font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1))).cornerRadius(10)
+            Text("魅力的だと思う画像を選んでください").font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1))).cornerRadius(10)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
         }.padding(.horizontal, 10)
     }
-    func A_frame(s: String) -> some View {
+    
+    func textQuestion() -> some View {
+        HStack(alignment: .top) {
+            AvatarView()
+            Text("その画像を選んだ理由を教えてください").font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1))).cornerRadius(10)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Spacer()
+        }.padding(.horizontal, 10)
+    }
+    
+    func userChoice(s: String) -> some View {
         HStack {
             Spacer()
             Text(s).font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.2078431373, green: 0.7647058824, blue: 0.3450980392, alpha: 1))).cornerRadius(10)
         }.padding(.horizontal, 10)
     }
+    
+    func userText(s: String) -> some View {
+        HStack {
+            Spacer()
+            Text(s).font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.2078431373, green: 0.7647058824, blue: 0.3450980392, alpha: 1))).cornerRadius(10)
+        }.padding(.horizontal, 10)
+    }
+    
     func I_frame(i: String) -> some View {
             Image(i)
                 .resizable()
@@ -94,19 +112,18 @@ struct Talk: View {
                         } else {
                             ForEach(history.indices, id: \.self) { index in
                                 let Num = index+1 //indexがIntじゃないから数字を足す
-                                A_frame(s:" \(history[index].text)")
-                                HStack(alignment: .top) {
-                                    VStack(spacing: 0) {
-                                        Q_frame(s:"問 \(Num)： 魅力的だと思う画像を選んでください")
-                                        HStack(spacing: 0) {
-                                            if Num/2 <= (Q.ImageName.count/4) {
-                                                I_frame(i:Q.ImageName[Num*2 - 2])
-                                                I_frame(i:Q.ImageName[Num*2 - 1])
-                                            }
+                                userChoice(s:" \(history[index].text)")
+                                VStack(spacing: 0) {
+                                    choiceQuestion()
+                                    HStack(spacing: 0) {
+                                        if Num/2 <= (Q.ImageName.count/4) {
+                                            I_frame(i:Q.ImageName[Num*2 - 2])
+                                            I_frame(i:Q.ImageName[Num*2 - 1])
                                         }
                                     }
-                                    Spacer()
                                 }
+                                userText(s:" \(history[index].text)")
+                                textQuestion()
                             }.padding(.vertical, 5)
                                 .onChange(of: history.indices) {
                                     if let _timer = ResponseTime{
