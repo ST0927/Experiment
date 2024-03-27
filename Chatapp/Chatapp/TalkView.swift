@@ -42,9 +42,7 @@ struct Talk: View {
     @State var Delete: Int = 0
     @State var ButtonDisabled: Bool = false
     @State var TextfieldDisabled: Bool = true
-    
-    
-    
+        
     func choiceQuestion() -> some View {
         HStack(alignment: .top) {
             AvatarView()
@@ -118,7 +116,11 @@ struct Talk: View {
                                 let Num = index+1 //indexがIntじゃないから数字を足す
                                 userChoice(s:" \(history[index].text)")
                                 VStack(spacing: 0) {
-                                    choiceQuestion()
+                                    if Num%2 == 0 {
+                                        choiceQuestion()
+                                    } else {
+                                        textQuestion()
+                                    }
                                     HStack(spacing: 0) {
                                         if Num/2 <= (Q.ImageName.count/4) {
                                             imageFrame(i:Q.ImageName[Num*2 - 2])
@@ -126,8 +128,6 @@ struct Talk: View {
                                         }
                                     }
                                 }
-                                userText(s:" \(history[index].text)")
-                                textQuestion()
                             }.padding(.vertical, 5)
                                 .onChange(of: history.indices) {
                                     if let _timer = ResponseTime{
