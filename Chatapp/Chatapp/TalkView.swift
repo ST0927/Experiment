@@ -20,7 +20,6 @@ struct Talk: View {
     @State var key_history:[String] = []
     @State var message_len:[String] = []
     @State var history:[Message] = []
-    @State var talkStart:Bool = true
     @State var offsetY:CGFloat = 0
     @State var initOffsetY:CGFloat = 0
     @State var pre:CGFloat = 0
@@ -82,76 +81,53 @@ struct Talk: View {
             VStack(alignment: .leading) {
                 ScrollViewReader { proxy in
                     ScrollView {
-                        if talkStart == false {
-                            HStack(alignment: .top) {
-                                AvatarView().padding()
-                                VStack(spacing: 0) {
-                                    Text("アンケートを始めますか？").frame(width: 200).font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1)))
-                                    Button(action: {
-                                        talkStart = true
-                                        let db = Firestore.firestore()
-                                        db.collection("messages").addDocument(data: ["text": "始める"]) { err in
-                                            if let e = err {
-                                                print(e)
-                                            } else {
-                                                print("sent")
-                                            }
-                                        }
-                                    })
-                                    {
-                                        Text("はい").frame(width: 200).padding(10).background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1)))
-                                    }
-                                }
-                                Spacer()
-                            }.padding(.top, 10)
-                        } else {
+                        VStack(spacing: 0) {
+                            choiceQuestion()
+                            HStack(spacing: 0) {
+                                imageFrame(i:Q.ImageName[0])
+                                imageFrame(i:Q.ImageName[1])
+                            }
+                        }
+                        ForEach(history.indices, id: \.self) { index in
+                            let Num = index+1 //indexがIntじゃないから数字を足す
+                            userResponse(s:" \(history[index].text)")
                             VStack(spacing: 0) {
-                                choiceQuestion()
+                                if Num%2 == 0 {
+                                    choiceQuestion()
+                                } else {
+                                    textQuestion()
+                                }
                                 HStack(spacing: 0) {
-                                    imageFrame(i:Q.ImageName[0])
-                                    imageFrame(i:Q.ImageName[1])
+                                    if Num < Q.ImageName.count/2 {
+                                        imageFrame(i:Q.ImageName[Num*2])
+                                        imageFrame(i:Q.ImageName[Num*2 + 1])
+                                    }
                                 }
                             }
-                            ForEach(history.indices, id: \.self) { index in
-                                let Num = index+1 //indexがIntじゃないから数字を足す
-                                userResponse(s:" \(history[index].text)")
-                                VStack(spacing: 0) {
-                                    if Num%2 == 0 {
-                                        choiceQuestion()
-                                    } else {
-                                        textQuestion()
-                                    }
-                                    HStack(spacing: 0) {
-                                        if Num < Q.ImageName.count/2 {
-                                            imageFrame(i:Q.ImageName[Num*2])
-                                            imageFrame(i:Q.ImageName[Num*2 + 1])
-                                        }
-                                    }
+                        }.padding(.vertical, 5)
+                            .onChange(of: history.indices) {
+                                if let _timer = ResponseTime{
+                                    _timer.cancel()
                                 }
-                            }.padding(.vertical, 5)
-                                .onChange(of: history.indices) {
-                                    if let _timer = ResponseTime{
-                                        _timer.cancel()
+                                ResponseTime = Timer.publish(every: 0.1, on: .main, in: .common)
+                                    .autoconnect()
+                                    .receive(on: DispatchQueue.main)
+                                    .sink { _ in
+                                        ResponseTimeCount += 0.1
                                     }
-                                    ResponseTime = Timer.publish(every: 0.1, on: .main, in: .common)
-                                        .autoconnect()
-                                        .receive(on: DispatchQueue.main)
-                                        .sink { _ in
-                                            ResponseTimeCount += 0.1
+                            }
+                            .background(
+                                GeometryReader { geometry in
+                                    Color.clear
+                                        .preference(
+                                            key: ScrollOffsetYPreferenceKey.self,
+                                            value: [geometry.frame(in: .global).minY]
+                                        ).onAppear {
+                                            initOffsetY = geometry.frame(in: .global).minY
                                         }
                                 }
-                                .background(
-                                    GeometryReader { geometry in
-                                        Color.clear
-                                            .preference(
-                                                key: ScrollOffsetYPreferenceKey.self,
-                                                value: [geometry.frame(in: .global).minY]
-                                            ).onAppear {
-                                                initOffsetY = geometry.frame(in: .global).minY
-                                            }
-                                    }
-                                )
-                        }
+                            )
+
                         Spacer(minLength: 50).id("footer")
                     }.padding(.bottom, 55)
                         .onChange(of: history.indices) {
@@ -230,10 +206,8 @@ struct Talk: View {
                 }
             }
             //Logger
-            if talkStart == true {
-                Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled)
-                    .environmentObject(TimerCount()).environmentObject(DataControl())
-            }
+            Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled)
+                .environmentObject(TimerCount()).environmentObject(DataControl())
             
             VStack {
                 Spacer()
