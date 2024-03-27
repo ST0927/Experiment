@@ -19,29 +19,29 @@ struct Talk: View {
     @State var key_message:[String] = []
     @State var key_history:[String] = []
     @State var message_len:[String] = []
-    @State var history: [Message] = []
-    @State var start:Bool = true
-    @State var offsetY: CGFloat = 0
-    @State var initOffsetY: CGFloat = 0
-    @State var pre: CGFloat = 0
-    @State var current: CGFloat = 0
-    @State var scroll: Bool = false
-    @State var Time: AnyCancellable?
-    @State var ResponseTime: AnyCancellable?
+    @State var history:[Message] = []
+    @State var talkStart:Bool = true
+    @State var offsetY:CGFloat = 0
+    @State var initOffsetY:CGFloat = 0
+    @State var pre:CGFloat = 0
+    @State var current:CGFloat = 0
+    @State var scroll:Bool = false
+    @State var Time:AnyCancellable?
+    @State var ResponseTime:AnyCancellable?
     @State var ResponseTimeCount:Double = 0
     @State var ResponseTimeCounts:[Double] = []
-    @State var startposition: CGFloat = 0
-    @State var endposition: CGFloat = 0
-    @State var ScrollTime: AnyCancellable?
+    @State var startposition:CGFloat = 0
+    @State var endposition:CGFloat = 0
+    @State var ScrollTime:AnyCancellable?
     @State var ScrollTimeCount:Double = 0
     @State var ScrollingTime:Double = 0
     @State var ScrollSpeed:Double = 0
-    @State var unScrollTime: AnyCancellable?
+    @State var unScrollTime:AnyCancellable?
     @State var unScrollTimeCount:Double = 0
     @State var UnScrollTimeCount:Double = 0
-    @State var Delete: Int = 0
-    @State var ButtonDisabled: Bool = false
-    @State var TextfieldDisabled: Bool = true
+    @State var Delete:Int = 0
+    @State var ButtonDisabled:Bool = false
+    @State var TextfieldDisabled:Bool = true
         
     func choiceQuestion() -> some View {
         HStack(alignment: .top) {
@@ -82,13 +82,13 @@ struct Talk: View {
             VStack(alignment: .leading) {
                 ScrollViewReader { proxy in
                     ScrollView {
-                        if start == false {
+                        if talkStart == false {
                             HStack(alignment: .top) {
                                 AvatarView().padding()
                                 VStack(spacing: 0) {
                                     Text("アンケートを始めますか？").frame(width: 200).font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1)))
                                     Button(action: {
-                                        start = true
+                                        talkStart = true
                                         let db = Firestore.firestore()
                                         db.collection("messages").addDocument(data: ["text": "始める"]) { err in
                                             if let e = err {
@@ -105,6 +105,13 @@ struct Talk: View {
                                 Spacer()
                             }.padding(.top, 10)
                         } else {
+                            VStack(spacing: 0) {
+                                choiceQuestion()
+                                HStack(spacing: 0) {
+                                    imageFrame(i:Q.ImageName[0])
+                                    imageFrame(i:Q.ImageName[1])
+                                }
+                            }
                             ForEach(history.indices, id: \.self) { index in
                                 let Num = index+1 //indexがIntじゃないから数字を足す
                                 userResponse(s:" \(history[index].text)")
@@ -223,7 +230,7 @@ struct Talk: View {
                 }
             }
             //Logger
-            if start == true {
+            if talkStart == true {
                 Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled)
                     .environmentObject(TimerCount()).environmentObject(DataControl())
             }
