@@ -61,14 +61,7 @@ struct Talk: View {
         }.padding(.horizontal, 10)
     }
     
-    func userChoice(s: String) -> some View {
-        HStack {
-            Spacer()
-            Text(s).font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.2078431373, green: 0.7647058824, blue: 0.3450980392, alpha: 1))).cornerRadius(10)
-        }.padding(.horizontal, 10)
-    }
-    
-    func userText(s: String) -> some View {
+    func userResponse(s: String) -> some View {
         HStack {
             Spacer()
             Text(s).font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.2078431373, green: 0.7647058824, blue: 0.3450980392, alpha: 1))).cornerRadius(10)
@@ -114,7 +107,7 @@ struct Talk: View {
                         } else {
                             ForEach(history.indices, id: \.self) { index in
                                 let Num = index+1 //indexがIntじゃないから数字を足す
-                                userChoice(s:" \(history[index].text)")
+                                userResponse(s:" \(history[index].text)")
                                 VStack(spacing: 0) {
                                     if Num%2 == 0 {
                                         choiceQuestion()
