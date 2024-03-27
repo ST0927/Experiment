@@ -15,6 +15,7 @@ import Combine
 struct Talk: View {
     @EnvironmentObject var Q: QuestionList
     @State var message = ""
+    @State var chatType = ""
     @State var key_message:[String] = []
     @State var key_history:[String] = []
     @State var message_len:[String] = []
@@ -41,6 +42,8 @@ struct Talk: View {
     @State var Delete: Int = 0
     @State var ButtonDisabled: Bool = false
     @State var TextfieldDisabled: Bool = true
+    
+    
     
     func choiceQuestion() -> some View {
         HStack(alignment: .top) {
@@ -239,6 +242,7 @@ struct Talk: View {
                         .frame(height: 55)
                         .background(Color.white)
                         .onChange(of: message) {
+                            
                                 key_message.append("\(message)")
                                 key_history.append("\(message.replacingOccurrences(of:" ",with: "[空白]"))")
                             if key_message.count > 1 {
@@ -250,8 +254,9 @@ struct Talk: View {
                         }
                         
                     Button(action: {
+                        chatType = "user"
                         let db = Firestore.firestore()
-                        db.collection("messages").addDocument(data: ["text":self.message]) { err in
+                        db.collection("messages").addDocument(data: ["text":self.message, "type":self.chatType]) { err in
                             if let e = err {
                                 print(e)
                             } else {
@@ -285,8 +290,10 @@ struct ScrollOffsetYPreferenceKey: PreferenceKey {
 struct Message : Identifiable {
     var id = UUID()
     var text: String
+    var type: String
     init(data: [String: Any]) {
         self.text = data["text"] as! String
+        self.type = data["type"] as? String ?? ""
     }
 }
 
