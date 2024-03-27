@@ -123,8 +123,8 @@ struct Talk: View {
                                     }
                                     HStack(spacing: 0) {
                                         if Num/2 <= (Q.ImageName.count/4) {
-                                            imageFrame(i:Q.ImageName[Num*2 - 2])
-                                            imageFrame(i:Q.ImageName[Num*2 - 1])
+                                            imageFrame(i:Q.ImageName[Num*2])
+                                            imageFrame(i:Q.ImageName[Num*2 + 1])
                                         }
                                     }
                                 }
