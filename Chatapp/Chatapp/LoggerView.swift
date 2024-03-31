@@ -58,16 +58,9 @@ struct Logger : View {
     @State var tapPosition_x:CGFloat = 0
     @State var tapPosition_y:CGFloat = 0
     func sendLoggerData() {
-        //日付をjsonで使える形に変換する、冗長だから後で省略化する
-        let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            formatter.timeStyle = .medium
-            formatter.dateStyle = .medium
-            formatter.locale = Locale(identifier: "ja_JP")
         let now = Date()
-        let now_str: String = formatter.string(from: now)
-        let date: NSDate? = formatter.date(from: now_str) as NSDate?
-        let dateUnix: TimeInterval? = date?.timeIntervalSince1970
+        let dateUnix: TimeInterval = now.timeIntervalSince1970
+
         
         //HTTPPOSTの形式を指定
         let url = URL(string: "https://datalake.iopt.jp/v1/sensor_data")!
@@ -80,7 +73,7 @@ struct Logger : View {
                         "meta": ["area": 1927,
                                  "type": 1927,
                                  "sensor_id": userStore.email,
-                                 "data_time": dateUnix ?? 0,
+                                 "data_time": dateUnix,
                                 ],
                         "body": ["event": event,
                                  
