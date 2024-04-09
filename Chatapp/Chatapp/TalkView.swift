@@ -99,8 +99,9 @@ struct Talk: View {
                                 }
                                 HStack(spacing: 0) {
                                     if Num < Q.ImageName.count/2 {
-                                        imageFrame(i:Q.ImageName[Num*2])
-                                        imageFrame(i:Q.ImageName[Num*2 + 1])
+//                                        imageFrame(i:Q.ImageName[Num*2])
+//                                        imageFrame(i:Q.ImageName[Num*2 + 1])
+                                        ImageFromPathView(filePath: "/Users/shigeyuki-t/Desktop/GQA/images/n15740.jpg")
                                     }
                                 }
                             }
@@ -279,7 +280,19 @@ struct AvatarView: View {
     }
 }
 
+struct ImageFromPathView: View {
+    let filePath: String
 
+    var body: some View {
+        if let uiImage = UIImage(contentsOfFile: filePath) {
+            Image(uiImage: uiImage)
+                .resizable()
+                .scaledToFit()
+        } else {
+            Text("画像が見つかりません")
+        }
+    }
+}
 
 #Preview {
     Talk()
