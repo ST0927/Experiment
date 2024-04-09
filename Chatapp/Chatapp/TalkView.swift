@@ -51,12 +51,12 @@ struct Talk: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack(spacing: 0) {
-                            choiceQuestionView(text: dataset.csvArray[1][1])
+                            ChoiceQuestionView(text: dataset.csvArray[1][1])
                             ImageFromPathView(filePath: "\(dataset.csvArray[1][3])")
                         }
                         ForEach(history.indices, id: \.self) { index in
                             let Num = index+1 //indexがIntじゃないから数字を足す
-                            userResponseView(text: "\(history[index].text)")
+                            UserResponseView(text: "\(history[index].text)")
                             VStack(spacing: 0) {
 //                                if Num%2 == 0 {
 //                                    choiceQuestion()
@@ -64,7 +64,7 @@ struct Talk: View {
 //                                    textQuestion()
 //                                }
 //                                choiceQuestion()
-                                choiceQuestionView(text: dataset.csvArray[Num+1][1])
+                                ChoiceQuestionView(text: dataset.csvArray[Num+1][1])
                                 HStack(spacing: 0) {
                                     if !dataset.csvArray[Num+1][3].isEmpty {
                                         ImageFromPathView(filePath: "\(dataset.csvArray[Num+1][3])")
@@ -174,7 +174,7 @@ struct Talk: View {
             }
             //Logger
             Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled)
-                .environmentObject(TimerCount()).environmentObject(DataControl())
+                .environmentObject(TimerCount())
             
             VStack {
                 Spacer()
@@ -258,7 +258,7 @@ struct ImageFromPathView: View {
     }
 }
 
-struct userResponseView: View {
+struct UserResponseView: View {
     let text: String
     var body: some View {
         HStack {
@@ -271,7 +271,7 @@ struct userResponseView: View {
     }
 }
 
-struct choiceQuestionView: View {
+struct ChoiceQuestionView: View {
     let text: String
     var body: some View {
         HStack(alignment: .top) {

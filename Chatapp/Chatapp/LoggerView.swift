@@ -138,7 +138,6 @@ struct Logger : View {
     }
 
     var body: some View {
-        
         //透明なビューを設置してタップ回数のカウント
         GeometryReader { geometry in
             Color.clear
@@ -199,7 +198,6 @@ struct Choice : View {
     @Binding var time: AnyCancellable?
     @Binding var ResponseTimeCount:Double
     @Binding var ResponseTimeCounts:[Double]
-    
     @Binding var ButtonDisabled: Bool
     @Binding var TextfieldDisabled: Bool
     
@@ -243,7 +241,8 @@ struct Choice : View {
                     TextfieldDisabled = false
                 })
                 {
-                    B_text(s: "左")
+                    ButtonView(text: "左")
+//                    B_text(s: "左")
                 }.disabled(ButtonDisabled)
                 Button(action: {
                     ResponseTimeCounts.append(ResponseTimeCount)
@@ -272,13 +271,26 @@ struct Choice : View {
                     TextfieldDisabled = false
                 })
                 {
-                    B_text(s: "右")
+                    ButtonView(text: "右")
+//                    B_text(s: "右")
                 }.disabled(ButtonDisabled)
             }.padding(.bottom, 55)
         }.keyboardObserving()
     }
 }
 
+struct ButtonView: View {
+    let text: String
+    var body: some View {
+        Text(text)
+            .padding(30)
+            .background(
+                Circle()
+                    .foregroundColor(Color(#colorLiteral(red: Float(0.9098039216), green: Float(0.9098039216), blue: Float(0.9176470588), alpha: Float(1))))
+            )
+            .padding(.trailing, 10)
+    }
+}
 
 //#Preview {
 //    Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts)
