@@ -183,7 +183,6 @@ struct Talk: View {
                         .frame(height: 55)
                         .background(Color.white)
                         .onChange(of: message) {
-                            
                                 key_message.append("\(message)")
                                 key_history.append("\(message.replacingOccurrences(of:" ",with: "[空白]"))")
                             if key_message.count > 1 {
