@@ -286,6 +286,27 @@ struct ImageFromPathView: View {
     }
 }
 
+struct choiceQuestion: View {
+    @EnvironmentObject var dataset: Dataset
+    let columnNumber: Int
+    
+    var body: some View {
+        if dataset.csvArray.indices.contains(1),
+           dataset.csvArray[1].indices.contains(columnNumber) {
+            HStack(alignment: .top) {
+                AvatarView()
+                Text(dataset.csvArray[1][columnNumber])
+                    .font(.system(size: 14))
+                    .padding(10)
+                    .background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1)))
+                    .cornerRadius(10)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Spacer()
+            }.padding(.horizontal, 10)
+        }
+    }
+}
+
 #Preview {
     Talk()
         .environmentObject(QuestionList())
