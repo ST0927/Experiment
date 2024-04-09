@@ -68,10 +68,7 @@ struct Talk: View {
                     ScrollView {
                         VStack(spacing: 0) {
                             choiceQuestionView(text: dataset.csvArray[1][1])
-                            HStack(spacing: 0) {
-                                imageFrame(i:Q.ImageName[0])
-                                imageFrame(i:Q.ImageName[1])
-                            }
+                            ImageFromPathView(filePath: "/Users/shigeyuki-t/Desktop/GQA/images/n15740.jpg")
                         }
                         ForEach(history.indices, id: \.self) { index in
                             let Num = index+1 //indexがIntじゃないから数字を足す
@@ -279,20 +276,19 @@ struct ImageFromPathView: View {
 }
 
 struct choiceQuestionView: View {
-    @EnvironmentObject var dataset: Dataset
     let text: String
     
     var body: some View {
-            HStack(alignment: .top) {
-                AvatarView()
-                Text(text)
-                    .font(.system(size: 14))
-                    .padding(10)
-                    .background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1)))
-                    .cornerRadius(10)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Spacer()
-            }.padding(.horizontal, 10)
+        HStack(alignment: .top) {
+            AvatarView()
+            Text(text)
+                .font(.system(size: 14))
+                .padding(10)
+                .background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1)))
+                .cornerRadius(10)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Spacer()
+        }.padding(.horizontal, 10)
     }
 }
 
