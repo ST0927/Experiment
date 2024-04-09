@@ -279,6 +279,8 @@ struct AvatarView: View {
     }
 }
 
+
+
 #Preview {
     Talk()
         .environmentObject(QuestionList())
