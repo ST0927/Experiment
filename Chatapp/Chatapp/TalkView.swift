@@ -53,15 +53,6 @@ struct Talk: View {
         }.padding(.horizontal, 10)
     }
     
-    func textQuestion() -> some View {
-        HStack(alignment: .top) {
-            AvatarView()
-            Text("その画像を選んだ理由を教えてください").font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1))).cornerRadius(10)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Spacer()
-        }.padding(.horizontal, 10)
-    }
-    
     func userResponse(s: String) -> some View {
         HStack {
             Spacer()
