@@ -44,14 +44,6 @@ struct Talk: View {
     @State var ButtonDisabled:Bool = false
     @State var TextfieldDisabled:Bool = true
     
-    
-    func userResponse(s: String) -> some View {
-        HStack {
-            Spacer()
-            Text(s).font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.2078431373, green: 0.7647058824, blue: 0.3450980392, alpha: 1))).cornerRadius(10)
-        }.padding(.horizontal, 10)
-    }
-    
     var body: some View {
         ZStack {
             Color(red:1.0,green:0.98,blue:0.94)
@@ -64,7 +56,7 @@ struct Talk: View {
                         }
                         ForEach(history.indices, id: \.self) { index in
                             let Num = index+1 //indexがIntじゃないから数字を足す
-                            userResponse(s:" \(history[index].text)")
+                            userResponseView(text: "\(history[index].text)")
                             VStack(spacing: 0) {
 //                                if Num%2 == 0 {
 //                                    choiceQuestion()
@@ -256,7 +248,6 @@ struct AvatarView: View {
 
 struct ImageFromPathView: View {
     let filePath: String
-
     var body: some View {
         if let uiImage = UIImage(contentsOfFile: filePath) {
             Image(uiImage: uiImage)
@@ -268,9 +259,21 @@ struct ImageFromPathView: View {
     }
 }
 
+struct userResponseView: View {
+    let text: String
+    var body: some View {
+        HStack {
+            Spacer()
+            Text(text)
+                .font(.system(size: 14)).padding(10)
+                .background(Color(#colorLiteral(red: 0.2078431373, green: 0.7647058824, blue: 0.3450980392, alpha: 1)))
+                .cornerRadius(10)
+        }.padding(.horizontal, 10)
+    }
+}
+
 struct choiceQuestionView: View {
     let text: String
-    
     var body: some View {
         HStack(alignment: .top) {
             AvatarView()
