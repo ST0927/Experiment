@@ -1,11 +1,13 @@
 platform :ios, '17.0'
 
+
 target 'Chatapp' do
-	
+	use_frameworks!
 	pod 'Firebase/Analytics'
 	pod 'Firebase/Firestore'
 	pod 'FirebaseFirestoreSwift'
 	pod 'KeyboardObserving'
+	pod 'SwiftCSV'
 end
 
 target 'ChatappTests' do

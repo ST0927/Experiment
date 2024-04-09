@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		53063F562B11C9E1002AFE61 /* TalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53063F552B11C9E1002AFE61 /* TalkView.swift */; };
+		530932FC2BC5317F0066E27B /* GQA_dataset.csv in Resources */ = {isa = PBXBuildFile; fileRef = 530932FB2BC5317E0066E27B /* GQA_dataset.csv */; };
 		531D55772AC7E906008D3EFF /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531D55762AC7E906008D3EFF /* UserStore.swift */; };
 		532A49922AC570BC00286B87 /* ChatappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A49912AC570BC00286B87 /* ChatappApp.swift */; };
 		532A49942AC570BC00286B87 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A49932AC570BC00286B87 /* ContentView.swift */; };
@@ -69,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		53063F552B11C9E1002AFE61 /* TalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkView.swift; sourceTree = "<group>"; };
+		530932FB2BC5317E0066E27B /* GQA_dataset.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GQA_dataset.csv; path = ../../../../Desktop/GQA_dataset.csv; sourceTree = "<group>"; };
 		531D55762AC7E906008D3EFF /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		532A498E2AC570BC00286B87 /* Chatapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		532A49912AC570BC00286B87 /* ChatappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatappApp.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				53B3B3722B85D4F3002A8CD8 /* DataControl.swift */,
 				532A49952AC570BE00286B87 /* Assets.xcassets */,
 				532A49A72AC5AAAC00286B87 /* GoogleService-Info.plist */,
+				530932FB2BC5317E0066E27B /* GQA_dataset.csv */,
 			);
 			path = Chatapp;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				532A49962AC570BE00286B87 /* Assets.xcassets in Resources */,
+				530932FC2BC5317F0066E27B /* GQA_dataset.csv in Resources */,
 				532A49A82AC5AAAC00286B87 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

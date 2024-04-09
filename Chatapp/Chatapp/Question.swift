@@ -13,3 +13,34 @@ class QuestionList : ObservableObject{
     @Published var Qcount: Int = 0
 }
 
+
+class Dataset : ObservableObject {
+    @Published var csvArray: [[String]] = [[]]
+    var csvBundle: String?
+    var csvData: String?
+    
+    init() {
+        csvBundle = Bundle.main.path(forResource:"GQA_dataset", ofType: "csv")
+        
+        if let csvBundle = csvBundle {
+            do {
+                csvData = try String(contentsOfFile: csvBundle, encoding: .utf8)
+                if let csvData = csvData {
+                    let rows = csvData.components(separatedBy: "\n")
+                    self.csvArray = rows.map { row in
+                        row.components(separatedBy: ",")
+                    }
+                }
+            } catch {
+                print("CSVファイルの読み込みに失敗：\(error)")
+            }
+        } else {
+            print("csvファイルのパスが見つかりません")
+        }
+    }
+}
+
+//    let csvBundle = Bundle.main.path(forResource: "GQA_dataset", ofType: "csv")!
+//    let csvData = try String(contentsOfFile: csvBundle, encoding: String.Encoding.utf8)
+//    let csv: CSV = try EnumeratedCSV(url: URL(fileURLWithPath: path))
+//    let rows = csv.rows

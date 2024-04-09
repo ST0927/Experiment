@@ -14,8 +14,10 @@ import Combine
 
 struct Talk: View {
     @EnvironmentObject var Q: QuestionList
+    @ObservedObject var dataset = Dataset()
     @State var message = ""
     @State var chatType = ""
+    
     @State var key_message:[String] = []
     @State var key_history:[String] = []
     @State var message_len:[String] = []
@@ -45,7 +47,7 @@ struct Talk: View {
     func choiceQuestion() -> some View {
         HStack(alignment: .top) {
             AvatarView()
-            Text("魅力的だと思う画像を選んでください").font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1))).cornerRadius(10)
+            Text(dataset.csvArray[1][1]).font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1))).cornerRadius(10)
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
         }.padding(.horizontal, 10)
