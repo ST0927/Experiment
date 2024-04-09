@@ -92,15 +92,14 @@ struct Talk: View {
                             let Num = index+1 //indexがIntじゃないから数字を足す
                             userResponse(s:" \(history[index].text)")
                             VStack(spacing: 0) {
-                                if Num%2 == 0 {
-                                    choiceQuestion()
-                                } else {
-                                    textQuestion()
-                                }
+//                                if Num%2 == 0 {
+//                                    choiceQuestion()
+//                                } else {
+//                                    textQuestion()
+//                                }
+                                choiceQuestion()
                                 HStack(spacing: 0) {
                                     if Num < Q.ImageName.count/2 {
-//                                        imageFrame(i:Q.ImageName[Num*2])
-//                                        imageFrame(i:Q.ImageName[Num*2 + 1])
                                         ImageFromPathView(filePath: "/Users/shigeyuki-t/Desktop/GQA/images/n15740.jpg")
                                     }
                                 }
