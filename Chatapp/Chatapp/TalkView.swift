@@ -52,14 +52,6 @@ struct Talk: View {
         }.padding(.horizontal, 10)
     }
     
-    func imageFrame(i: String) -> some View {
-            Image(i)
-                .resizable()
-                .frame(width: 200, height: 200)
-                .border(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1)), width: 1)
-                .background(Color.white)
-    }
-    
     var body: some View {
         ZStack {
             Color(red:1.0,green:0.98,blue:0.94)
@@ -68,7 +60,7 @@ struct Talk: View {
                     ScrollView {
                         VStack(spacing: 0) {
                             choiceQuestionView(text: dataset.csvArray[1][1])
-                            ImageFromPathView(filePath: "/Users/shigeyuki-t/Desktop/GQA/images/n15740.jpg")
+                            ImageFromPathView(filePath: "\(dataset.csvArray[1][3])")
                         }
                         ForEach(history.indices, id: \.self) { index in
                             let Num = index+1 //indexがIntじゃないから数字を足す
@@ -80,9 +72,10 @@ struct Talk: View {
 //                                    textQuestion()
 //                                }
 //                                choiceQuestion()
+                                choiceQuestionView(text: dataset.csvArray[Num+1][1])
                                 HStack(spacing: 0) {
-                                    if Num < Q.ImageName.count/2 {
-                                        ImageFromPathView(filePath: "/Users/shigeyuki-t/Desktop/GQA/images/n15740.jpg")
+                                    if !dataset.csvArray[Num+1][3].isEmpty {
+                                        ImageFromPathView(filePath: "\(dataset.csvArray[Num+1][3])")
                                     }
                                 }
                             }
