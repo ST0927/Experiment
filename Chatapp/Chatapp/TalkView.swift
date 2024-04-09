@@ -43,15 +43,7 @@ struct Talk: View {
     @State var Delete:Int = 0
     @State var ButtonDisabled:Bool = false
     @State var TextfieldDisabled:Bool = true
-        
-    func choiceQuestion() -> some View {
-        HStack(alignment: .top) {
-            AvatarView()
-            Text(dataset.csvArray[1][1]).font(.system(size: 14)).padding(10).background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1))).cornerRadius(10)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Spacer()
-        }.padding(.horizontal, 10)
-    }
+    
     
     func userResponse(s: String) -> some View {
         HStack {
@@ -75,7 +67,7 @@ struct Talk: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack(spacing: 0) {
-                            choiceQuestion()
+                            choiceQuestionView(text: dataset.csvArray[1][1])
                             HStack(spacing: 0) {
                                 imageFrame(i:Q.ImageName[0])
                                 imageFrame(i:Q.ImageName[1])
@@ -90,7 +82,7 @@ struct Talk: View {
 //                                } else {
 //                                    textQuestion()
 //                                }
-                                choiceQuestion()
+//                                choiceQuestion()
                                 HStack(spacing: 0) {
                                     if Num < Q.ImageName.count/2 {
                                         ImageFromPathView(filePath: "/Users/shigeyuki-t/Desktop/GQA/images/n15740.jpg")
@@ -286,16 +278,14 @@ struct ImageFromPathView: View {
     }
 }
 
-struct choiceQuestion: View {
+struct choiceQuestionView: View {
     @EnvironmentObject var dataset: Dataset
-    let columnNumber: Int
+    let text: String
     
     var body: some View {
-        if dataset.csvArray.indices.contains(1),
-           dataset.csvArray[1].indices.contains(columnNumber) {
             HStack(alignment: .top) {
                 AvatarView()
-                Text(dataset.csvArray[1][columnNumber])
+                Text(text)
                     .font(.system(size: 14))
                     .padding(10)
                     .background(Color(#colorLiteral(red: 0.9098039216, green: 0.9098039216, blue: 0.9176470588, alpha: 1)))
@@ -303,7 +293,6 @@ struct choiceQuestion: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 Spacer()
             }.padding(.horizontal, 10)
-        }
     }
 }
 
