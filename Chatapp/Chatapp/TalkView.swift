@@ -50,7 +50,7 @@ struct Talk: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack(spacing: 0) {
-                            ChoiceQuestionView(text: dataset.csvArray[1][1])
+                            ChoiceQuestionView(text: "Q1: "+dataset.csvArray[1][1])
                             ImageFromPathView(filePath: "\(dataset.csvArray[1][3])")
                         }
                         ForEach(history.indices, id: \.self) { index in
@@ -63,7 +63,7 @@ struct Talk: View {
 //                                    textQuestion()
 //                                }
 //                                choiceQuestion()
-                                ChoiceQuestionView(text: dataset.csvArray[Num+1][1])
+                                ChoiceQuestionView(text: "Q\(Num): "+dataset.csvArray[Num+1][1])
                                 HStack(spacing: 0) {
                                     if !dataset.csvArray[Num+1][3].isEmpty {
                                         ImageFromPathView(filePath: "\(dataset.csvArray[Num+1][3])")
