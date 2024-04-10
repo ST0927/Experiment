@@ -63,7 +63,7 @@ struct Talk: View {
 //                                    textQuestion()
 //                                }
 //                                choiceQuestion()
-                                ChoiceQuestionView(text: "Q\(Num): "+dataset.csvArray[Num+1][1])
+                                ChoiceQuestionView(text: "Q\(Num+1): "+dataset.csvArray[Num+1][1])
                                 HStack(spacing: 0) {
                                     if !dataset.csvArray[Num+1][3].isEmpty {
                                         ImageFromPathView(filePath: "\(dataset.csvArray[Num+1][3])")
@@ -251,6 +251,7 @@ struct ImageFromPathView: View {
             Image(uiImage: uiImage)
                 .resizable()
                 .scaledToFit()
+                .border(Color.white, width: 5)
         } else {
             Text("画像が見つかりません")
         }

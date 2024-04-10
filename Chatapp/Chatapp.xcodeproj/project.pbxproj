@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		53063F562B11C9E1002AFE61 /* TalkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53063F552B11C9E1002AFE61 /* TalkView.swift */; };
-		530932FC2BC5317F0066E27B /* GQA_dataset.csv in Resources */ = {isa = PBXBuildFile; fileRef = 530932FB2BC5317E0066E27B /* GQA_dataset.csv */; };
 		531D55772AC7E906008D3EFF /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531D55762AC7E906008D3EFF /* UserStore.swift */; };
 		532A49922AC570BC00286B87 /* ChatappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A49912AC570BC00286B87 /* ChatappApp.swift */; };
 		532A49942AC570BC00286B87 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532A49932AC570BC00286B87 /* ContentView.swift */; };
@@ -60,6 +59,7 @@
 		533FC1092BA2ED2900ACE910 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 533FC1082BA2ED2900ACE910 /* FirebaseAnalyticsSwift */; };
 		533FC10B2BA2ED2900ACE910 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 533FC10A2BA2ED2900ACE910 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		533FC10D2BA2ED2900ACE910 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 533FC10C2BA2ED2900ACE910 /* FirebaseAppCheck */; };
+		534EA0052BC6A860008B0F37 /* GQA_dataset.csv in Resources */ = {isa = PBXBuildFile; fileRef = 534EA0042BC6A860008B0F37 /* GQA_dataset.csv */; };
 		535187302AF8050800F6CAF9 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5351872F2AF8050800F6CAF9 /* Question.swift */; };
 		536AF3912AD95C3E0016085F /* KeyboardObserving in Frameworks */ = {isa = PBXBuildFile; productRef = 536AF3902AD95C3E0016085F /* KeyboardObserving */; };
 		536D64192AE12C240027C8AC /* OpenAIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 536D64182AE12C240027C8AC /* OpenAIKit */; };
@@ -70,7 +70,6 @@
 
 /* Begin PBXFileReference section */
 		53063F552B11C9E1002AFE61 /* TalkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TalkView.swift; sourceTree = "<group>"; };
-		530932FB2BC5317E0066E27B /* GQA_dataset.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GQA_dataset.csv; path = ../../../../Desktop/GQA_dataset.csv; sourceTree = "<group>"; };
 		531D55762AC7E906008D3EFF /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		532A498E2AC570BC00286B87 /* Chatapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		532A49912AC570BC00286B87 /* ChatappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatappApp.swift; sourceTree = "<group>"; };
@@ -81,6 +80,7 @@
 		532A49A52AC571C400286B87 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 		532A49A72AC5AAAC00286B87 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		533FC0EE2BA1BE9600ACE910 /* LoggerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerView.swift; sourceTree = "<group>"; };
+		534EA0042BC6A860008B0F37 /* GQA_dataset.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GQA_dataset.csv; path = ../../../../Desktop/GQA_dataset.csv; sourceTree = "<group>"; };
 		5351872F2AF8050800F6CAF9 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		53B3B3722B85D4F3002A8CD8 /* DataControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataControl.swift; sourceTree = "<group>"; };
 		53EB55C22AEB7EDE001A9A9A /* TimeCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCount.swift; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 				533FC0EE2BA1BE9600ACE910 /* LoggerView.swift */,
 				532A49952AC570BE00286B87 /* Assets.xcassets */,
 				532A49A72AC5AAAC00286B87 /* GoogleService-Info.plist */,
-				530932FB2BC5317E0066E27B /* GQA_dataset.csv */,
+				534EA0042BC6A860008B0F37 /* GQA_dataset.csv */,
 				53B3B3722B85D4F3002A8CD8 /* DataControl.swift */,
 			);
 			path = Chatapp;
@@ -291,7 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				532A49962AC570BE00286B87 /* Assets.xcassets in Resources */,
-				530932FC2BC5317F0066E27B /* GQA_dataset.csv in Resources */,
+				534EA0052BC6A860008B0F37 /* GQA_dataset.csv in Resources */,
 				532A49A82AC5AAAC00286B87 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
