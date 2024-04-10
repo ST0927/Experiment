@@ -237,8 +237,8 @@ struct Choice : View {
                             print("sent")
                         }
                     }
-                    ButtonDisabled = true
-                    TextfieldDisabled = false
+//                    ButtonDisabled = true
+//                    TextfieldDisabled = false
                 })
                 {
                     ButtonView(text: "左")
@@ -267,8 +267,8 @@ struct Choice : View {
                             print("sent")
                         }
                     }
-                    ButtonDisabled = true
-                    TextfieldDisabled = false
+//                    ButtonDisabled = true
+//                    TextfieldDisabled = false
                 })
                 {
                     ButtonView(text: "右")
