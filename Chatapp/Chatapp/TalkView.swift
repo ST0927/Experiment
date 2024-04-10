@@ -17,7 +17,6 @@ struct Talk: View {
     @ObservedObject var dataset = Dataset()
     @State var message = ""
     @State var chatType = ""
-    
     @State var key_message:[String] = []
     @State var key_history:[String] = []
     @State var message_len:[String] = []
@@ -205,8 +204,8 @@ struct Talk: View {
                         }
                         message_len.append("\(message)")
                         self.message = ""
-                        ButtonDisabled = false
-                        TextfieldDisabled = true
+//                        ButtonDisabled = false
+//                        TextfieldDisabled = true
                         //送信したらキーボードを閉じる
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }) {
