@@ -230,7 +230,7 @@ struct Choice : View {
                             TimeCount += 0.1
                         }
                     let db = Firestore.firestore()
-                    db.collection("messages").addDocument(data: ["text": "左"]) { err in
+                    db.collection("messages").addDocument(data: ["text": "YES"]) { err in
                         if let e = err {
                             print(e)
                         } else {
@@ -241,7 +241,7 @@ struct Choice : View {
 //                    TextfieldDisabled = false
                 })
                 {
-                    ButtonView(text: "左")
+                    ButtonView(text: "YES")
 //                    B_text(s: "左")
                 }.disabled(ButtonDisabled)
                 Button(action: {
@@ -260,7 +260,7 @@ struct Choice : View {
                             TimeCount += 0.1
                         }
                     let db = Firestore.firestore()
-                    db.collection("messages").addDocument(data: ["text": "右"]) { err in
+                    db.collection("messages").addDocument(data: ["text": "NO"]) { err in
                         if let e = err {
                             print(e)
                         } else {
@@ -271,7 +271,7 @@ struct Choice : View {
 //                    TextfieldDisabled = false
                 })
                 {
-                    ButtonView(text: "右")
+                    ButtonView(text: "NO")
 //                    B_text(s: "右")
                 }.disabled(ButtonDisabled)
             }.padding(.bottom, 55)
