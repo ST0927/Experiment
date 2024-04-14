@@ -1,12 +1,14 @@
 """
 データセットから質問と画像のデータだけをcsvとして保存し直すプログラム
 画像はcsvに直接入らないのでローカルのファイルパスでひとまず代用、DBがベストだと思う
+(4/14)csvの画像idに一致する画像だけで新しくフォルダを作成し、それをGithubリポジトリに保存する
 """
 
 import pandas as pd
 import requests
 import json
 import os
+import shutil
 
 # GQAデータセット
 # ロード
@@ -25,11 +27,36 @@ def find_image_path(image_id):
                 return os.path.join(root, file)
     return "None"
 GQA_df['file_path'] = GQA_df['imageId'].apply(find_image_path)
-# GQA_df = GQA_df.drop(columns='imageId')
+
+
+
+
+
+def add_gitLink(image_id):
+    gitLink = "https://github.com/ST0927/Experiment/blob/main/Images/" + str(image_id) + ".jpg"
+    return gitLink
+
+GQA_df["GithubLink"] = GQA_df['imageId'].apply(add_gitLink)
+
 
 # csv変換
 csv_file_path = '/Users/shigeyuki-t/Desktop/GQA_dataset.csv'
 GQA_df.to_csv(csv_file_path, index=True)
+
+# # 使う画像のみを新規フォルダに保存
+# newFolder_directory = '/Users/shigeyuki-t/Desktop/Images_firstExperiment'
+# def send_newFolder(image_id):
+#     if not os.path.exists(newFolder_directory):
+#         os.makedirs(newFolder_directory)
+#     for root,dirs,files in os.walk(images_directory):
+#         for file in files:
+#             if file.startswith(image_id):
+#                 source_path = os.path.join(root, file)
+#                 forwarding_path = os.path.join(newFolder_directory, file)
+#                 shutil.copy(source_path, forwarding_path)
+#                 return forwarding_path
+#     return "None"
+# folder_path = GQA_df['imageId'].apply(send_newFolder)
 
 print(GQA_df)
 
