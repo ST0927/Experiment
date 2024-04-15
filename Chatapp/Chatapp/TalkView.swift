@@ -258,6 +258,58 @@ struct ImageFromPathView: View {
     }
 }
 
+struct ImageFromUrlView: View {
+    let imageUrl: URL
+    @State private var imageData: Data?
+
+    var body: some View {
+        Group {
+            if let imageData = imageData, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+                    .border(Color.white, width: 5)
+            } else {
+                Text("画像が読み込まれていません")
+                    .onAppear {
+                        loadImage()
+                    }
+            }
+        }
+    }
+
+    private func loadImage() {
+        URLSession.shared.dataTask(with: imageUrl) { data, response, error in
+            if let data = data {
+                DispatchQueue.main.async {
+                    self.imageData = data
+                }
+            } else {
+                print("Error loading image: \(error?.localizedDescription ?? "Unknown error")")
+            }
+        }.resume()
+    }
+}
+
+struct ImageFromGitLinkView: View {
+    var body: some View {
+        VStack {
+            Text("GitHub Image Display")
+                .font(.title)
+                .padding()
+            
+            AsyncImage(url: URL(string: "https://raw.githubusercontent.com/user/repo/branch/path/to/image.png")) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 300, height: 200)
+            } placeholder: {
+                ProgressView()
+            }
+        }
+    }
+}
+
 struct UserResponseView: View {
     let text: String
     var body: some View {
