@@ -52,6 +52,7 @@ struct Talk: View {
                         VStack(spacing: 0) {
                             ChoiceQuestionView(text: "Q1: "+dataset.csvArray[1][1])
                             ImageFromPathView(filePath: "\(dataset.csvArray[1][3])")
+                            ImageFromGitLinkView()
                         }
                         ForEach(history.indices, id: \.self) { index in
                             let Num = index+1 //indexがIntじゃないから数字を足す
@@ -294,11 +295,7 @@ struct ImageFromUrlView: View {
 struct ImageFromGitLinkView: View {
     var body: some View {
         VStack {
-            Text("GitHub Image Display")
-                .font(.title)
-                .padding()
-            
-            AsyncImage(url: URL(string: "https://raw.githubusercontent.com/user/repo/branch/path/to/image.png")) { image in
+            AsyncImage(url: URL(string: "https://raw.githubusercontent.com/ST0927/Experiment/main/Images/n15740.jpg")) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
