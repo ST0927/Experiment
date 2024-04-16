@@ -10,7 +10,7 @@ import SwiftUI
 struct QuestionListView: View {
     var body: some View {
         NavigationLink(destination: Talk().environmentObject(QuestionList())){
-            Text("アンケート画面へ")
+            Text("4/20~ プレ実験")
         }
     }
 }

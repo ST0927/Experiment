@@ -28,8 +28,8 @@
             filePath = "Chatapp/TalkView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
             landmarkName = "unknown"
             landmarkType = "0">
          </BreakpointContent>
@@ -80,6 +80,38 @@
             endingLineNumber = "15"
             landmarkName = "Talk"
             landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "95D3C36A-FCA0-4917-B5A5-3A73F0665C0B - 42112d1358e3aefe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chatapp.Talk.init() -&gt; Chatapp.Talk"
+                  moduleName = "Chatapp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shigeyuki-t/Documents/Experiment/Chatapp/Chatapp/TalkView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "2180">
+               </Location>
+               <Location
+                  uuid = "95D3C36A-FCA0-4917-B5A5-3A73F0665C0B - b7bbafcea2f43061"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chatapp.Talk.init(Q: SwiftUI.EnvironmentObject&lt;Chatapp.QuestionList&gt;, dataset: Chatapp.Dataset, message: Swift.String, chatType: Swift.String, key_message: Swift.Array&lt;Swift.String&gt;, key_history: Swift.Array&lt;Swift.String&gt;, message_len: Swift.Array&lt;Swift.String&gt;, history: Swift.Array&lt;Chatapp.Message&gt;, offsetY: CoreGraphics.CGFloat, initOffsetY: CoreGraphics.CGFloat, pre: CoreGraphics.CGFloat, current: CoreGraphics.CGFloat, scroll: Swift.Bool, Time: Swift.Optional&lt;Combine.AnyCancellable&gt;, ResponseTime: Swift.Optional&lt;Combine.AnyCancellable&gt;, ResponseTimeCount: Swift.Double, ResponseTimeCounts: Swift.Array&lt;Swift.Double&gt;, startposition: CoreGraphics.CGFloat, endposition: CoreGraphics.CGFloat, ScrollTime: Swift.Optional&lt;Combine.AnyCancellable&gt;, ScrollTimeCount: Swift.Double, ScrollingTime: Swift.Double, ScrollSpeed: Swift.Double, unScrollTime: Swift.Optional&lt;Combine.AnyCancellable&gt;, unScrollTimeCount: Swift.Double, UnScrollTimeCount: Swift.Double, Delete: Swift.Int, ButtonDisabled: Swift.Bool, TextfieldDisabled: Swift.Bool) -&gt; Chatapp.Talk"
+                  moduleName = "Chatapp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/shigeyuki-t/Documents/Experiment/Chatapp/Chatapp/TalkView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "228">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
