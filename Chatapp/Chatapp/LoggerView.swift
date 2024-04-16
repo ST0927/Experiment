@@ -159,32 +159,32 @@ struct Logger : View {
        
         
         //動作確認用
-        HStack {
-            VStack {
-                Text("ユーザー:\(userStore.userID)")
-                Text("ユーザー:\(userStore.email)")
-                if !message_len.isEmpty {
-                    Text("文字数：\(message_len[message_len.count - 1].count)")
-                    Text("文字数平均：\(Double(message_len.joined().count)/Double(message_len.count))")
-                }
-                Text("テキスト削除回数：\(Delete)")
-                Text("回答時間：\(ResponseTimeCount)")
-                if !ResponseTimeCounts.isEmpty {
-                    Text("回答時間平均：\(Double(ResponseTimeCounts.reduce(0, +))/Double(ResponseTimeCounts.count))")
-                }
-                
-                //Text("非操作時間")
-                Text("タップ回数：\(tapNum)")
-                Text("タップ間隔：\(TimeCount)")
-                Text("左を選んだ回数：\(LeftChoice)")
-                Text("右を選んだ回数：\(RightChoice)")
-                Text("画面位置：\(abs(offsetY - initOffsetY))")
-                Text("スクロール長さ：\(abs(endposition - startposition))")
-                Text("スクロール時間：\(ScrollingTime)")
-                Text("スクロール速度：\(abs(ScrollSpeed))")
-                
-            }
-        }
+//        HStack {
+//            VStack {
+//                Text("ユーザー:\(userStore.userID)")
+//                Text("ユーザー:\(userStore.email)")
+//                if !message_len.isEmpty {
+//                    Text("文字数：\(message_len[message_len.count - 1].count)")
+//                    Text("文字数平均：\(Double(message_len.joined().count)/Double(message_len.count))")
+//                }
+//                Text("テキスト削除回数：\(Delete)")
+//                Text("回答時間：\(ResponseTimeCount)")
+//                if !ResponseTimeCounts.isEmpty {
+//                    Text("回答時間平均：\(Double(ResponseTimeCounts.reduce(0, +))/Double(ResponseTimeCounts.count))")
+//                }
+//                
+//                //Text("非操作時間")
+//                Text("タップ回数：\(tapNum)")
+//                Text("タップ間隔：\(TimeCount)")
+//                Text("左を選んだ回数：\(LeftChoice)")
+//                Text("右を選んだ回数：\(RightChoice)")
+//                Text("画面位置：\(abs(offsetY - initOffsetY))")
+//                Text("スクロール長さ：\(abs(endposition - startposition))")
+//                Text("スクロール時間：\(ScrollingTime)")
+//                Text("スクロール速度：\(abs(ScrollSpeed))")
+//                
+//            }
+//        }
         Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled)
     }
 }
@@ -242,7 +242,6 @@ struct Choice : View {
                 })
                 {
                     ButtonView(text: "YES")
-//                    B_text(s: "左")
                 }.disabled(ButtonDisabled)
                 Button(action: {
                     ResponseTimeCounts.append(ResponseTimeCount)
@@ -272,7 +271,6 @@ struct Choice : View {
                 })
                 {
                     ButtonView(text: "NO")
-//                    B_text(s: "右")
                 }.disabled(ButtonDisabled)
             }.padding(.bottom, 55)
         }.keyboardObserving()

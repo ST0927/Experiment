@@ -251,17 +251,25 @@ struct ImageFromGitLinkView: View {
     let filePath: String
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: filePath)) { image in
-                image
-                    .resizable()
-                    .scaledToFit()
-                    .border(Color.white, width: 5)
-            } placeholder: {
-                ProgressView()
+            AsyncImage(url: URL(string: filePath)) { phase in
+                switch phase {
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .border(Color.white, width: 5)
+                case .failure(_):
+                    Text("画像の取得に失敗しました")
+                case .empty:
+                    ProgressView()
+                @unknown default:
+                    Text("未知のエラーが発生しました")
+                }
             }
         }
     }
 }
+
 
 struct UserResponseView: View {
     let text: String
