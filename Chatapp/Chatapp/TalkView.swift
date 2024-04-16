@@ -51,8 +51,7 @@ struct Talk: View {
                     ScrollView {
                         VStack(spacing: 0) {
                             ChoiceQuestionView(text: "Q1: "+dataset.csvArray[1][1])
-                            ImageFromPathView(filePath: "\(dataset.csvArray[1][3])")
-                            ImageFromGitLinkView()
+                            ImageFromGitLinkView(filePath: "\(dataset.csvArray[1][3])")
                         }
                         ForEach(history.indices, id: \.self) { index in
                             let Num = index+1 //indexがIntじゃないから数字を足す
@@ -67,7 +66,7 @@ struct Talk: View {
                                 ChoiceQuestionView(text: "Q\(Num+1): "+dataset.csvArray[Num+1][1])
                                 HStack(spacing: 0) {
                                     if !dataset.csvArray[Num+1][3].isEmpty {
-                                        ImageFromPathView(filePath: "\(dataset.csvArray[Num+1][3])")
+                                        ImageFromGitLinkView(filePath: "\(dataset.csvArray[Num+1][3])")
                                     }
                                 }
                             }
@@ -240,33 +239,23 @@ struct Message : Identifiable {
 struct AvatarView: View {
     var body: some View {
         VStack {
-            Image(systemName: "person.crop.circle").resizable().frame(width: 30, height: 30).clipShape(Circle())
-        }
-    }
-}
-
-struct ImageFromPathView: View {
-    let filePath: String
-    var body: some View {
-        if let uiImage = UIImage(contentsOfFile: filePath) {
-            Image(uiImage: uiImage)
+            Image(systemName: "person.crop.circle")
                 .resizable()
-                .scaledToFit()
-                .border(Color.white, width: 5)
-        } else {
-            Text("画像が見つかりません")
+                .frame(width: 30, height: 30)
+                .clipShape(Circle())
         }
     }
 }
 
 struct ImageFromGitLinkView: View {
+    let filePath: String
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: "https://raw.githubusercontent.com/ST0927/Experiment/main/Images/n15740.jpg")) { image in
+            AsyncImage(url: URL(string: filePath)) { image in
                 image
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 300, height: 200)
+                    .scaledToFit()
+                    .border(Color.white, width: 5)
             } placeholder: {
                 ProgressView()
             }
