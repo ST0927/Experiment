@@ -33,7 +33,7 @@ GQA_df['file_path'] = GQA_df['imageId'].apply(find_image_path)
 
 
 def add_gitLink(image_id):
-    gitLink = "https://github.com/ST0927/Experiment/blob/main/Images/" + str(image_id) + ".jpg"
+    gitLink = "https://raw.githubusercontent.com/ST0927/Experiment/main/Images/" + str(image_id) + ".jpg"
     return gitLink
 
 GQA_df["GithubLink"] = GQA_df['imageId'].apply(add_gitLink)
