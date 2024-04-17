@@ -59,27 +59,22 @@ struct Talk: View {
                             let num_of_task = 99 //１問目は別で用意
                             UserResponseView(text: "\(history[index].text)")
                             VStack(spacing: 0) {
-//                                if Num%2 == 0 {
-//                                    choiceQuestion()
-//                                } else {
-//                                    textQuestion()
-//                                }
-//                                choiceQuestion()
                                 if Num <= num_of_task {
-                                    AvatarMessageView(text: "Q\(Num+1): "+dataset.csvArray[Num+1][1])
-                                }
-                                HStack(spacing: 0) {
-                                    
-                                    if !dataset.csvArray[Num+1][3].isEmpty && Num <= num_of_task{
-                                        ImageFromGitLinkView(filePath: "\(dataset.csvArray[Num+1][3])")
-                                    } else if dataset.csvArray[Num+1][3].isEmpty {
-                                        Text("Image not found")
-                                    } else if Num > num_of_task {
-                                        AvatarMessageView(text: "This concludes the questions. Thank you for your cooperation!")
-                                            .onAppear {
-                                                ButtonDisabled = true
-                                            }
+                                    if !dataset.csvArray[Num+1][1].isEmpty {
+                                        AvatarMessageView(text: "Q\(Num+1): "+dataset.csvArray[Num+1][1])
+                                    } else {
+                                        Text("Question not found")
                                     }
+                                    if !dataset.csvArray[Num+1][3].isEmpty {
+                                        ImageFromGitLinkView(filePath: "\(dataset.csvArray[Num+1][3])")
+                                    } else {
+                                        Text("Image not found")
+                                    }
+                                } else {
+                                    AvatarMessageView(text: "This concludes the questions. Thank you for your cooperation!")
+                                        .onAppear {
+                                            ButtonDisabled = true
+                                        }
                                 }
                             }
                         }.padding(.vertical, 5)
