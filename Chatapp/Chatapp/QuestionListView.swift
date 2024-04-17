@@ -15,17 +15,21 @@ import SwiftUI
 //    }
 //}
 
+class TaskActivate: ObservableObject {
+    @Published var task1 = true
+}
+
 struct TaskListView: View {
-    @State private var taskActive = false
+    @EnvironmentObject var TaskActivate: TaskActivate
     @State private var isActive = false
     @State private var showAlert = false
     
     var body: some View {
         NavigationView {
             VStack {
-                NavigationLink(destination: Talk().environmentObject(QuestionList()), isActive: $isActive) {
+                NavigationLink(destination: Talk().environmentObject(QuestionList()), isActive: $TaskActivate.task1) {
                     Button("4/20~ プレ実験") {
-                        if taskActive {
+                        if TaskActivate.task1 {
                             isActive = true
                         } else {
                             showAlert = true
@@ -45,4 +49,5 @@ struct TaskListView: View {
 #Preview {
 //    QuestionListView()
     TaskListView()
+        .environmentObject(TaskActivate())
 }
