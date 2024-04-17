@@ -14,6 +14,7 @@ import Combine
 
 struct Talk: View {
     @EnvironmentObject var Q: QuestionList
+    @EnvironmentObject var TaskActivate: TaskActivate
     @ObservedObject var dataset = Dataset()
     @State var message = ""
     @State var chatType = ""
@@ -50,11 +51,12 @@ struct Talk: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack(spacing: 0) {
-                            ChoiceQuestionView(text: "Q1: "+dataset.csvArray[1][1])
+                            AvatarMessageView(text: "Q1: "+dataset.csvArray[1][1])
                             ImageFromGitLinkView(filePath: "\(dataset.csvArray[1][3])")
                         }
                         ForEach(history.indices, id: \.self) { index in
                             let Num = index+1 //indexがIntじゃないから数字を足す
+                            let num_of_task = 99 //１問目は別で用意
                             UserResponseView(text: "\(history[index].text)")
                             VStack(spacing: 0) {
 //                                if Num%2 == 0 {
@@ -63,10 +65,20 @@ struct Talk: View {
 //                                    textQuestion()
 //                                }
 //                                choiceQuestion()
-                                ChoiceQuestionView(text: "Q\(Num+1): "+dataset.csvArray[Num+1][1])
+                                if Num <= num_of_task {
+                                    AvatarMessageView(text: "Q\(Num+1): "+dataset.csvArray[Num+1][1])
+                                }
                                 HStack(spacing: 0) {
-                                    if !dataset.csvArray[Num+1][3].isEmpty {
+                                    
+                                    if !dataset.csvArray[Num+1][3].isEmpty && Num <= num_of_task{
                                         ImageFromGitLinkView(filePath: "\(dataset.csvArray[Num+1][3])")
+                                    } else if dataset.csvArray[Num+1][3].isEmpty {
+                                        Text("Image not found")
+                                    } else if Num > num_of_task {
+                                        AvatarMessageView(text: "This concludes the questions. Thank you for your cooperation!")
+                                            .onAppear {
+                                                ButtonDisabled = true
+                                            }
                                     }
                                 }
                             }
@@ -284,7 +296,7 @@ struct UserResponseView: View {
     }
 }
 
-struct ChoiceQuestionView: View {
+struct AvatarMessageView: View {
     let text: String
     var body: some View {
         HStack(alignment: .top) {

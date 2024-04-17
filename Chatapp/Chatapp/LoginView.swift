@@ -19,7 +19,7 @@ struct LoginView: View {
     var body: some View {
         if userStore.isAuthenticated {
 //            QuestionListView()
-            TaskListView()
+            TaskListView().environmentObject(TaskActivate())
             } else {
             VStack {
                 Text("メールアドレス")

@@ -60,6 +60,7 @@ struct Logger : View {
     @State var text_len:Int = 0
     @State var text_len_ave:Double = 0
     @State var response_time_ave:Double = 0
+    
     func sendLoggerData() {
         
         //日付の設定
