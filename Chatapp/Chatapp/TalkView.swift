@@ -54,9 +54,10 @@ struct Talk: View {
                             AvatarMessageView(text: "Q1: "+dataset.csvArray[1][1])
                             ImageFromGitLinkView(filePath: "\(dataset.csvArray[1][3])")
                         }
+
                         ForEach(history.indices, id: \.self) { index in
                             let Num = index+1 //indexがIntじゃないから数字を足す
-                            let num_of_task = 99 //１問目は別で用意
+                            let num_of_task = 29 //１問目は別で用意
                             UserResponseView(text: "\(history[index].text)")
                             VStack(spacing: 0) {
                                 if Num <= num_of_task {
