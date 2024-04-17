@@ -60,15 +60,11 @@ struct Talk: View {
                             UserResponseView(text: "\(history[index].text)")
                             VStack(spacing: 0) {
                                 if Num <= num_of_task {
-                                    if !dataset.csvArray[Num+1][1].isEmpty {
+                                    if !dataset.csvArray[Num+1][1].isEmpty && !dataset.csvArray[Num+1][3].isEmpty {
                                         AvatarMessageView(text: "Q\(Num+1): "+dataset.csvArray[Num+1][1])
-                                    } else {
-                                        Text("Question not found")
-                                    }
-                                    if !dataset.csvArray[Num+1][3].isEmpty {
                                         ImageFromGitLinkView(filePath: "\(dataset.csvArray[Num+1][3])")
-                                    } else {
-                                        Text("Image not found")
+                                    } else  {
+                                        Text("Question not found")
                                     }
                                 } else {
                                     AvatarMessageView(text: "This concludes the questions. Thank you for your cooperation!")
@@ -185,7 +181,7 @@ struct Talk: View {
             VStack {
                 Spacer()
                 HStack(spacing:0) {
-                    TextField("　メッセージ", text: $message)
+                    TextField("  Not used in this experiment", text: $message)
                         .frame(height: 55)
                         .background(Color.white)
                         .onChange(of: message) {
