@@ -28,8 +28,8 @@
             filePath = "Chatapp/TalkView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
             landmarkName = "unknown"
             landmarkType = "0">
          </BreakpointContent>
@@ -124,8 +124,8 @@
             filePath = "Chatapp/TalkView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -140,8 +140,8 @@
             filePath = "Chatapp/TalkView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
