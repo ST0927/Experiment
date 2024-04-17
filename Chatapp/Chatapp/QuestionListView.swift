@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct QuestionListView: View {
-    var body: some View {
-        NavigationLink(destination: Talk().environmentObject(QuestionList())){
-            Text("4/20~ プレ実験")
-        }
-    }
-}
+//struct QuestionListView: View {
+//    var body: some View {
+//        NavigationLink(destination: Talk().environmentObject(QuestionList())){
+//            Text("4/20~ プレ実験")
+//        }
+//    }
+//}
 
 struct TaskListView: View {
     @State private var taskActive = false
@@ -35,7 +35,7 @@ struct TaskListView: View {
             }
             .navigationTitle("実験リスト")
             .alert(isPresented: $showAlert) {
-                Alert(title: Text("注意"), message: Text("アンケートは終了しました"), dismissButton: .default(Text("OK")))
+                Alert(title: Text("注意"), message: Text("このタスクは終了しました"), dismissButton: .default(Text("OK")))
             }
         }
     }
