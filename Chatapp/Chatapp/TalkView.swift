@@ -15,6 +15,7 @@ import Combine
 struct Talk: View {
     @EnvironmentObject var Q: QuestionList
     @EnvironmentObject var TaskActivate: TaskActivate
+    @EnvironmentObject var userStore: UserStore
     @ObservedObject var dataset = Dataset()
     @State var message = ""
     @State var chatType = ""
@@ -166,7 +167,7 @@ struct Talk: View {
                 }
             }.keyboardObserving().onAppear  {
                 let db = Firestore.firestore()
-                db.collection("messages").addSnapshotListener {
+                db.collection(userStore.email).addSnapshotListener {
                     (snapshot, err) in
                     if err != nil {
                         print("error")
