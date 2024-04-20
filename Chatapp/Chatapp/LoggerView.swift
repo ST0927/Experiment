@@ -50,7 +50,7 @@ struct Logger : View {
     @State var response_time_ave:Double = 0
     
     @ObservedObject var dataset = Dataset()
-    @State var isAnswerCorrect: Bool
+    @State var isAnswerCorrect: Bool = true
     @State var taskNum: Int = 1
     
     func restartTime(c: Binding<Double>) {
@@ -196,7 +196,7 @@ struct Logger : View {
 //                
 //            }
 //        }
-        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $tapNum)
+        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum)
     }
 }
 
