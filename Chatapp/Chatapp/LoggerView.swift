@@ -331,7 +331,6 @@ struct Choice : View {
                 Button(action: {
                     event = "response"
                     ResponseTimeCounts.append(ResponseTimeCount)
-                    ResponseTimeCount = 0
                     tapNum += 1
                     LeftChoice += 1
                     
@@ -344,6 +343,7 @@ struct Choice : View {
                     sendLoggerData()
                     
                     taskNum += 1
+                    ResponseTimeCount = 0
                     TimeCount = 0
                     if let _timer = time{
                         _timer.cancel()
@@ -372,7 +372,6 @@ struct Choice : View {
                 Button(action: {
                     event = "response"
                     ResponseTimeCounts.append(ResponseTimeCount)
-                    ResponseTimeCount = 0
                     tapNum += 1
                     RightChoice += 1
                     
@@ -385,6 +384,7 @@ struct Choice : View {
                     sendLoggerData()
                     
                     taskNum += 1
+                    ResponseTimeCount = 0
                     TimeCount = 0
                     if let _timer = time{
                         _timer.cancel()
