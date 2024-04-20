@@ -39,6 +39,20 @@ struct Logger : View {
     @Binding var ButtonDisabled: Bool
     @Binding var TextfieldDisabled: Bool
     
+    @State var event: String = ""
+    @State var responseData: String = ""
+    @State var screenWidth:CGFloat = 0
+    @State var screenHeight:CGFloat = 0
+    @State var tapPosition_x:CGFloat = 0
+    @State var tapPosition_y:CGFloat = 0
+    @State var text_len:Int = 0
+    @State var text_len_ave:Double = 0
+    @State var response_time_ave:Double = 0
+    
+    @ObservedObject var dataset = Dataset()
+    @State var isAnswerCorrect: Bool
+    @State var taskNum: Int = 1
+    
     func restartTime(c: Binding<Double>) {
         if let _timer = time{
             _timer.cancel()
@@ -50,16 +64,6 @@ struct Logger : View {
                 c.wrappedValue += 0.1
             }
     }
-    
-    @State var event: String = ""
-    @State var responseData: String = ""
-    @State var screenWidth:CGFloat = 0
-    @State var screenHeight:CGFloat = 0
-    @State var tapPosition_x:CGFloat = 0
-    @State var tapPosition_y:CGFloat = 0
-    @State var text_len:Int = 0
-    @State var text_len_ave:Double = 0
-    @State var response_time_ave:Double = 0
     
     func sendLoggerData() {
         
@@ -89,30 +93,31 @@ struct Logger : View {
                                  "data_time": dateUnix,
                                 ],
                         "body": ["event": event,//イベント名
-                                 //端末サイズ、表示中の画面の位置
+                                 //端末サイズ、表示中の画面の位置、表示中のタスク番号
                                  "screen_width":screenWidth,
                                  "screen_height":screenHeight,
                                  "view_position":abs(offsetY - initOffsetY),
+                                 "taskNum":taskNum,
                                  //タップ：カウント、頻度、場所
                                  "tap_count":tapNum,
                                  "tap_interval":TimeCount,
                                  "tap_position_x":tapPosition_x,
                                  "tap_position_y":tapPosition_y,
-                                 //選択ボタン
+                                 //回答：回数、正誤、かけた時間、
                                  "choice_left":LeftChoice,
                                  "choice_right":RightChoice,
-                                 //テキスト入力：長さ、平均長さ、削除回数、回答にかけた時間、
+                                 "isAnswerCorrect":isAnswerCorrect,
+                                 "response_time":ResponseTimeCount,
+                                 "response_time_ave":response_time_ave,
+                                 //テキスト入力：長さ、平均長さ、削除回数、
                                  "text_len":text_len,
                                  "text_len_ave":text_len_ave,
                                  "text_delete_count":Delete,
-                                 "response_time":ResponseTimeCount,
-                                 "response_time_ave":response_time_ave,
-                                 //スクロール：発生位置（Y軸）、長さ、時間、速さ
                                  
+                                 //スクロール：長さ、時間、速さ
                                  "scroll_length":abs(endposition - startposition),
                                  "scroll_time":ScrollingTime,
-                                 "scroll_speed":abs(ScrollSpeed),
-                                 
+                                 "scroll_speed":abs(ScrollSpeed)
                                  ]
                         ] as [String: Any]
         
@@ -191,7 +196,7 @@ struct Logger : View {
 //                
 //            }
 //        }
-        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData)
+        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $tapNum)
     }
 }
 
@@ -225,6 +230,10 @@ struct Choice : View {
     @Binding var ScrollingTime:Double
     @Binding var ScrollSpeed:Double
     @Binding var responseData: String
+    
+    @ObservedObject var dataset = Dataset()
+    @Binding var isAnswerCorrect: Bool
+    @Binding var taskNum: Int
     
     
     func B_text(s: String) -> some View {
@@ -263,25 +272,28 @@ struct Choice : View {
                                  "data_time": dateUnix,
                                 ],
                         "body": ["event": event,//イベント名
-                                 //端末サイズ
+                                 //端末サイズ、表示中の画面の位置、表示中のタスク番号
                                  "screen_width":screenWidth,
                                  "screen_height":screenHeight,
+                                 "view_position":abs(offsetY - initOffsetY),
+                                 "taskNum":taskNum,
                                  //タップ：カウント、頻度、場所
                                  "tap_count":tapNum,
                                  "tap_interval":TimeCount,
                                  "tap_position_x":tapPosition_x,
                                  "tap_position_y":tapPosition_y,
-                                 //選択ボタン
+                                 //回答：回数、正誤、かけた時間、
                                  "choice_left":LeftChoice,
                                  "choice_right":RightChoice,
-                                 //テキスト入力：長さ、平均長さ、削除回数、回答にかけた時間、
+                                 "isAnswerCorrect":isAnswerCorrect,
+                                 "response_time":ResponseTimeCount,
+                                 "response_time_ave":response_time_ave,
+                                 //テキスト入力：長さ、平均長さ、削除回数、
                                  "text_len":text_len,
                                  "text_len_ave":text_len_ave,
                                  "text_delete_count":Delete,
-                                 "response_time":ResponseTimeCount,
-                                 "response_time_ave":response_time_ave,
-                                 //スクロール：発生位置（Y軸）、長さ、時間、速さ
-                                 "view_position":abs(offsetY - initOffsetY),
+                                 
+                                 //スクロール：長さ、時間、速さ
                                  "scroll_length":abs(endposition - startposition),
                                  "scroll_time":ScrollingTime,
                                  "scroll_speed":abs(ScrollSpeed)
@@ -321,6 +333,16 @@ struct Choice : View {
                     ResponseTimeCount = 0
                     tapNum += 1
                     LeftChoice += 1
+                    
+                    if dataset.csvArray[taskNum][2] == "TRUE" {
+                        isAnswerCorrect = true
+                    } else {
+                        isAnswerCorrect = false
+                    }
+                    
+                    sendLoggerData()
+                    
+                    taskNum += 1
                     TimeCount = 0
                     if let _timer = time{
                         _timer.cancel()
@@ -339,7 +361,7 @@ struct Choice : View {
                             print("sent")
                         }
                     }
-                    sendLoggerData()
+                    
 //                    ButtonDisabled = true
 //                    TextfieldDisabled = false
                 })
@@ -352,6 +374,16 @@ struct Choice : View {
                     ResponseTimeCount = 0
                     tapNum += 1
                     RightChoice += 1
+                    
+                    if dataset.csvArray[taskNum][2] == "False" {
+                        isAnswerCorrect = true
+                    } else {
+                        isAnswerCorrect = false
+                    }
+                    
+                    sendLoggerData()
+                    
+                    taskNum += 1
                     TimeCount = 0
                     if let _timer = time{
                         _timer.cancel()
