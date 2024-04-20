@@ -54,8 +54,8 @@ struct Talk: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack(spacing: 0) {
-                            AvatarMessageView(text: "Q1: "+dataset.csvArray[1][1])
-                            ImageFromGitLinkView(filePath: "\(dataset.csvArray[1][3])")
+                            AvatarMessageView(text: "Q1: "+dataset.csvArray[1][3])
+                            ImageFromGitLinkView(filePath: "\(dataset.csvArray[1][4])")
                         }
 
                         ForEach(history.indices, id: \.self) { index in
@@ -64,9 +64,9 @@ struct Talk: View {
                             UserResponseView(text: "\(history[index].text)")
                             VStack(spacing: 0) {
                                 if Num <= num_of_task {
-                                    if !dataset.csvArray[Num+1][1].isEmpty && !dataset.csvArray[Num+1][3].isEmpty {
-                                        AvatarMessageView(text: "Q\(Num+1): "+dataset.csvArray[Num+1][1])
-                                        ImageFromGitLinkView(filePath: "\(dataset.csvArray[Num+1][3])")
+                                    if !dataset.csvArray[Num+1][3].isEmpty && !dataset.csvArray[Num+1][4].isEmpty {
+                                        AvatarMessageView(text: "Q\(Num+1): "+dataset.csvArray[Num+1][3])
+                                        ImageFromGitLinkView(filePath: "\(dataset.csvArray[Num+1][4])")
                                     } else  {
                                         Text("Question not found")
                                     }

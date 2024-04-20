@@ -332,7 +332,7 @@ struct Choice : View {
                             TimeCount += 0.1
                         }
                     let db = Firestore.firestore()
-                    db.collection("messages").addDocument(data: ["text": "YES"]) { err in
+                    db.collection(userStore.email).addDocument(data: ["text": "TRUE"]) { err in
                         if let e = err {
                             print(e)
                         } else {
@@ -363,7 +363,7 @@ struct Choice : View {
                             TimeCount += 0.1
                         }
                     let db = Firestore.firestore()
-                    db.collection("messages").addDocument(data: ["text": "NO"]) { err in
+                    db.collection(userStore.email).addDocument(data: ["text": "FALSE"]) { err in
                         if let e = err {
                             print(e)
                         } else {
