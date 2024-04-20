@@ -44,6 +44,9 @@ struct Talk: View {
     @State var ButtonDisabled:Bool = false
     @State var TextfieldDisabled:Bool = true
     
+    //未実装、絶対やる
+    @State var ScrollCount: Double = 0
+    
     var body: some View {
         ZStack {
             Color(red:1.0,green:0.98,blue:0.94)
@@ -139,6 +142,7 @@ struct Talk: View {
                                             ScrollSpeed = (endposition - startposition)/ScrollingTime
                                             ScrollTimeCount = 0
                                             scroll = false
+                                            ScrollCount += 1
                                         } else {
                                             print("スクロール中")
                                         }
