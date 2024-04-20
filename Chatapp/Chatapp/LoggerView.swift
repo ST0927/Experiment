@@ -110,9 +110,9 @@ struct Logger : View {
                                  "response_time":ResponseTimeCount,
                                  "response_time_ave":response_time_ave,
                                  //テキスト入力：長さ、平均長さ、削除回数、
-                                 "text_len":text_len,
-                                 "text_len_ave":text_len_ave,
-                                 "text_delete_count":Delete,
+//                                 "text_len":text_len,
+//                                 "text_len_ave":text_len_ave,
+//                                 "text_delete_count":Delete,
                                  
                                  //スクロール：長さ、時間、速さ
                                  "scroll_length":abs(endposition - startposition),
@@ -151,8 +151,6 @@ struct Logger : View {
                 .contentShape(Rectangle())
                 .onTapGesture { tap in
                     event = "tapCount"
-                    screenWidth = geometry.size.width
-                    screenHeight = geometry.size.height
                     tapPosition_x = tap.x
                     tapPosition_y = tap.y
                     tapNum += 1
@@ -165,6 +163,10 @@ struct Logger : View {
                     
                     //画面タップでキーボードを閉じる
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
+                .onAppear {
+                    screenWidth = geometry.size.width
+                    screenHeight = geometry.size.height
                 }
         }
        
@@ -289,10 +291,9 @@ struct Choice : View {
                                  "response_time":ResponseTimeCount,
                                  "response_time_ave":response_time_ave,
                                  //テキスト入力：長さ、平均長さ、削除回数、
-                                 "text_len":text_len,
-                                 "text_len_ave":text_len_ave,
-                                 "text_delete_count":Delete,
-                                 
+//                                 "text_len":text_len,
+//                                 "text_len_ave":text_len_ave,
+//                                 "text_delete_count":Delete,
                                  //スクロール：長さ、時間、速さ
                                  "scroll_length":abs(endposition - startposition),
                                  "scroll_time":ScrollingTime,
@@ -354,7 +355,7 @@ struct Choice : View {
                             TimeCount += 0.1
                         }
                     let db = Firestore.firestore()
-                    db.collection(userStore.email).addDocument(data: ["text": "TRUE"]) { err in
+                    db.collection(userStore.email).addDocument(data: ["text": "Yes"]) { err in
                         if let e = err {
                             print(e)
                         } else {
@@ -395,7 +396,7 @@ struct Choice : View {
                             TimeCount += 0.1
                         }
                     let db = Firestore.firestore()
-                    db.collection(userStore.email).addDocument(data: ["text": "FALSE"]) { err in
+                    db.collection(userStore.email).addDocument(data: ["text": "No"]) { err in
                         if let e = err {
                             print(e)
                         } else {
