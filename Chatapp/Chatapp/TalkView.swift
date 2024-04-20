@@ -71,6 +71,7 @@ struct Talk: View {
                                         Text("Question not found")
                                     }
                                 } else {
+                                    //タスクの終了処理
                                     AvatarMessageView(text: "This concludes the questions. Thank you for your cooperation!")
                                         .onAppear {
                                             ButtonDisabled = true
