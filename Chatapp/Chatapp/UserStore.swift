@@ -10,5 +10,5 @@ import Foundation
 class UserStore : ObservableObject {
     @Published var isAuthenticated = false
     @Published var userID = ""
-    @Published var email = ""
+    @Published var email = "test"
 }

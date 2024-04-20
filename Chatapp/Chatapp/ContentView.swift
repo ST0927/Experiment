@@ -16,7 +16,7 @@ struct ContentView: View {
             NavigationView {
                 VStack {
                     NavigationLink(destination: RegistrationView()){
-                        Text("会員登録")
+                        Text("新規登録")
                         .padding()
                     }
                     
