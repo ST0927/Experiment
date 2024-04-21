@@ -48,94 +48,96 @@ struct Talk: View {
     //未実装、絶対やる
     @State var ScrollCount: Int = 0
     
-//    @Binding var response_time_ave:Double
-//    @Binding var event: String
-//    @Binding var screenWidth:CGFloat
-//    @Binding var screenHeight:CGFloat
-//    @Binding var tapPosition_x:CGFloat
-//    @Binding var tapPosition_y:CGFloat
-//    @Binding var isAnswerCorrect: Bool
-//    @Binding var taskNum: Int
-//    @Binding var tapNum:Int
-//    @Binding var LeftChoice:Int
-//    @Binding var RightChoice:Int
-//    @Binding var TimeCount:Double
-//    @Binding var responseData: String
+    @State var response_time_ave:Double = 0
+    @State var event: String = ""
+    @State var screenWidth:CGFloat = 0
+    @State var screenHeight:CGFloat = 0
+    @State var tapPosition_x:CGFloat = 0
+    @State var tapPosition_y:CGFloat = 0
+    @State var isAnswerCorrect: Bool = true
+    @State var taskNum: Int = 1
+    @State var tapNum:Int = 0
+    @State var LeftChoice:Int = 0
+    @State var RightChoice:Int = 0
+    @State var TimeCount:Double = 0
+    @State var responseData: String = ""
     
-//    func sendLoggerData() {
-//        
-//        //日付の設定
-//        let now = Date()
-//        let dateUnix: TimeInterval = now.timeIntervalSince1970
-//
-//        //HTTPPOSTの形式を指定
-//        let url = URL(string: "https://datalake.iopt.jp/v1/sensor_data")!
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//
-//        if !ResponseTimeCounts.isEmpty {
-//            response_time_ave = Double(ResponseTimeCounts.reduce(0, +))/Double(ResponseTimeCounts.count)
-//        }
-//        
-//        //送信する内容のリスト
-//        let sendData = ["key": "t9eX8tyr7G_ZQk-2",
-//                        "meta": ["area": 1927,
-//                                 "type": 1927,
-//                                 "sensor_id": userStore.email,
-//                                 "data_time": dateUnix,
-//                                ],
-//                        "body": ["event": event,//イベント名
-//                                 //端末サイズ、表示中の画面の位置、表示中のタスク番号
-//                                 "screen_width":screenWidth,
-//                                 "screen_height":screenHeight,
-//                                 "view_position":abs(offsetY - initOffsetY),
-//                                 "taskNum":taskNum,
-//                                 //タップ：カウント、頻度、場所
-//                                 "tap_count":tapNum,
-//                                 "tap_interval":TimeCount,
-//                                 "tap_position_x":tapPosition_x,
-//                                 "tap_position_y":tapPosition_y,
-//                                 //回答：回数、正誤、かけた時間、
-//                                 "choice_left":LeftChoice,
-//                                 "choice_right":RightChoice,
-//                                 "isAnswerCorrect":isAnswerCorrect,
-//                                 "response_time":ResponseTimeCount,
-//                                 "response_time_ave":response_time_ave,
-//                                 //テキスト入力：長さ、平均長さ、削除回数、
-////                                 "text_len":text_len,
-////                                 "text_len_ave":text_len_ave,
-////                                 "text_delete_count":Delete,
-//                                 
-//                                 //スクロール：長さ、時間、速さ
-//                                 "scroll_length":abs(endposition - startposition),
-//                                 "scroll_time":ScrollingTime,
-//                                 "scroll_speed":abs(ScrollSpeed)
-//                                 ]
-//                        ] as [String: Any]
-//        
-//        //送信する内容をJSON形式に変更してHTTPリクエストのボディに設定
-//        do {
-//            let jsonData = try JSONSerialization.data(withJSONObject: sendData)
-//            request.httpBody = jsonData
-//        } catch {
-//            print("Error: \(error)")
-//        }
-//        
-//        //HTTPリクエストの実行
-//        URLSession.shared.dataTask(with: request) { data, response, error in
-//            if let data = data {
-//                if let responseString = String(data: data, encoding: .utf8) {
-//                    DispatchQueue.main.async {
-//                        self.responseData = responseString
-//                    }
-//                }
-//            } else if let error = error {
-//                print("Error: \(error)")
-//            }
-//        }.resume()
-//        
-//    }
+    
+    
+    func sendLoggerData() {
+        
+        //日付の設定
+        let now = Date()
+        let dateUnix: TimeInterval = now.timeIntervalSince1970
+
+        //HTTPPOSTの形式を指定
+        let url = URL(string: "https://datalake.iopt.jp/v1/sensor_data")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        if !ResponseTimeCounts.isEmpty {
+            response_time_ave = Double(ResponseTimeCounts.reduce(0, +))/Double(ResponseTimeCounts.count)
+        }
+        
+        //送信する内容のリスト
+        let sendData = ["key": "t9eX8tyr7G_ZQk-2",
+                        "meta": ["area": 1927,
+                                 "type": 1927,
+                                 "sensor_id": userStore.email,
+                                 "data_time": dateUnix,
+                                ],
+                        "body": ["event": event,//イベント名
+                                 //端末サイズ、表示中の画面の位置、表示中のタスク番号
+                                 "screen_width":screenWidth,
+                                 "screen_height":screenHeight,
+                                 "view_position":abs(offsetY - initOffsetY),
+                                 "taskNum":taskNum,
+                                 //タップ：カウント、頻度、場所
+                                 "tap_count":tapNum,
+                                 "tap_interval":TimeCount,
+                                 "tap_position_x":tapPosition_x,
+                                 "tap_position_y":tapPosition_y,
+                                 //回答：回数、正誤、かけた時間、
+                                 "choice_left":LeftChoice,
+                                 "choice_right":RightChoice,
+                                 "isAnswerCorrect":isAnswerCorrect,
+                                 "response_time":ResponseTimeCount,
+                                 "response_time_ave":response_time_ave,
+                                 //テキスト入力：長さ、平均長さ、削除回数、
+//                                 "text_len":text_len,
+//                                 "text_len_ave":text_len_ave,
+//                                 "text_delete_count":Delete,
+                                 
+                                 //スクロール：長さ、時間、速さ
+                                 "scroll_length":abs(endposition - startposition),
+                                 "scroll_time":ScrollingTime,
+                                 "scroll_speed":abs(ScrollSpeed)
+                                 ]
+                        ] as [String: Any]
+        
+        //送信する内容をJSON形式に変更してHTTPリクエストのボディに設定
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: sendData)
+            request.httpBody = jsonData
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        //HTTPリクエストの実行
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data = data {
+                if let responseString = String(data: data, encoding: .utf8) {
+                    DispatchQueue.main.async {
+                        self.responseData = responseString
+                    }
+                }
+            } else if let error = error {
+                print("Error: \(error)")
+            }
+        }.resume()
+        
+    }
     
     var body: some View {
         ZStack {
@@ -203,6 +205,7 @@ struct Talk: View {
                             offsetY = value[0]
                             if scroll == false {
                                 print("start")
+                                event = "scroll"
                                 startposition = offsetY - initOffsetY
                                 UnScrollTimeCount = unScrollTimeCount
                                 if let _timer = ScrollTime{
@@ -234,6 +237,7 @@ struct Talk: View {
                                             ScrollTimeCount = 0
                                             scroll = false
                                             ScrollCount += 1
+                                            sendLoggerData()
                                         } else {
                                             print("スクロール中")
                                         }
@@ -270,8 +274,7 @@ struct Talk: View {
                     }
                 }
             }
-            //Logger
-            Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled)
+            Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_x,isAnswerCorrect:$isAnswerCorrect,taskNum:$taskNum,tapNum:$tapNum,LeftChoice:$LeftChoice,RightChoice:$RightChoice,TimeCount:$TimeCount, responseData:$responseData)
                 .environmentObject(TimerCount())
             
             VStack {

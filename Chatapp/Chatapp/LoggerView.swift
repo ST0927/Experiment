@@ -13,10 +13,8 @@ struct Logger : View {
     @EnvironmentObject var timerController: TimerCount
     @EnvironmentObject var userStore: UserStore
     
-    @State var tapNum:Int = 0
-    @State var LeftChoice:Int = 0
-    @State var RightChoice:Int = 0
-    @State var TimeCount:Double = 0
+    
+    
     @State var time: AnyCancellable?
     
     @Binding var offsetY:CGFloat
@@ -39,19 +37,28 @@ struct Logger : View {
     @Binding var ButtonDisabled: Bool
     @Binding var TextfieldDisabled: Bool
     
-    @State var event: String = ""
-    @State var responseData: String = ""
-    @State var screenWidth:CGFloat = 0
-    @State var screenHeight:CGFloat = 0
-    @State var tapPosition_x:CGFloat = 0
-    @State var tapPosition_y:CGFloat = 0
+    @Binding var response_time_ave:Double
+    @Binding var event: String
+    @Binding var screenWidth:CGFloat
+    @Binding var screenHeight:CGFloat
+    @Binding var tapPosition_x:CGFloat
+    @Binding var tapPosition_y:CGFloat
+    @Binding var isAnswerCorrect: Bool
+    @Binding var taskNum: Int
+    @Binding var tapNum:Int
+    @Binding var LeftChoice:Int
+    @Binding var RightChoice:Int
+    @Binding var TimeCount:Double
+    @Binding var responseData: String
+    
+    
+    
     @State var text_len:Int = 0
     @State var text_len_ave:Double = 0
-    @State var response_time_ave:Double = 0
+    
     
     @ObservedObject var dataset = Dataset()
-    @State var isAnswerCorrect: Bool = true
-    @State var taskNum: Int = 1
+    
     
     func restartTime(c: Binding<Double>) {
         if let _timer = time{
@@ -143,7 +150,6 @@ struct Logger : View {
         }.resume()
         
     }
-
     var body: some View {
         //透明なビューを設置してタップ回数のカウント
         GeometryReader { geometry in
@@ -174,8 +180,12 @@ struct Logger : View {
         //動作確認用
         HStack {
             VStack {
+                Text("イベント:\(event)")
+                Text("スクリーン幅:\(screenWidth)")
+                Text("スクリーン高さ:\(screenHeight)")
                 Text("ユーザー:\(userStore.userID)")
                 Text("ユーザー:\(userStore.email)")
+                Text("タスク:\(taskNum)")
                 if !message_len.isEmpty {
                     Text("文字数：\(message_len[message_len.count - 1].count)")
                     Text("文字数平均：\(Double(message_len.joined().count)/Double(message_len.count))")
@@ -189,8 +199,15 @@ struct Logger : View {
                 //Text("非操作時間")
                 Text("タップ回数：\(tapNum)")
                 Text("タップ間隔：\(TimeCount)")
+                Text("タップ座標x：\(tapPosition_x)")
+                Text("タップ座標y：\(tapPosition_y)")
                 Text("左を選んだ回数：\(LeftChoice)")
                 Text("右を選んだ回数：\(RightChoice)")
+                if isAnswerCorrect == true {
+                    Text("回答の正誤：正)")
+                } else {
+                    Text("回答の正誤：誤)")
+                }
                 Text("画面位置：\(abs(offsetY - initOffsetY))")
                 Text("スクロール長さ：\(abs(endposition - startposition))")
                 Text("スクロール時間：\(ScrollingTime)")
