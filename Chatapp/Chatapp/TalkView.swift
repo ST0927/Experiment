@@ -109,7 +109,8 @@ struct Talk: View {
 //                                 "text_len_ave":text_len_ave,
 //                                 "text_delete_count":Delete,
                                  
-                                 //スクロール：長さ、時間、速さ
+                                 //スクロール：長さ、時間、速さ、回数
+                                 "scroll_count":ScrollCount,
                                  "scroll_length":abs(endposition - startposition),
                                  "scroll_time":ScrollingTime,
                                  "scroll_speed":abs(ScrollSpeed)
