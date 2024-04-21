@@ -179,44 +179,44 @@ struct Logger : View {
        
         
         //動作確認用
-        HStack {
-            VStack {
-                Text("イベント:\(event)")
-                Text("スクリーン幅:\(screenWidth)")
-                Text("スクリーン高さ:\(screenHeight)")
-                Text("ユーザー:\(userStore.userID)")
-                Text("ユーザー:\(userStore.email)")
-                Text("タスク:\(taskNum)")
-                if !message_len.isEmpty {
-                    Text("文字数：\(message_len[message_len.count - 1].count)")
-                    Text("文字数平均：\(Double(message_len.joined().count)/Double(message_len.count))")
-                }
-                Text("テキスト削除回数：\(Delete)")
-                Text("回答時間：\(ResponseTimeCount)")
-                if !ResponseTimeCounts.isEmpty {
-                    Text("回答時間平均：\(Double(ResponseTimeCounts.reduce(0, +))/Double(ResponseTimeCounts.count))")
-                }
-                
-                //Text("非操作時間")
-                Text("タップ回数：\(tapNum)")
-                Text("タップ間隔：\(TimeCount)")
-                Text("タップ座標x：\(tapPosition_x)")
-                Text("タップ座標y：\(tapPosition_y)")
-                Text("左を選んだ回数：\(LeftChoice)")
-                Text("右を選んだ回数：\(RightChoice)")
-                if isAnswerCorrect == true {
-                    Text("回答の正誤：正)")
-                } else {
-                    Text("回答の正誤：誤)")
-                }
-                Text("画面位置：\(abs(offsetY - initOffsetY))")
-                Text("スクロール回数：\(ScrollCount)")
-                Text("スクロール長さ：\(abs(endposition - startposition))")
-                Text("スクロール時間：\(ScrollingTime)")
-                Text("スクロール速度：\(abs(ScrollSpeed))")
-                
-            }
-        }
+//        HStack {
+//            VStack {
+//                Text("イベント:\(event)")
+//                Text("スクリーン幅:\(screenWidth)")
+//                Text("スクリーン高さ:\(screenHeight)")
+//                Text("ユーザー:\(userStore.userID)")
+//                Text("ユーザー:\(userStore.email)")
+//                Text("タスク:\(taskNum)")
+//                if !message_len.isEmpty {
+//                    Text("文字数：\(message_len[message_len.count - 1].count)")
+//                    Text("文字数平均：\(Double(message_len.joined().count)/Double(message_len.count))")
+//                }
+//                Text("テキスト削除回数：\(Delete)")
+//                Text("回答時間：\(ResponseTimeCount)")
+//                if !ResponseTimeCounts.isEmpty {
+//                    Text("回答時間平均：\(Double(ResponseTimeCounts.reduce(0, +))/Double(ResponseTimeCounts.count))")
+//                }
+//                
+//                //Text("非操作時間")
+//                Text("タップ回数：\(tapNum)")
+//                Text("タップ間隔：\(TimeCount)")
+//                Text("タップ座標x：\(tapPosition_x)")
+//                Text("タップ座標y：\(tapPosition_y)")
+//                Text("左を選んだ回数：\(LeftChoice)")
+//                Text("右を選んだ回数：\(RightChoice)")
+//                if isAnswerCorrect == true {
+//                    Text("回答の正誤：正)")
+//                } else {
+//                    Text("回答の正誤：誤)")
+//                }
+//                Text("画面位置：\(abs(offsetY - initOffsetY))")
+//                Text("スクロール回数：\(ScrollCount)")
+//                Text("スクロール長さ：\(abs(endposition - startposition))")
+//                Text("スクロール時間：\(ScrollingTime)")
+//                Text("スクロール速度：\(abs(ScrollSpeed))")
+//                
+//            }
+//        }
         Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollCount: $ScrollCount, ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum)
     }
 }
