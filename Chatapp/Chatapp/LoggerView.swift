@@ -50,7 +50,7 @@ struct Logger : View {
     @Binding var RightChoice:Int
     @Binding var TimeCount:Double
     @Binding var responseData: String
-    
+    @Binding var ScrollCount:Int
     
     
     @State var text_len:Int = 0
@@ -122,6 +122,7 @@ struct Logger : View {
 //                                 "text_delete_count":Delete,
                                  
                                  //スクロール：長さ、時間、速さ
+                                 "scroll_count":ScrollCount,
                                  "scroll_length":abs(endposition - startposition),
                                  "scroll_time":ScrollingTime,
                                  "scroll_speed":abs(ScrollSpeed)
@@ -209,13 +210,14 @@ struct Logger : View {
                     Text("回答の正誤：誤)")
                 }
                 Text("画面位置：\(abs(offsetY - initOffsetY))")
+                Text("スクロール回数：\(ScrollCount)")
                 Text("スクロール長さ：\(abs(endposition - startposition))")
                 Text("スクロール時間：\(ScrollingTime)")
                 Text("スクロール速度：\(abs(ScrollSpeed))")
                 
             }
         }
-        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum)
+        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollCount: $ScrollCount, ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum)
     }
 }
 
@@ -246,6 +248,7 @@ struct Choice : View {
     @Binding var initOffsetY:CGFloat
     @Binding var startposition: CGFloat
     @Binding var endposition: CGFloat
+    @Binding var ScrollCount: Int
     @Binding var ScrollingTime:Double
     @Binding var ScrollSpeed:Double
     @Binding var responseData: String
@@ -312,6 +315,7 @@ struct Choice : View {
 //                                 "text_len_ave":text_len_ave,
 //                                 "text_delete_count":Delete,
                                  //スクロール：長さ、時間、速さ
+                                 "scroll_count":ScrollCount,
                                  "scroll_length":abs(endposition - startposition),
                                  "scroll_time":ScrollingTime,
                                  "scroll_speed":abs(ScrollSpeed)
