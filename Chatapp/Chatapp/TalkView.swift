@@ -23,8 +23,10 @@ struct Talk: View {
     @State var key_history:[String] = []
     @State var message_len:[String] = []
     @State var history:[Message] = []
+    
     @State var offsetY:CGFloat = 0
     @State var initOffsetY:CGFloat = 0
+    
     @State var pre:CGFloat = 0
     @State var current:CGFloat = 0
     @State var scroll:Bool = false
@@ -44,10 +46,7 @@ struct Talk: View {
     @State var Delete:Int = 0
     @State var ButtonDisabled:Bool = false
     @State var TextfieldDisabled:Bool = true
-    
-    //未実装、絶対やる
     @State var ScrollCount: Int = 0
-    
     @State var response_time_ave:Double = 0
     @State var event: String = ""
     @State var screenWidth:CGFloat = 0
@@ -146,10 +145,10 @@ struct Talk: View {
             VStack(alignment: .leading) {
                 ScrollViewReader { proxy in
                     ScrollView {
-                        VStack(spacing: 0) {
-                            AvatarMessageView(text: "Q1: "+dataset.csvArray[1][3])
-                            ImageFromGitLinkView(filePath: "\(dataset.csvArray[1][4])")
-                        }
+//                        VStack(spacing: 0) {
+//                            AvatarMessageView(text: "Q1: "+dataset.csvArray[1][3])
+//                            ImageFromGitLinkView(filePath: "\(dataset.csvArray[1][4])")
+//                        }
 
                         ForEach(history.indices, id: \.self) { index in
                             let Num = index+1 //indexがIntじゃないから数字を足す
@@ -185,7 +184,7 @@ struct Talk: View {
                             }
                             .background(
                                 GeometryReader { geometry in
-                                    Color.clear
+                                    Color.red
                                         .preference(
                                             key: ScrollOffsetYPreferenceKey.self,
                                             value: [geometry.frame(in: .global).minY]
@@ -203,7 +202,6 @@ struct Talk: View {
                                 }
                         .onPreferenceChange(ScrollOffsetYPreferenceKey.self) { value in
                             offsetY = value[0]
-//                            initOffsetY = value.last ?? 0
                             print("initOffsetY: \(initOffsetY)")
                             if scroll == false {
                                 print("start")
