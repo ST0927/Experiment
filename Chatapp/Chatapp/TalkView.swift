@@ -194,7 +194,6 @@ struct Talk: View {
                                         }
                                 }
                             )
-
                         Spacer(minLength: 50).id("footer")
                     }.padding(.bottom, 55)
                         .onChange(of: history.indices) {
@@ -204,8 +203,12 @@ struct Talk: View {
                                 }
                         .onPreferenceChange(ScrollOffsetYPreferenceKey.self) { value in
                             offsetY = value[0]
+//                            initOffsetY = value.last ?? 0
+                            print("initOffsetY: \(initOffsetY)")
                             if scroll == false {
                                 print("start")
+                                print("offsetY:\(offsetY)")
+                                print("initOffsetY:\(initOffsetY)")
                                 event = "scroll"
                                 startposition = offsetY - initOffsetY
                                 UnScrollTimeCount = unScrollTimeCount
@@ -221,7 +224,10 @@ struct Talk: View {
                             }
                             scroll = true
                             current = offsetY - initOffsetY
+                            print("offsetY:\(offsetY)")
+                            print("initOffsetY:\(initOffsetY)")
                             print(offsetY - initOffsetY)
+                            
                             if let _timer = Time{
                                 _timer.cancel()
                             }
