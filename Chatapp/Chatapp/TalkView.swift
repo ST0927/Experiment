@@ -53,6 +53,7 @@ struct Talk: View {
     @State var screenHeight:CGFloat = 0
     @State var tapPosition_x:CGFloat = 0
     @State var tapPosition_y:CGFloat = 0
+    
     @State var isAnswerCorrect: Bool = true
     @State var taskNum: Int = 1
     @State var tapNum:Int = 0
@@ -150,7 +151,6 @@ struct Talk: View {
                                 AvatarMessageView(text: "Q1: "+dataset.csvArray[1][3])
                                 ImageFromGitLinkView(filePath: "\(dataset.csvArray[1][4])")
                             }
-                            
                             ForEach(history.indices, id: \.self) { index in
                                 let Num = index+1 //indexがIntじゃないから数字を足す
                                 let num_of_task = 29 //１問目は別で用意
@@ -173,30 +173,29 @@ struct Talk: View {
                                 }
                             }
                         }
-
                         .padding(.vertical, 5)
-                            .onChange(of: history.indices) {
-                                if let _timer = ResponseTime{
-                                    _timer.cancel()
+                        .onChange(of: history.indices) {
+                            if let _timer = ResponseTime{
+                                _timer.cancel()
+                            }
+                            ResponseTime = Timer.publish(every: 0.1, on: .main, in: .common)
+                                .autoconnect()
+                                .receive(on: DispatchQueue.main)
+                                .sink { _ in
+                                    ResponseTimeCount += 0.1
                                 }
-                                ResponseTime = Timer.publish(every: 0.1, on: .main, in: .common)
-                                    .autoconnect()
-                                    .receive(on: DispatchQueue.main)
-                                    .sink { _ in
-                                        ResponseTimeCount += 0.1
+                        }
+                        .background(
+                            GeometryReader { geometry in
+                                Color.clear
+                                    .preference(
+                                        key: ScrollOffsetYPreferenceKey.self,
+                                        value: [geometry.frame(in: .global).minY]
+                                    ).onAppear {
+                                        initOffsetY = geometry.frame(in: .global).minY
                                     }
                             }
-                            .background(
-                                GeometryReader { geometry in
-                                    Color.red
-                                        .preference(
-                                            key: ScrollOffsetYPreferenceKey.self,
-                                            value: [geometry.frame(in: .global).minY]
-                                        ).onAppear {
-                                            initOffsetY = geometry.frame(in: .global).minY
-                                        }
-                                }
-                            )
+                        )
                         Spacer(minLength: 50).id("footer")
                     }.padding(.bottom, 55)
                         .onChange(of: history.indices) {
@@ -209,8 +208,6 @@ struct Talk: View {
                             print("initOffsetY: \(initOffsetY)")
                             if scroll == false {
                                 print("start")
-                                print("offsetY:\(offsetY)")
-                                print("initOffsetY:\(initOffsetY)")
                                 event = "scroll"
                                 startposition = offsetY - initOffsetY
                                 UnScrollTimeCount = unScrollTimeCount
@@ -226,8 +223,6 @@ struct Talk: View {
                             }
                             scroll = true
                             current = offsetY - initOffsetY
-                            print("offsetY:\(offsetY)")
-                            print("initOffsetY:\(initOffsetY)")
                             print(offsetY - initOffsetY)
                             
                             if let _timer = Time{
@@ -283,7 +278,7 @@ struct Talk: View {
                     }
                 }
             }
-            Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_x,isAnswerCorrect:$isAnswerCorrect,taskNum:$taskNum,tapNum:$tapNum,LeftChoice:$LeftChoice,RightChoice:$RightChoice,TimeCount:$TimeCount, responseData:$responseData, ScrollCount: $ScrollCount)
+            Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,isAnswerCorrect:$isAnswerCorrect,taskNum:$taskNum,tapNum:$tapNum,LeftChoice:$LeftChoice,RightChoice:$RightChoice,TimeCount:$TimeCount, responseData:$responseData, ScrollCount: $ScrollCount)
                 .environmentObject(TimerCount())
             
             VStack {

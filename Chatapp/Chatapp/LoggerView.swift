@@ -151,6 +151,7 @@ struct Logger : View {
         }.resume()
         
     }
+
     var body: some View {
         //透明なビューを設置してタップ回数のカウント
         GeometryReader { geometry in
