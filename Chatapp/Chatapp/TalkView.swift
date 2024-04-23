@@ -145,32 +145,36 @@ struct Talk: View {
             VStack(alignment: .leading) {
                 ScrollViewReader { proxy in
                     ScrollView {
-//                        VStack(spacing: 0) {
-//                            AvatarMessageView(text: "Q1: "+dataset.csvArray[1][3])
-//                            ImageFromGitLinkView(filePath: "\(dataset.csvArray[1][4])")
-//                        }
-
-                        ForEach(history.indices, id: \.self) { index in
-                            let Num = index+1 //indexがIntじゃないから数字を足す
-                            let num_of_task = 29 //１問目は別で用意
-                            UserResponseView(text: "\(history[index].text)")
+                        VStack {
                             VStack(spacing: 0) {
-                                if Num <= num_of_task {
-                                    if !dataset.csvArray[Num+1][3].isEmpty && !dataset.csvArray[Num+1][4].isEmpty {
-                                        AvatarMessageView(text: "Q\(Num+1): "+dataset.csvArray[Num+1][3])
-                                        ImageFromGitLinkView(filePath: "\(dataset.csvArray[Num+1][4])")
-                                    } else  {
-                                        Text("Question not found")
-                                    }
-                                } else {
-                                    //タスクの終了処理
-                                    AvatarMessageView(text: "This concludes the questions. Thank you for your cooperation!")
-                                        .onAppear {
-                                            ButtonDisabled = true
+                                AvatarMessageView(text: "Q1: "+dataset.csvArray[1][3])
+                                ImageFromGitLinkView(filePath: "\(dataset.csvArray[1][4])")
+                            }
+                            
+                            ForEach(history.indices, id: \.self) { index in
+                                let Num = index+1 //indexがIntじゃないから数字を足す
+                                let num_of_task = 29 //１問目は別で用意
+                                UserResponseView(text: "\(history[index].text)")
+                                VStack(spacing: 0) {
+                                    if Num <= num_of_task {
+                                        if !dataset.csvArray[Num+1][3].isEmpty && !dataset.csvArray[Num+1][4].isEmpty {
+                                            AvatarMessageView(text: "Q\(Num+1): "+dataset.csvArray[Num+1][3])
+                                            ImageFromGitLinkView(filePath: "\(dataset.csvArray[Num+1][4])")
+                                        } else  {
+                                            Text("Question not found")
                                         }
+                                    } else {
+                                        //タスクの終了処理
+                                        AvatarMessageView(text: "This concludes the questions. Thank you for your cooperation!")
+                                            .onAppear {
+                                                ButtonDisabled = true
+                                            }
+                                    }
                                 }
                             }
-                        }.padding(.vertical, 5)
+                        }
+
+                        .padding(.vertical, 5)
                             .onChange(of: history.indices) {
                                 if let _timer = ResponseTime{
                                     _timer.cancel()
