@@ -22,7 +22,7 @@ struct TaskListView: View {
     
     var body: some View {
         VStack {
-            Button("4/20~ プレ実験") {
+            Button("[5/7 ~ 5/12] Image Caption Evaluation") {
                 if taskisActive == true {
                     isActive = true
                 } else {
@@ -30,7 +30,7 @@ struct TaskListView: View {
                 }
             }
             .alert(isPresented: $showAlert) {
-                Alert(title: Text("注意"), message: Text("このタスクは終了しました"), dismissButton: .default(Text("OK")))
+                Alert(title: Text("Attention"), message: Text("This experiment has concluded."), dismissButton: .default(Text("OK")))
             }
             NavigationLink(destination: Talk(taskisActive: $taskisActive).environmentObject(QuestionList()),isActive: $isActive) {
                 EmptyView()
