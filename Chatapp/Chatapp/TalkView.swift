@@ -63,6 +63,7 @@ struct Talk: View {
     
     @State var timelimit: Bool = false
     
+    @Binding var taskisActive:Bool
     func sendLoggerData() {
         
         //日付の設定
@@ -279,8 +280,8 @@ struct Talk: View {
                     }
                 }
             }
-            Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,isAnswerCorrect:$isAnswerCorrect,taskNum:$taskNum,tapNum:$tapNum,LeftChoice:$LeftChoice,RightChoice:$RightChoice,TimeCount:$TimeCount, responseData:$responseData, ScrollCount: $ScrollCount, timelimit: $timelimit)
-                .environmentObject(TimerCount())
+            Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,isAnswerCorrect:$isAnswerCorrect,taskNum:$taskNum,tapNum:$tapNum,LeftChoice:$LeftChoice,RightChoice:$RightChoice,TimeCount:$TimeCount, responseData:$responseData, ScrollCount: $ScrollCount, timelimit: $timelimit, taskisActive: $taskisActive)
+                .environmentObject(TimerCount()).environmentObject(Chatapp.TaskActivate())
             
             VStack {
                 Spacer()
@@ -409,10 +410,10 @@ struct AvatarMessageView: View {
 
 
 
-#Preview {
-    Talk(/*response_time_ave: $response_time_ave, event: $event, screenWidth: $screenWidth, screenHeight: $screenHeight, tapPosition_x: $tapPosition_x, tapPosition_y: $tapPosition_y, isAnswerCorrect: $isAnswerCorrect, taskNum: $taskNum, tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice, TimeCount: $TimeCount, responseData: $responseData*/)
-        .environmentObject(QuestionList())
-        .environmentObject(UserStore())
-}
-
+//#Preview {
+//    Talk(/*response_time_ave: $response_time_ave, event: $event, screenWidth: $screenWidth, screenHeight: $screenHeight, tapPosition_x: $tapPosition_x, tapPosition_y: $tapPosition_y, isAnswerCorrect: $isAnswerCorrect, taskNum: $taskNum, tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice, TimeCount: $TimeCount, responseData: $responseData*/, taskisActive: )
+//        .environmentObject(QuestionList())
+//        .environmentObject(UserStore())
+//}
+//
 

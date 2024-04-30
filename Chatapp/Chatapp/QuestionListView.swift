@@ -21,13 +21,14 @@ class TaskActivate: ObservableObject {
 
 struct TaskListView: View {
     @EnvironmentObject var TaskActivate: TaskActivate
-    @State private var isActive = false
-    @State private var showAlert = false
+    @State var taskisActive = true
+    @State var isActive = false
+    @State var showAlert = false
     
     var body: some View {
         VStack {
             Button("4/20~ プレ実験") {
-                if TaskActivate.task1 == true {
+                if taskisActive == true {
                     isActive = true
                 } else {
                     showAlert = true
@@ -36,7 +37,7 @@ struct TaskListView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("注意"), message: Text("このタスクは終了しました"), dismissButton: .default(Text("OK")))
             }
-            NavigationLink(destination: Talk().environmentObject(QuestionList()),isActive: $isActive) {
+            NavigationLink(destination: Talk(taskisActive: $taskisActive).environmentObject(QuestionList()),isActive: $isActive) {
                 EmptyView()
             }/*.disabled(TaskActivate.task1)*/
             
