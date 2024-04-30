@@ -12,11 +12,8 @@ import FirebaseFirestore
 struct Logger : View {
     @EnvironmentObject var timerController: TimerCount
     @EnvironmentObject var userStore: UserStore
-    
-    
-    
+
     @State var time: AnyCancellable?
-    
     @Binding var offsetY:CGFloat
     @Binding var initOffsetY:CGFloat
     @Binding var pre: CGFloat
@@ -33,31 +30,29 @@ struct Logger : View {
     @Binding var Delete:Int
     @Binding var ResponseTimeCount:Double
     @Binding var ResponseTimeCounts:[Double]
-    
-    @Binding var ButtonDisabled: Bool
-    @Binding var TextfieldDisabled: Bool
-    
+    @Binding var ButtonDisabled:Bool
+    @Binding var TextfieldDisabled:Bool
     @Binding var response_time_ave:Double
-    @Binding var event: String
+    @Binding var event:String
     @Binding var screenWidth:CGFloat
     @Binding var screenHeight:CGFloat
     @Binding var tapPosition_x:CGFloat
     @Binding var tapPosition_y:CGFloat
     @Binding var isAnswerCorrect: Bool
-    @Binding var taskNum: Int
+    @Binding var taskNum:Int
     @Binding var tapNum:Int
     @Binding var LeftChoice:Int
     @Binding var RightChoice:Int
     @Binding var TimeCount:Double
-    @Binding var responseData: String
+    @Binding var responseData:String
     @Binding var ScrollCount:Int
-    
     
     @State var text_len:Int = 0
     @State var text_len_ave:Double = 0
     
     
     @ObservedObject var dataset = Dataset()
+    @Binding var timelimit:Bool
     
     
     func restartTime(c: Binding<Double>) {
@@ -196,6 +191,7 @@ struct Logger : View {
                 Text("回答時間：\(ResponseTimeCount)")
                 if !ResponseTimeCounts.isEmpty {
                     Text("回答時間平均：\(Double(ResponseTimeCounts.reduce(0, +))/Double(ResponseTimeCounts.count))")
+                    Text("合計回答時間：\(Double(ResponseTimeCounts.reduce(0, +)))")
                 }
                 
                 //Text("非操作時間")
@@ -218,7 +214,7 @@ struct Logger : View {
                 
             }
         }
-        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollCount: $ScrollCount, ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum)
+        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollCount: $ScrollCount, ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum, timelimit: $timelimit)
     }
 }
 
@@ -257,7 +253,7 @@ struct Choice : View {
     @ObservedObject var dataset = Dataset()
     @Binding var isAnswerCorrect: Bool
     @Binding var taskNum: Int
-    
+    @Binding var timelimit:Bool
     
     func B_text(s: String) -> some View {
         Text(s)
@@ -353,6 +349,10 @@ struct Choice : View {
                 Button(action: {
                     event = "response"
                     ResponseTimeCounts.append(ResponseTimeCount)
+                    if ResponseTimeCounts.reduce(0, +) > 60 {
+                        timelimit = true
+                        ButtonDisabled = true
+                    }
                     tapNum += 1
                     LeftChoice += 1
                     
@@ -394,6 +394,10 @@ struct Choice : View {
                 Button(action: {
                     event = "response"
                     ResponseTimeCounts.append(ResponseTimeCount)
+                    if ResponseTimeCounts.reduce(0, +) > 60 {
+                        timelimit = true
+                        ButtonDisabled = true
+                    }
                     tapNum += 1
                     RightChoice += 1
                     

@@ -26,21 +26,22 @@ struct TaskListView: View {
     
     var body: some View {
         VStack {
-            NavigationLink(destination: Talk().environmentObject(QuestionList())) {
-                Text("4/20~ プレ実験")
-//                Button("4/20~ プレ実験") {
-//                    if TaskActivate.task1 {
-//                        isActive = true
-//                    } else {
-//                        showAlert = true
-//                    }
-//                }
+            Button("4/20~ プレ実験") {
+                if TaskActivate.task1 == true {
+                    isActive = true
+                } else {
+                    showAlert = true
+                }
             }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("注意"), message: Text("このタスクは終了しました"), dismissButton: .default(Text("OK")))
+            }
+            NavigationLink(destination: Talk().environmentObject(QuestionList()),isActive: $isActive) {
+                EmptyView()
+            }/*.disabled(TaskActivate.task1)*/
+            
         }
 //            .navigationTitle("実験一覧")
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("注意"), message: Text("このタスクは終了しました"), dismissButton: .default(Text("OK")))
-        }
     }
 }
 
