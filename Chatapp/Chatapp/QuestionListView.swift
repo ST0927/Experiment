@@ -15,12 +15,7 @@ import SwiftUI
 //    }
 //}
 
-class TaskActivate: ObservableObject {
-    @Published var task1 = true
-}
-
 struct TaskListView: View {
-    @EnvironmentObject var TaskActivate: TaskActivate
     @State var taskisActive = true
     @State var isActive = false
     @State var showAlert = false
@@ -50,5 +45,4 @@ struct TaskListView: View {
 #Preview {
 //    QuestionListView()
     TaskListView()
-        .environmentObject(TaskActivate())
 }
