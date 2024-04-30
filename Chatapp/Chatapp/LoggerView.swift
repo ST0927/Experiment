@@ -221,7 +221,6 @@ struct Logger : View {
 
 struct Choice : View {
     @EnvironmentObject var timerController: TimerCount
-    @EnvironmentObject var TaskActivate: TaskActivate
     @Binding var tapNum:Int
     @Binding var LeftChoice:Int
     @Binding var RightChoice:Int
@@ -356,7 +355,6 @@ struct Choice : View {
                     if ResponseTimeCounts.reduce(0, +) > 60 {
                         timelimit = true
                         ButtonDisabled = true
-                        TaskActivate.task1 = false
                         taskisActive = false
                     }
                     tapNum += 1
@@ -403,7 +401,6 @@ struct Choice : View {
                     if ResponseTimeCounts.reduce(0, +) > 60 {
                         timelimit = true
                         ButtonDisabled = true
-                        TaskActivate.task1 = false
                         taskisActive = false
                     }
                     tapNum += 1
