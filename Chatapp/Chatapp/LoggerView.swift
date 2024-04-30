@@ -352,7 +352,7 @@ struct Choice : View {
                 Button(action: {
                     event = "response"
                     ResponseTimeCounts.append(ResponseTimeCount)
-                    if ResponseTimeCounts.reduce(0, +) > 60 {
+                    if ResponseTimeCounts.reduce(0, +) > 1800 {
                         timelimit = true
                         ButtonDisabled = true
                         taskisActive = false
@@ -398,7 +398,7 @@ struct Choice : View {
                 Button(action: {
                     event = "response"
                     ResponseTimeCounts.append(ResponseTimeCount)
-                    if ResponseTimeCounts.reduce(0, +) > 60 {
+                    if ResponseTimeCounts.reduce(0, +) > 1800 {
                         timelimit = true
                         ButtonDisabled = true
                         taskisActive = false
