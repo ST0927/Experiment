@@ -53,7 +53,6 @@ struct Talk: View {
     @State var screenHeight:CGFloat = 0
     @State var tapPosition_x:CGFloat = 0
     @State var tapPosition_y:CGFloat = 0
-    
     @State var isAnswerCorrect: Bool = true
     @State var taskNum: Int = 1
     @State var tapNum:Int = 0
@@ -62,7 +61,7 @@ struct Talk: View {
     @State var TimeCount:Double = 0
     @State var responseData: String = ""
     
-    
+    @State var timelimit: Bool = false
     
     func sendLoggerData() {
         
@@ -156,11 +155,11 @@ struct Talk: View {
                                 let num_of_task = 29 //１問目は別で用意
                                 UserResponseView(text: "\(history[index].text)")
                                 VStack(spacing: 0) {
-                                    if Num <= num_of_task {
+                                    if Num <= num_of_task  {
                                         if !dataset.csvArray[Num+1][3].isEmpty && !dataset.csvArray[Num+1][4].isEmpty {
                                             AvatarMessageView(text: "Q\(Num+1): "+dataset.csvArray[Num+1][3])
                                             ImageFromGitLinkView(filePath: "\(dataset.csvArray[Num+1][4])")
-                                        } else  {
+                                        } else {
                                             Text("Question not found")
                                         }
                                     } else {
@@ -198,6 +197,9 @@ struct Talk: View {
                         )
                         Spacer(minLength: 50).id("footer")
                     }.padding(.bottom, 55)
+                        .alert(isPresented: $timelimit) {
+                            Alert(title: Text("Finish!"), message: Text("Your work time has been adjusted to 30 minutes. Thank you for your cooperation!"), dismissButton: .default(Text("OK")))
+                        }
                         .onChange(of: history.indices) {
                                     withAnimation {
                                         proxy.scrollTo("footer")
@@ -205,7 +207,6 @@ struct Talk: View {
                                 }
                         .onPreferenceChange(ScrollOffsetYPreferenceKey.self) { value in
                             offsetY = value[0]
-                            print("initOffsetY: \(initOffsetY)")
                             if scroll == false {
                                 print("start")
                                 event = "scroll"
@@ -278,7 +279,7 @@ struct Talk: View {
                     }
                 }
             }
-            Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,isAnswerCorrect:$isAnswerCorrect,taskNum:$taskNum,tapNum:$tapNum,LeftChoice:$LeftChoice,RightChoice:$RightChoice,TimeCount:$TimeCount, responseData:$responseData, ScrollCount: $ScrollCount)
+            Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,isAnswerCorrect:$isAnswerCorrect,taskNum:$taskNum,tapNum:$tapNum,LeftChoice:$LeftChoice,RightChoice:$RightChoice,TimeCount:$TimeCount, responseData:$responseData, ScrollCount: $ScrollCount, timelimit: $timelimit)
                 .environmentObject(TimerCount())
             
             VStack {
