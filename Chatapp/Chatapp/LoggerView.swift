@@ -183,9 +183,9 @@ struct Logger : View {
 //                Text("スクリーン高さ:\(screenHeight)")
 //                Text("ユーザー:\(userStore.userID)")
 //                Text("ユーザー:\(userStore.email)")
-                Text("進捗:\(taskNum)/150")
-                Text("進捗(改訂版):\(dataStatus.task_progress)/150")
-                Text("問題番号:\(QuestionNum)")
+//                Text("進捗:\(taskNum)/150")
+//                Text("進捗(改訂版):\(dataStatus.task_progress)/150")
+//                Text("問題番号:\(QuestionNum)")
 //                if !message_len.isEmpty {
 //                    Text("文字数：\(message_len[message_len.count - 1].count)")
 //                    Text("文字数平均：\(Double(message_len.joined().count)/Double(message_len.count))")
@@ -203,11 +203,11 @@ struct Logger : View {
 //                Text("タップ座標y：\(tapPosition_y)")
 //                Text("左を選んだ回数：\(LeftChoice)")
 //                Text("右を選んだ回数：\(RightChoice)")
-                if isAnswerCorrect == true {
-                    Text("回答の正誤：正")
-                } else {
-                    Text("回答の正誤：誤")
-                }
+//                if isAnswerCorrect == true {
+//                    Text("回答の正誤：正")
+//                } else {
+//                    Text("回答の正誤：誤")
+//                }
 //                Text("画面位置：\(abs(offsetY - initOffsetY))")
 //                Text("スクロール回数：\(ScrollCount)")
 //                Text("スクロール長さ：\(abs(endposition - startposition))")
