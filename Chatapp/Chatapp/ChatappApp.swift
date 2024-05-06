@@ -25,7 +25,9 @@ struct ChatappApp: App {
       WindowGroup {
         NavigationView {
           ContentView()
-                .environmentObject(userStore)
+                .environmentObject(userStore) //これ冗長じゃない？上のuserStore = UserStore()消してUserStore()にしていい気がする
+                .environmentObject(DataStatus())
+            //アプリ内全てで共有したいならここでenvironmentObjectとして宣言する?
         }
       }
     }

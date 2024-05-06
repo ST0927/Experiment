@@ -12,7 +12,7 @@ import FirebaseFirestore
 struct Logger : View {
     @EnvironmentObject var timerController: TimerCount
     @EnvironmentObject var userStore: UserStore
-
+    @EnvironmentObject var dataStatus: DataStatus
     @State var time: AnyCancellable?
     @Binding var offsetY:CGFloat
     @Binding var initOffsetY:CGFloat
@@ -54,7 +54,7 @@ struct Logger : View {
     @ObservedObject var dataset = Dataset()
     @Binding var timelimit:Bool
     @Binding var taskisActive:Bool
-    @Binding var TaskNum:Int
+    @Binding var QuestionNum:Int
     
     func restartTime(c: Binding<Double>) {
         if let _timer = time{
@@ -101,6 +101,7 @@ struct Logger : View {
                                  "screen_height":screenHeight,
                                  "view_position":abs(offsetY - initOffsetY),
                                  "taskNum":taskNum,
+                                 "QuestionNum":QuestionNum,
                                  //タップ：カウント、頻度、場所
                                  "tap_count":tapNum,
                                  "tap_interval":TimeCount,
@@ -182,8 +183,9 @@ struct Logger : View {
 //                Text("スクリーン高さ:\(screenHeight)")
 //                Text("ユーザー:\(userStore.userID)")
 //                Text("ユーザー:\(userStore.email)")
-                Text("タスク:\(taskNum)")
-                Text("タスク:\(TaskNum)")
+                Text("進捗:\(taskNum)/150")
+                Text("進捗(改訂版):\(dataStatus.task_progress)/150")
+                Text("問題番号:\(QuestionNum)")
 //                if !message_len.isEmpty {
 //                    Text("文字数：\(message_len[message_len.count - 1].count)")
 //                    Text("文字数平均：\(Double(message_len.joined().count)/Double(message_len.count))")
@@ -214,12 +216,13 @@ struct Logger : View {
 //                
             }
         }
-        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollCount: $ScrollCount, ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum, timelimit: $timelimit, taskisActive: $taskisActive)
+        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollCount: $ScrollCount, ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum, timelimit: $timelimit, taskisActive: $taskisActive, QuestionNum: $QuestionNum)
     }
 }
 
 struct Choice : View {
     @EnvironmentObject var timerController: TimerCount
+    @EnvironmentObject var dataStatus: DataStatus
     @Binding var tapNum:Int
     @Binding var LeftChoice:Int
     @Binding var RightChoice:Int
@@ -254,8 +257,8 @@ struct Choice : View {
     @Binding var isAnswerCorrect: Bool
     @Binding var taskNum: Int
     @Binding var timelimit:Bool
-    
     @Binding var taskisActive:Bool
+    @Binding var QuestionNum:Int
     
     func B_text(s: String) -> some View {
         Text(s)
@@ -298,6 +301,7 @@ struct Choice : View {
                                  "screen_height":screenHeight,
                                  "view_position":abs(offsetY - initOffsetY),
                                  "taskNum":taskNum,
+                                 "QuestionNum":QuestionNum,
                                  //タップ：カウント、頻度、場所
                                  "tap_count":tapNum,
                                  "tap_interval":TimeCount,
@@ -368,6 +372,7 @@ struct Choice : View {
                     sendLoggerData()
                     
                     taskNum += 1
+                    dataStatus.task_progress += 1
                     ResponseTimeCount = 0
                     TimeCount = 0
                     if let _timer = time{
@@ -414,6 +419,7 @@ struct Choice : View {
                     sendLoggerData()
                     
                     taskNum += 1
+                    dataStatus.task_progress += 1
                     ResponseTimeCount = 0
                     TimeCount = 0
                     if let _timer = time{

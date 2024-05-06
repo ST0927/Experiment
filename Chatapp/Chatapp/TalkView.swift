@@ -22,10 +22,8 @@ struct Talk: View {
     @State var key_history:[String] = []
     @State var message_len:[String] = []
     @State var history:[Message] = []
-    
     @State var offsetY:CGFloat = 0
     @State var initOffsetY:CGFloat = 0
-    
     @State var pre:CGFloat = 0
     @State var current:CGFloat = 0
     @State var scroll:Bool = false
@@ -60,10 +58,9 @@ struct Talk: View {
     @State var TimeCount:Double = 0
     @State var responseData: String = ""
     @State var timelimit: Bool = false
-    
-    @Binding var TaskNum:Int
-    
+    @Binding var QuestionNum:Int
     @Binding var taskisActive:Bool
+
     func sendLoggerData() {
         
         //日付の設定
@@ -93,6 +90,7 @@ struct Talk: View {
                                  "screen_height":screenHeight,
                                  "view_position":abs(offsetY - initOffsetY),
                                  "taskNum":taskNum,
+                                 "QuestionNum":QuestionNum,
                                  //タップ：カウント、頻度、場所
                                  "tap_count":tapNum,
                                  "tap_interval":TimeCount,
@@ -160,6 +158,9 @@ struct Talk: View {
                                         if !dataset.csvArray[Num+1][3].isEmpty && !dataset.csvArray[Num+1][4].isEmpty {
                                             AvatarMessageView(text: "Q\(Num+1): "+dataset.csvArray[Num+1][3])
                                             ImageFromGitLinkView(filePath: "\(dataset.csvArray[Num+1][4])")
+                                                .onAppear {
+                                                    QuestionNum = Int(dataset.csvArray[Num+1][0]) ?? 1
+                                                }
                                         } else {
                                             Text("Question not found")
                                         }
@@ -171,8 +172,6 @@ struct Talk: View {
                                                 taskisActive = false
                                             }
                                     }
-                                }.onAppear {
-                                    TaskNum = Int(dataset.csvArray[Num+1][0]) ?? 1
                                 }
                             }
                         }
@@ -283,7 +282,7 @@ struct Talk: View {
                     }
                 }
             }
-            Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,isAnswerCorrect:$isAnswerCorrect,taskNum:$taskNum,tapNum:$tapNum,LeftChoice:$LeftChoice,RightChoice:$RightChoice,TimeCount:$TimeCount, responseData:$responseData, ScrollCount: $ScrollCount, timelimit: $timelimit, taskisActive: $taskisActive, TaskNum: $TaskNum)
+            Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,isAnswerCorrect:$isAnswerCorrect,taskNum:$taskNum,tapNum:$tapNum,LeftChoice:$LeftChoice,RightChoice:$RightChoice,TimeCount:$TimeCount, responseData:$responseData, ScrollCount: $ScrollCount, timelimit: $timelimit, taskisActive: $taskisActive, QuestionNum: $QuestionNum)
                 .environmentObject(TimerCount())
             
             VStack {
