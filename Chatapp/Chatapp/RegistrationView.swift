@@ -17,15 +17,15 @@ struct RegistrationView: View {
     
     var body: some View {
         VStack {
-            Text("メールアドレス")
-            TextField("メールアドレス",text: $email).padding(.leading)
+            Text("Email address")
+            TextField("Email address",text: $email).padding(.leading)
             Divider().padding()
             
-            Text("パスワード")
-            SecureField("パスワード",text: $password).padding(.leading)
+            Text("Password")
+            SecureField("Password",text: $password).padding(.leading)
             Divider().padding()
             
-            Button("登録"){
+            Button("Register"){
                 Auth.auth().createUser(withEmail:self.email, password:self.password){ (result, error) in
                     if let e = error {
                         self.showingError = true
@@ -39,7 +39,7 @@ struct RegistrationView: View {
                     self.presentationMode.wrappedValue.dismiss()
                 }
             }.alert(isPresented: $showingError) {
-                Alert.init(title: Text("エラー"),message: Text(self.error!.localizedDescription),dismissButton: .default(Text("OK")))
+                Alert.init(title: Text("Error"),message: Text(self.error!.localizedDescription),dismissButton: .default(Text("OK")))
             }
         }
     }

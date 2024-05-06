@@ -11,9 +11,9 @@ struct PasswordResetView: View {
     @State var email = ""
     var body: some View {
         VStack {
-            Text("メールアドレス")
-            TextField("メールアドレス", text: $email).padding(.leading)
-            Button("パスワード再設定メールを送信") {
+            Text("Email address")
+            TextField("Email address", text: $email).padding(.leading)
+            Button("Send password reset email") {
 
             }
         }
