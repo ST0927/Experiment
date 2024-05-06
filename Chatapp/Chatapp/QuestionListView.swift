@@ -19,7 +19,7 @@ struct TaskListView: View {
     @State var taskisActive = true
     @State var isActive = false
     @State var showAlert = false
-    @State var TaskNum:Int = 0
+    @State var QuestionNum:Int = 0
     
     var body: some View {
         VStack {
@@ -33,7 +33,7 @@ struct TaskListView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Attention"), message: Text("This experiment has concluded."), dismissButton: .default(Text("OK")))
             }
-            NavigationLink(destination: Talk(TaskNum: $TaskNum, taskisActive: $taskisActive).environmentObject(QuestionList()),isActive: $isActive) {
+            NavigationLink(destination: Talk(QuestionNum: $QuestionNum, taskisActive: $taskisActive).environmentObject(QuestionList()),isActive: $isActive) {
                 EmptyView()
             }/*.disabled(TaskActivate.task1)*/
             

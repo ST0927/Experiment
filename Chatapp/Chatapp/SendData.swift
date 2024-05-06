@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+class DataStatus : ObservableObject {
+    @Published var task_progress:Int = 1
+}
