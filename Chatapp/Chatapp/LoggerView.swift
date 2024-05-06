@@ -53,7 +53,6 @@ struct Logger : View {
     
     @ObservedObject var dataset = Dataset()
     @Binding var timelimit:Bool
-    @Binding var taskisActive:Bool
     @Binding var QuestionNum:Int
     
     func restartTime(c: Binding<Double>) {
@@ -216,7 +215,7 @@ struct Logger : View {
 //                
             }
         }
-        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollCount: $ScrollCount, ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum, timelimit: $timelimit, taskisActive: $taskisActive, QuestionNum: $QuestionNum)
+        Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollCount: $ScrollCount, ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum, timelimit: $timelimit, QuestionNum: $QuestionNum)
     }
 }
 
@@ -257,7 +256,6 @@ struct Choice : View {
     @Binding var isAnswerCorrect: Bool
     @Binding var taskNum: Int
     @Binding var timelimit:Bool
-    @Binding var taskisActive:Bool
     @Binding var QuestionNum:Int
     
     func B_text(s: String) -> some View {
@@ -358,7 +356,7 @@ struct Choice : View {
                     if ResponseTimeCounts.reduce(0, +) > 1800 {
                         timelimit = true
                         ButtonDisabled = true
-                        taskisActive = false
+                        dataStatus.task_isActive = false
                     }
                     tapNum += 1
                     LeftChoice += 1
@@ -405,7 +403,7 @@ struct Choice : View {
                     if ResponseTimeCounts.reduce(0, +) > 1800 {
                         timelimit = true
                         ButtonDisabled = true
-                        taskisActive = false
+                        dataStatus.task_isActive = false
                     }
                     tapNum += 1
                     RightChoice += 1

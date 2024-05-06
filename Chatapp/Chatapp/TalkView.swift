@@ -17,6 +17,7 @@ struct Talk: View {
     @EnvironmentObject var userStore: UserStore
 //    @ObservedObject var dataset = Dataset()
     @EnvironmentObject var dataset: Dataset
+    @EnvironmentObject var dataStatus:DataStatus
     @State var message = ""
     @State var chatType = ""
     @State var key_message:[String] = []
@@ -60,7 +61,6 @@ struct Talk: View {
     @State var responseData: String = ""
     @State var timelimit: Bool = false
     @Binding var QuestionNum:Int
-    @Binding var taskisActive:Bool
 
     func sendLoggerData() {
         
@@ -170,7 +170,7 @@ struct Talk: View {
                                         AvatarMessageView(text: "This concludes the questions. Thank you for your cooperation!")
                                             .onAppear {
                                                 ButtonDisabled = true
-                                                taskisActive = false
+                                                dataStatus.task_isActive = false
                                             }
                                     }
                                 }
@@ -283,7 +283,7 @@ struct Talk: View {
                     }
                 }
             }
-            Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,isAnswerCorrect:$isAnswerCorrect,taskNum:$taskNum,tapNum:$tapNum,LeftChoice:$LeftChoice,RightChoice:$RightChoice,TimeCount:$TimeCount, responseData:$responseData, ScrollCount: $ScrollCount, timelimit: $timelimit, taskisActive: $taskisActive, QuestionNum: $QuestionNum)
+            Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,isAnswerCorrect:$isAnswerCorrect,taskNum:$taskNum,tapNum:$tapNum,LeftChoice:$LeftChoice,RightChoice:$RightChoice,TimeCount:$TimeCount, responseData:$responseData, ScrollCount: $ScrollCount, timelimit: $timelimit, QuestionNum: $QuestionNum)
                 .environmentObject(TimerCount())
             
             VStack {
