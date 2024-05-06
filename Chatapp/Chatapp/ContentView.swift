@@ -16,12 +16,12 @@ struct ContentView: View {
             NavigationView {
                 VStack {
                     NavigationLink(destination: RegistrationView()){
-                        Text("新規登録")
+                        Text("Sign up")
                         .padding()
                     }
                     
                     NavigationLink(destination: LoginView()){
-                        Text("ログイン")
+                        Text("Log in")
                     }
                 }
             }

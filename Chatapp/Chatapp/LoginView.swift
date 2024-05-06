@@ -22,15 +22,15 @@ struct LoginView: View {
             TaskListView()
             } else {
             VStack {
-                Text("メールアドレス")
-                TextField("メールアドレス",text: $email).padding(.leading)
+                Text("Email address")
+                TextField("Email address",text: $email).padding(.leading)
                 Divider().padding()
 
-                Text("パスワード")
-                SecureField("パスワード",text: $password).padding(.leading)
+                Text("Password")
+                SecureField("Password",text: $password).padding(.leading)
                 Divider().padding()
 
-                Button("ログイン"){
+                Button("Log in"){
                     Auth.auth().signIn(withEmail: self.email, password: self.password) { (result, error) in
                         if let e = error {
                             self.showingError = true
@@ -46,12 +46,12 @@ struct LoginView: View {
                         userStore.isAuthenticated = true
                     }
                 }.alert(isPresented: $showingError) {
-                    Alert.init(title: Text("エラー"),message: Text(self.error!.localizedDescription),dismissButton: .default(Text("OK")))
+                    Alert.init(title: Text("Error"),message: Text(self.error!.localizedDescription),dismissButton: .default(Text("OK")))
                 }
                 .padding()
                 
                 NavigationLink(destination:PasswordResetView()){
-                    Text("パスワードを忘れた場合")
+                    Text("If you forgot your password")
                 }
                 .padding()
 
