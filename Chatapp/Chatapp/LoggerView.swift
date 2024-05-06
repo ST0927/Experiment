@@ -53,8 +53,8 @@ struct Logger : View {
     
     @ObservedObject var dataset = Dataset()
     @Binding var timelimit:Bool
-    
     @Binding var taskisActive:Bool
+    @Binding var TaskNum:Int
     
     func restartTime(c: Binding<Double>) {
         if let _timer = time{
@@ -174,7 +174,6 @@ struct Logger : View {
                 }
         }
        
-        
         //動作確認用
         HStack {
             VStack {
@@ -184,6 +183,7 @@ struct Logger : View {
 //                Text("ユーザー:\(userStore.userID)")
 //                Text("ユーザー:\(userStore.email)")
                 Text("タスク:\(taskNum)")
+                Text("タスク:\(TaskNum)")
 //                if !message_len.isEmpty {
 //                    Text("文字数：\(message_len[message_len.count - 1].count)")
 //                    Text("文字数平均：\(Double(message_len.joined().count)/Double(message_len.count))")
@@ -203,12 +203,8 @@ struct Logger : View {
 //                Text("右を選んだ回数：\(RightChoice)")
                 if isAnswerCorrect == true {
                     Text("回答の正誤：正")
-                    Text("\(dataset.csvArray[taskNum][2])")
-                    Text("\(dataset.csvArray[taskNum][2])")
                 } else {
                     Text("回答の正誤：誤")
-                    Text("\(dataset.csvArray[taskNum][2])")
-                    Text("\(dataset.csvArray[taskNum][2])")
                 }
 //                Text("画面位置：\(abs(offsetY - initOffsetY))")
 //                Text("スクロール回数：\(ScrollCount)")
