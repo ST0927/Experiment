@@ -27,13 +27,23 @@ class Dataset : ObservableObject {
                 csvData = try String(contentsOfFile: csvBundle, encoding: .utf8)
                 if let csvData = csvData {
                     var rows = csvData.components(separatedBy: "\n")
-                    self.csvArray = rows.map { row in
-                        row.components(separatedBy: ",")
-                    }
+                    rows.removeAll { $0.isEmpty }
                     rows.shuffle()
+                    
                     self.csvArray = rows.map { row in
                         row.components(separatedBy: ",")
                     }
+                    
+//                    rows.removeAll { $0.isEmpty }
+//                    rows.shuffle()
+//                    self.csvArray = rows.map { row in
+//                        row.components(separatedBy: ",")
+//                    }
+//                    
+//                    if let index = rows.firstIndex(of: "") {
+//                        let emptyRow = rows.remove(at: index)
+//                        rows.insert(emptyRow, at: 0)
+//                    }
                 }
                 print(csvArray)
             } catch {
