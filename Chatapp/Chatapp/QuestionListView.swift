@@ -16,7 +16,8 @@ import SwiftUI
 //}
 
 struct TaskListView: View {
-    @State var taskisActive = true
+    @EnvironmentObject var dataStatus:DataStatus
+//    @State var taskisActive = true
     @State var isActive = false
     @State var showAlert = false
     @State var QuestionNum:Int = 0
@@ -24,7 +25,7 @@ struct TaskListView: View {
     var body: some View {
         VStack {
             Button("[5/7 ~ 5/12] Image Caption Evaluation") {
-                if taskisActive == true {
+                if dataStatus.task_isActive == true {
                     isActive = true
                 } else {
                     showAlert = true
@@ -33,7 +34,7 @@ struct TaskListView: View {
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("Attention"), message: Text("This experiment has concluded."), dismissButton: .default(Text("OK")))
             }
-            NavigationLink(destination: Talk(QuestionNum: $QuestionNum, taskisActive: $taskisActive).environmentObject(QuestionList()),isActive: $isActive) {
+            NavigationLink(destination: Talk(QuestionNum: $QuestionNum).environmentObject(QuestionList()),isActive: $isActive) {
                 EmptyView()
             }/*.disabled(TaskActivate.task1)*/
             

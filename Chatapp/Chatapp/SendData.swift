@@ -8,6 +8,6 @@
 import Foundation
 
 class DataStatus : ObservableObject {
-    
+    @Published var task_isActive:Bool = true
     @Published var task_progress:Int = 1
 }
