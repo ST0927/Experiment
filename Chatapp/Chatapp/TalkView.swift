@@ -15,7 +15,8 @@ import Combine
 struct Talk: View {
     @EnvironmentObject var Q: QuestionList
     @EnvironmentObject var userStore: UserStore
-    @ObservedObject var dataset = Dataset()
+//    @ObservedObject var dataset = Dataset()
+    @EnvironmentObject var dataset: Dataset
     @State var message = ""
     @State var chatType = ""
     @State var key_message:[String] = []

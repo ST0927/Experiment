@@ -26,11 +26,16 @@ class Dataset : ObservableObject {
             do {
                 csvData = try String(contentsOfFile: csvBundle, encoding: .utf8)
                 if let csvData = csvData {
-                    let rows = csvData.components(separatedBy: "\n")
+                    var rows = csvData.components(separatedBy: "\n")
+                    self.csvArray = rows.map { row in
+                        row.components(separatedBy: ",")
+                    }
+                    rows.shuffle()
                     self.csvArray = rows.map { row in
                         row.components(separatedBy: ",")
                     }
                 }
+                print(csvArray)
             } catch {
                 print("CSVファイルの読み込みに失敗：\(error)")
             }

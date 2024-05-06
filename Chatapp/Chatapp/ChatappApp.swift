@@ -27,6 +27,7 @@ struct ChatappApp: App {
           ContentView()
                 .environmentObject(userStore) //これ冗長じゃない？上のuserStore = UserStore()消してUserStore()にしていい気がする
                 .environmentObject(DataStatus())
+                .environmentObject(Dataset())
             //アプリ内全てで共有したいならここでenvironmentObjectとして宣言する?
         }
       }
