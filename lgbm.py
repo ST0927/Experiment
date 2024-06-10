@@ -1,3 +1,4 @@
+
 import pandas as pd
 
 file_path = '/Users/shigeyuki-t/Desktop/FirstExperiment/分析用/05.csv'
@@ -7,3 +8,4 @@ dataset.info()
 dataset.describe()
 
 predict_param = dataset['isAnswerCorrect']
+
