@@ -215,7 +215,7 @@ struct Talk: View {
                                 print("start")
                                 event = "scroll"
                                 startposition = offsetY - initOffsetY
-                                UnScrollTimeCount = unScrollTimeCount
+//                                UnScrollTimeCount = unScrollTimeCount
                                 if let _timer = ScrollTime{
                                     _timer.cancel()
                                 }
@@ -247,22 +247,26 @@ struct Talk: View {
                                             scroll = false
                                             ScrollCount += 1
                                             sendLoggerData()
+                                            if let _timer = ScrollTime
+                                            {
+                                                _timer.cancel()
+                                            }
                                         } else {
                                             print("スクロール中")
                                         }
                                     }
-                                    else if pre == current {
-                                        unScrollTimeCount = 0
-                                        if let _timer = unScrollTime{
-                                            _timer.cancel()
-                                        }
-                                        unScrollTime = Timer.publish(every: 0.1, on: .main, in: .common)
-                                            .autoconnect()
-                                            .receive(on: DispatchQueue.main)
-                                            .sink { _ in
-                                                unScrollTimeCount += 0.1
-                                            }
-                                    }
+//                                    else if pre == current {
+//                                        unScrollTimeCount = 0
+//                                        if let _timer = unScrollTime{
+//                                            _timer.cancel()
+//                                        }
+//                                        unScrollTime = Timer.publish(every: 0.1, on: .main, in: .common)
+//                                            .autoconnect()
+//                                            .receive(on: DispatchQueue.main)
+//                                            .sink { _ in
+//                                                unScrollTimeCount += 0.1
+//                                            }
+//                                    }
                                 }
                             pre = offsetY - initOffsetY
                         }
