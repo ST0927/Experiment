@@ -207,13 +207,13 @@ struct Logger : View {
 //                } else {
 //                    Text("回答の正誤：誤")
 //                }
-//                Text("画面位置：\(abs(offsetY - initOffsetY))")
-//                Text("スクロール回数：\(ScrollCount)")
-//                Text("スクロール長さ：\(abs(endposition - startposition))")
-//                Text("スクロール時間：\(ScrollingTime)")
-//                Text("スクロール速度：\(abs(ScrollSpeed))")
+                Text("画面位置：\(abs(offsetY - initOffsetY))")
+                Text("スクロール回数：\(ScrollCount)")
+                Text("スクロール長さ：\(abs(endposition - startposition))")
+                Text("スクロール時間：\(ScrollingTime)")
+                Text("スクロール速度：\(abs(ScrollSpeed))")
 //                
-            }
+            }.background(Color.white)
         }
         Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollCount: $ScrollCount, ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum, timelimit: $timelimit, QuestionNum: $QuestionNum)
     }
