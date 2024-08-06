@@ -3,10 +3,10 @@ version=v4
 num_class=1
 num_tree_per_iteration=1
 label_index=0
-max_feature_idx=15
+max_feature_idx=14
 objective=binary sigmoid:1
-feature_names=ratio_tap_position_y screen_height tap_position_x tap_position_y predicted_isAnswerCorrect s_tap_count scroll_time s_view_position response_time taskNum screen_width ratio_tap_position_x s_choice_left event_scroll s_scroll_speed scroll_length
-feature_infos=none [844:844] none none [0:1] [1:1] [0:10.999999999999993] [-343.99999999999989:756.66666666666788] [0.40000000000000002:7.6999999999999869] [1:27] [390:390] none [0:1] [0:6] [0:1911.6666666666704] [0:1522]
+feature_names=response_time s_tap_count ratio_tap_position_y scroll_length event_scroll s_scroll_speed tap_position_x taskNum tap_position_y screen_width s_view_position scroll_time ratio_tap_position_x s_choice_left screen_height
+feature_infos=[0.40000000000000002:7.6999999999999869] [1:1] none [0:1522] [0:6] [0:1911.6666666666704] none [1:27] none [390:390] [-343.99999999999989:756.66666666666788] [0:10.999999999999993] none [0:1] [844:844]
 tree_sizes=239
 
 Tree=0
@@ -58,7 +58,7 @@ parameters:
 [neg_bagging_fraction: 1]
 [bagging_freq: 0]
 [bagging_seed: 3]
-[feature_fraction: 0.6]
+[feature_fraction: 0.7]
 [feature_fraction_bynode: 1]
 [feature_fraction_seed: 2]
 [extra_trees: 0]
