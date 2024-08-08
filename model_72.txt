@@ -3,10 +3,10 @@ version=v4
 num_class=1
 num_tree_per_iteration=1
 label_index=0
-max_feature_idx=14
+max_feature_idx=15
 objective=binary sigmoid:1
-feature_names=response_time s_tap_count ratio_tap_position_y scroll_length event_scroll s_scroll_speed tap_position_x taskNum tap_position_y screen_width s_view_position scroll_time ratio_tap_position_x s_choice_left screen_height
-feature_infos=[0.10000000000000001:10.399999999999981] [1:1] none [0:1530] [0:6] [-1719.9999999999984:1911.6666666666704] none [1:72] none [390:390] [-343.99999999999989:914] [-0.5:18.799999999999962] none [0:1] [844:844]
+feature_names=response_time s_tap_count ratio_tap_position_y scroll_length event_scroll s_scroll_speed tap_position_x taskNum tap_position_y screen_width s_view_position predicted_isAnswerCorrect scroll_time ratio_tap_position_x s_choice_left screen_height
+feature_infos=[0.10000000000000001:10.399999999999981] [1:1] none [0:1530] [0:6] [-1719.9999999999984:1911.6666666666704] none [1:72] none [390:390] [-343.99999999999989:914] [0:1] [-0.5:18.799999999999962] none [0:1] [844:844]
 tree_sizes=238
 
 Tree=0
@@ -53,12 +53,12 @@ parameters:
 [max_depth: -1]
 [min_data_in_leaf: 20]
 [min_sum_hessian_in_leaf: 0.001]
-[bagging_fraction: 0.401911]
+[bagging_fraction: 0.411556]
 [pos_bagging_fraction: 1]
 [neg_bagging_fraction: 1]
-[bagging_freq: 1]
+[bagging_freq: 7]
 [bagging_seed: 3]
-[feature_fraction: 0.7]
+[feature_fraction: 0.6]
 [feature_fraction_bynode: 1]
 [feature_fraction_seed: 2]
 [extra_trees: 0]
