@@ -3,11 +3,11 @@ version=v4
 num_class=1
 num_tree_per_iteration=1
 label_index=0
-max_feature_idx=14
+max_feature_idx=15
 objective=binary sigmoid:1
-feature_names=response_time s_tap_count ratio_tap_position_y scroll_length event_scroll s_scroll_speed tap_position_x taskNum tap_position_y screen_width s_view_position scroll_time ratio_tap_position_x s_choice_left screen_height
-feature_infos=[0.10000000000000001:10.399999999999981] [1:1] none [0:1530] [0:6] [-1719.9999999999984:1911.6666666666704] none [1:63] none [390:390] [-343.99999999999989:756.66666666666788] [-0.10000000000000009:18.799999999999962] none [0:1] [844:844]
-tree_sizes=239 340 340 341 341 342
+feature_names=response_time s_tap_count ratio_tap_position_y scroll_length event_scroll s_scroll_speed tap_position_x taskNum tap_position_y screen_width s_view_position predicted_isAnswerCorrect scroll_time ratio_tap_position_x s_choice_left screen_height
+feature_infos=[0.10000000000000001:10.399999999999981] [1:1] none [0:1530] [0:6] [-1719.9999999999984:1911.6666666666704] none [1:63] none [390:390] [-343.99999999999989:756.66666666666788] [0:1] [-0.10000000000000009:18.799999999999962] none [0:1] [844:844]
+tree_sizes=239 340 342
 
 Tree=0
 num_leaves=1
@@ -31,13 +31,13 @@ shrinkage=1
 Tree=1
 num_leaves=2
 num_cat=0
-split_feature=3
-split_gain=1.67116
-threshold=765.00000000000193
+split_feature=10
+split_gain=0.41779
+threshold=382.66666666666703
 decision_type=2
 left_child=-1
 right_child=-2
-leaf_value=-0.043105267424033672 0.04045263098522664
+leaf_value=0.04045263098522664 0.082231580189856809
 leaf_weight=4.7870999574661255 4.7870999574661255
 leaf_count=20 20
 internal_value=0
@@ -50,75 +50,18 @@ shrinkage=0.1
 Tree=2
 num_leaves=2
 num_cat=0
-split_feature=0
-split_gain=0.842732
-threshold=2.0500000000000012
-decision_type=2
-left_child=-1
-right_child=-2
-leaf_value=0.085878860342280081 0.027992596612067357
-leaf_weight=5.019744023680687 5.0403097867965698
-leaf_count=21 21
-internal_value=0
-internal_weight=0
-internal_count=42
-is_linear=0
-shrinkage=0.1
-
-
-Tree=3
-num_leaves=2
-num_cat=0
-split_feature=7
-split_gain=2.87744
-threshold=30.500000000000004
-decision_type=2
-left_child=-1
-right_child=-2
-leaf_value=0.057330522604599844 -0.048213906441528502
-leaf_weight=4.7352624982595444 5.6832613050937653
-leaf_count=20 24
-internal_value=0
-internal_weight=0
-internal_count=44
-is_linear=0
-shrinkage=0.1
-
-
-Tree=4
-num_leaves=2
-num_cat=0
-split_feature=11
-split_gain=1.16008
+split_feature=12
+split_gain=0.946425
 threshold=2.3500000000000005
 decision_type=2
 left_child=-1
 right_child=-2
-leaf_value=0.020683184718146393 -0.04856424281115148
-leaf_weight=4.9523049294948578 4.7298352867364883
-leaf_count=21 20
+leaf_value=0.03274318469842584 -0.028470419636393181
+leaf_weight=5.4270694106817245 4.7245442420244217
+leaf_count=23 20
 internal_value=0
 internal_weight=0
-internal_count=41
-is_linear=0
-shrinkage=0.1
-
-
-Tree=5
-num_leaves=2
-num_cat=0
-split_feature=11
-split_gain=0.885217
-threshold=2.6499999999999999
-decision_type=2
-left_child=-1
-right_child=-2
-leaf_value=0.037000869902382549 -0.021461871644180258
-leaf_weight=5.6402599215507507 4.789017453789711
-leaf_count=24 20
-internal_value=0
-internal_weight=0
-internal_count=44
+internal_count=43
 is_linear=0
 shrinkage=0.1
 
@@ -126,10 +69,8 @@ shrinkage=0.1
 end of trees
 
 feature_importances:
-scroll_time=2
-response_time=1
-scroll_length=1
-taskNum=1
+s_view_position=1
+scroll_time=1
 
 parameters:
 [boosting: gbdt]
@@ -152,12 +93,12 @@ parameters:
 [max_depth: -1]
 [min_data_in_leaf: 20]
 [min_sum_hessian_in_leaf: 0.001]
-[bagging_fraction: 0.51901]
+[bagging_fraction: 0.475896]
 [pos_bagging_fraction: 1]
 [neg_bagging_fraction: 1]
 [bagging_freq: 1]
 [bagging_seed: 3]
-[feature_fraction: 0.7]
+[feature_fraction: 0.6]
 [feature_fraction_bynode: 1]
 [feature_fraction_seed: 2]
 [extra_trees: 0]
