@@ -330,6 +330,12 @@ struct Talk: View {
                     }.disabled(TextfieldDisabled)
                 }
             }
+            
+//            func makeUIViewController(context: Context) -> ViewController {
+//                return Eyetrack()
+//            }
+//            
+//            func updateUIViewController(_ uiViewController: Eyetrack, context: Context) {}
         }
     }
 }
