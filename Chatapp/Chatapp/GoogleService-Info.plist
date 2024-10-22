@@ -24,7 +24,5 @@
 	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>1:820307539565:ios:32f868183894e22294b164</string>
 </dict>
 </plist>
