@@ -331,11 +331,8 @@ struct Talk: View {
                 }
             }
             
-//            func makeUIViewController(context: Context) -> ViewController {
-//                return Eyetrack()
-//            }
-//            
-//            func updateUIViewController(_ uiViewController: Eyetrack, context: Context) {}
+            EyetrackView()
+            
         }
     }
 }

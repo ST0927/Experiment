@@ -64,7 +64,7 @@
 		536D64192AE12C240027C8AC /* OpenAIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 536D64182AE12C240027C8AC /* OpenAIKit */; };
 		5373C73D2BE943A20020705B /* SendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373C73C2BE943A20020705B /* SendData.swift */; };
 		53A02FFA2CC616D000D6DAE0 /* Eyetrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A02FF92CC616D000D6DAE0 /* Eyetrack.swift */; };
-		53B04FB22BD3EF0100B3561D /* GQA_dataset.csv in Resources */ = {isa = PBXBuildFile; fileRef = 53B04FB12BD3EF0100B3561D /* GQA_dataset.csv */; };
+		53D9E6022CC7618E00DD99CE /* GQA_dataset.csv in Resources */ = {isa = PBXBuildFile; fileRef = 53D9E6012CC7618E00DD99CE /* GQA_dataset.csv */; };
 		53EB55C32AEB7EDE001A9A9A /* TimeCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB55C22AEB7EDE001A9A9A /* TimeCount.swift */; };
 		53EBF9A82B2B4725001BAD4E /* QuestionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EBF9A72B2B4725001BAD4E /* QuestionListView.swift */; };
 /* End PBXBuildFile section */
@@ -84,7 +84,7 @@
 		5351872F2AF8050800F6CAF9 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		5373C73C2BE943A20020705B /* SendData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendData.swift; sourceTree = "<group>"; };
 		53A02FF92CC616D000D6DAE0 /* Eyetrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eyetrack.swift; sourceTree = "<group>"; };
-		53B04FB12BD3EF0100B3561D /* GQA_dataset.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GQA_dataset.csv; path = ../../../../Desktop/GQA_dataset.csv; sourceTree = "<group>"; };
+		53D9E6012CC7618E00DD99CE /* GQA_dataset.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GQA_dataset.csv; path = ../../../Desktop/GQA_dataset.csv; sourceTree = "<group>"; };
 		53EB55C22AEB7EDE001A9A9A /* TimeCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCount.swift; sourceTree = "<group>"; };
 		53EBF9A72B2B4725001BAD4E /* QuestionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,7 +186,7 @@
 		53E3B9C52BCE5777000076D6 /* rsrc */ = {
 			isa = PBXGroup;
 			children = (
-				53B04FB12BD3EF0100B3561D /* GQA_dataset.csv */,
+				53D9E6012CC7618E00DD99CE /* GQA_dataset.csv */,
 			);
 			path = rsrc;
 			sourceTree = "<group>";
@@ -302,8 +302,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				532A49962AC570BE00286B87 /* Assets.xcassets in Resources */,
-				53B04FB22BD3EF0100B3561D /* GQA_dataset.csv in Resources */,
 				532A49A82AC5AAAC00286B87 /* GoogleService-Info.plist in Resources */,
+				53D9E6022CC7618E00DD99CE /* GQA_dataset.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +488,7 @@
 				DEVELOPMENT_TEAM = ZY6FK4H66Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "内カメラの利用";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -521,6 +522,7 @@
 				DEVELOPMENT_TEAM = ZY6FK4H66Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "内カメラの利用";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
