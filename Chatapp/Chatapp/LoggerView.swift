@@ -10,6 +10,10 @@ import Combine
 import FirebaseFirestore
 
 struct Logger : View {
+    
+//    @ObservedObject var motionsensor = MotionSensor()
+    @EnvironmentObject var motionsensor: MotionSensor
+    
     @EnvironmentObject var timerController: TimerCount
     @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var dataStatus: DataStatus
@@ -212,9 +216,25 @@ struct Logger : View {
                 Text("スクロール長さ：\(abs(endposition - startposition))")
                 Text("スクロール時間：\(ScrollingTime)")
                 Text("スクロール速度：\(abs(ScrollSpeed))")
-//                
+                Text("attitudeX:\(motionsensor.attitudeX)")
+                Text("attitudeY:\(motionsensor.attitudeY)")
+                Text("attitudeZ:\(motionsensor.attitudeZ)")
+                Text("gyroX:\(motionsensor.gyroX)")
+                Text("gyroY:\(motionsensor.gyroY)")
+                Text("gyroZ:\(motionsensor.gyroZ)")
+                Text("gravityX:\(motionsensor.gravityX)")
+                Text("gravityY:\(motionsensor.gravityY)")
+                Text("gravityZ:\(motionsensor.gravityZ)")
+                Text("accX:\(motionsensor.userAccX)")
+                Text("accY:\(motionsensor.userAccY)")
+                Text("accZ:\(motionsensor.userAccZ)")
+
             }.background(Color.white)
+        }.onAppear {
+            motionsensor.startSensorUpdates(intervalSeconds: 0.1)
+            print("正常に呼び出されているはず")
         }
+        
         Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollCount: $ScrollCount, ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum, timelimit: $timelimit, QuestionNum: $QuestionNum)
     }
 }

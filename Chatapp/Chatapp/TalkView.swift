@@ -13,6 +13,9 @@ import UIKit
 import Combine
 
 struct Talk: View {
+    
+//    @ObservedObject var sensor = MotionSensor()
+    
     @EnvironmentObject var Q: QuestionList
     @EnvironmentObject var userStore: UserStore
 //    @ObservedObject var dataset = Dataset()
@@ -331,7 +334,7 @@ struct Talk: View {
                 }
             }
             
-            EyetrackView()
+//            EyetrackView()
             
         }
     }
