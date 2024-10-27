@@ -10,9 +10,9 @@ import Combine
 import FirebaseFirestore
 
 struct Logger : View {
-    
-//    @ObservedObject var motionsensor = MotionSensor()
+
     @EnvironmentObject var motionsensor: MotionSensor
+    @EnvironmentObject var dataSender: SensorDataSender
     
     @EnvironmentObject var timerController: TimerCount
     @EnvironmentObject var userStore: UserStore
@@ -232,8 +232,34 @@ struct Logger : View {
             }.background(Color.white)
         }.onAppear {
             motionsensor.startSensorUpdates(intervalSeconds: 0.1)
-            print("正常に呼び出されているはず")
+            dataSender.startCollectingDataRegularly(interval: 1.0) {
+                                dataSender.sendLogData(
+                                    event: event,
+                                    screenWidth: Int(screenWidth),
+                                    screenHeight: Int(screenHeight),
+                                    viewPosition: abs(offsetY - initOffsetY),
+                                    taskNum: taskNum,
+                                    questionNum: QuestionNum,
+                                    tapNum: tapNum,
+                                    timeCount: TimeCount,
+                                    tapPositionX: tapPosition_x,
+                                    tapPositionY: tapPosition_y,
+                                    leftChoice: LeftChoice,
+                                    rightChoice: RightChoice,
+                                    isAnswerCorrect: isAnswerCorrect,
+                                    responseTimeCount: ResponseTimeCount,
+                                    responseTimeAve: response_time_ave,
+                                    scrollCount: ScrollCount,
+                                    scrollLength: abs(endposition - startposition),
+                                    scrollingTime: ScrollingTime,
+                                    scrollSpeed: ScrollSpeed,
+                                    userStoreEmail: userStore.email
+                                )
+                            }
         }
+        .onDisappear {
+                        dataSender.stopSendingData() // 表示が消えたら停止
+                    }
         
         Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollCount: $ScrollCount, ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum, timelimit: $timelimit, QuestionNum: $QuestionNum)
     }
@@ -347,6 +373,9 @@ struct Choice : View {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: sendData)
             request.httpBody = jsonData
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                    print("正しく送信されてるJSONデータ: \(jsonString)")
+                }
         } catch {
             print("Error: \(error)")
         }
