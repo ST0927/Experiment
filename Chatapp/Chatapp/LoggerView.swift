@@ -211,28 +211,28 @@ struct Logger : View {
 //                } else {
 //                    Text("回答の正誤：誤")
 //                }
-                Text("画面位置：\(abs(offsetY - initOffsetY))")
-                Text("スクロール回数：\(ScrollCount)")
-                Text("スクロール長さ：\(abs(endposition - startposition))")
-                Text("スクロール時間：\(ScrollingTime)")
-                Text("スクロール速度：\(abs(ScrollSpeed))")
-                Text("attitudeX:\(motionsensor.attitudeX)")
-                Text("attitudeY:\(motionsensor.attitudeY)")
-                Text("attitudeZ:\(motionsensor.attitudeZ)")
-                Text("gyroX:\(motionsensor.gyroX)")
-                Text("gyroY:\(motionsensor.gyroY)")
-                Text("gyroZ:\(motionsensor.gyroZ)")
-                Text("gravityX:\(motionsensor.gravityX)")
-                Text("gravityY:\(motionsensor.gravityY)")
-                Text("gravityZ:\(motionsensor.gravityZ)")
-                Text("accX:\(motionsensor.userAccX)")
-                Text("accY:\(motionsensor.userAccY)")
-                Text("accZ:\(motionsensor.userAccZ)")
+//                Text("画面位置：\(abs(offsetY - initOffsetY))")
+//                Text("スクロール回数：\(ScrollCount)")
+//                Text("スクロール長さ：\(abs(endposition - startposition))")
+//                Text("スクロール時間：\(ScrollingTime)")
+//                Text("スクロール速度：\(abs(ScrollSpeed))")
+//                Text("attitudeX:\(motionsensor.attitudeX)")
+//                Text("attitudeY:\(motionsensor.attitudeY)")
+//                Text("attitudeZ:\(motionsensor.attitudeZ)")
+//                Text("gyroX:\(motionsensor.gyroX)")
+//                Text("gyroY:\(motionsensor.gyroY)")
+//                Text("gyroZ:\(motionsensor.gyroZ)")
+//                Text("gravityX:\(motionsensor.gravityX)")
+//                Text("gravityY:\(motionsensor.gravityY)")
+//                Text("gravityZ:\(motionsensor.gravityZ)")
+//                Text("accX:\(motionsensor.userAccX)")
+//                Text("accY:\(motionsensor.userAccY)")
+//                Text("accZ:\(motionsensor.userAccZ)")
 
             }.background(Color.white)
         }.onAppear {
             motionsensor.startSensorUpdates(intervalSeconds: 0.1)
-            dataSender.startCollectingDataRegularly(interval: 1.0) {
+            dataSender.startCollectingDataRegularly() {
                                 dataSender.sendLogData(
                                     event: event,
                                     screenWidth: Int(screenWidth),
@@ -253,7 +253,19 @@ struct Logger : View {
                                     scrollLength: abs(endposition - startposition),
                                     scrollingTime: ScrollingTime,
                                     scrollSpeed: ScrollSpeed,
-                                    userStoreEmail: userStore.email
+                                    userStoreEmail: userStore.email,
+                                    attitudeX: motionsensor.attitudeX,
+                                    attitudeY: motionsensor.attitudeY,
+                                    attitudeZ: motionsensor.attitudeZ,
+                                    gyroX: motionsensor.gyroX,
+                                    gyroY: motionsensor.gyroY,
+                                    gyroZ: motionsensor.gyroZ,
+                                    gravityX: motionsensor.gravityX,
+                                    gravityY: motionsensor.gravityY,
+                                    gravityZ: motionsensor.gravityZ,
+                                    userAccX: motionsensor.userAccX,
+                                    userAccY: motionsensor.userAccY,
+                                    userAccZ: motionsensor.userAccZ
                                 )
                             }
         }
