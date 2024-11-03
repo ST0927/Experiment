@@ -64,6 +64,8 @@
 		536D64192AE12C240027C8AC /* OpenAIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 536D64182AE12C240027C8AC /* OpenAIKit */; };
 		5373C73D2BE943A20020705B /* SendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373C73C2BE943A20020705B /* SendData.swift */; };
 		537691B52CCB78E5009B5EDE /* CoreMotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537691B42CCB78E5009B5EDE /* CoreMotion.swift */; };
+		537691B82CD38D38009B5EDE /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 537691B62CD38D38009B5EDE /* Model.xcdatamodeld */; };
+		537691BE2CD4A1E3009B5EDE /* CSVExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537691BD2CD4A1E3009B5EDE /* CSVExportView.swift */; };
 		537E2C772CC7795E0069E772 /* GQA_dataset.csv in Resources */ = {isa = PBXBuildFile; fileRef = 537E2C762CC7795E0069E772 /* GQA_dataset.csv */; };
 		53A02FFA2CC616D000D6DAE0 /* Eyetrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A02FF92CC616D000D6DAE0 /* Eyetrack.swift */; };
 		53EB55C32AEB7EDE001A9A9A /* TimeCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53EB55C22AEB7EDE001A9A9A /* TimeCount.swift */; };
@@ -85,6 +87,8 @@
 		5351872F2AF8050800F6CAF9 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		5373C73C2BE943A20020705B /* SendData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendData.swift; sourceTree = "<group>"; };
 		537691B42CCB78E5009B5EDE /* CoreMotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotion.swift; sourceTree = "<group>"; };
+		537691B72CD38D38009B5EDE /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		537691BD2CD4A1E3009B5EDE /* CSVExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVExportView.swift; sourceTree = "<group>"; };
 		537E2C762CC7795E0069E772 /* GQA_dataset.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = GQA_dataset.csv; path = "../../../Desktop/バックアップ/GQA_dataset.csv"; sourceTree = "<group>"; };
 		53A02FF92CC616D000D6DAE0 /* Eyetrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Eyetrack.swift; sourceTree = "<group>"; };
 		53EB55C22AEB7EDE001A9A9A /* TimeCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCount.swift; sourceTree = "<group>"; };
@@ -178,8 +182,10 @@
 				5373C73C2BE943A20020705B /* SendData.swift */,
 				53EB55C22AEB7EDE001A9A9A /* TimeCount.swift */,
 				533FC0EE2BA1BE9600ACE910 /* LoggerView.swift */,
+				537691B62CD38D38009B5EDE /* Model.xcdatamodeld */,
 				53A02FF92CC616D000D6DAE0 /* Eyetrack.swift */,
 				537691B42CCB78E5009B5EDE /* CoreMotion.swift */,
+				537691BD2CD4A1E3009B5EDE /* CSVExportView.swift */,
 				532A49952AC570BE00286B87 /* Assets.xcassets */,
 				532A49A72AC5AAAC00286B87 /* GoogleService-Info.plist */,
 			);
@@ -340,6 +346,7 @@
 			files = (
 				531D55772AC7E906008D3EFF /* UserStore.swift in Sources */,
 				5373C73D2BE943A20020705B /* SendData.swift in Sources */,
+				537691B82CD38D38009B5EDE /* Model.xcdatamodeld in Sources */,
 				53A02FFA2CC616D000D6DAE0 /* Eyetrack.swift in Sources */,
 				53EB55C32AEB7EDE001A9A9A /* TimeCount.swift in Sources */,
 				537691B52CCB78E5009B5EDE /* CoreMotion.swift in Sources */,
@@ -347,6 +354,7 @@
 				532A49A22AC5714400286B87 /* LoginView.swift in Sources */,
 				532A49A62AC571C400286B87 /* PasswordResetView.swift in Sources */,
 				532A49942AC570BC00286B87 /* ContentView.swift in Sources */,
+				537691BE2CD4A1E3009B5EDE /* CSVExportView.swift in Sources */,
 				53063F562B11C9E1002AFE61 /* TalkView.swift in Sources */,
 				532A49922AC570BC00286B87 /* ChatappApp.swift in Sources */,
 				532A49A42AC5718900286B87 /* RegistrationView.swift in Sources */,
@@ -820,6 +828,19 @@
 			productName = OpenAIKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		537691B62CD38D38009B5EDE /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				537691B72CD38D38009B5EDE /* Model.xcdatamodel */,
+			);
+			currentVersion = 537691B72CD38D38009B5EDE /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 532A49862AC570BC00286B87 /* Project object */;
 }

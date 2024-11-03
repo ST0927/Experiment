@@ -30,6 +30,7 @@ struct ChatappApp: App {
                 .environmentObject(Dataset())
                 .environmentObject(MotionSensor())
                 .environmentObject(SensorDataSender())
+                .environmentObject(SaveData())
 //                .environmentObject(BufferSendData())
             
             //アプリ内全てで共有したいならここでenvironmentObjectとして宣言する?
