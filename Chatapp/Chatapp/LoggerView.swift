@@ -12,13 +12,7 @@ import CoreData
 
 struct Logger : View {
     
-//    @Environment(\.managedObjectContext) private var viewContext
-    @EnvironmentObject var saveData: SaveData
-//    @FetchRequest(
-//            entity: PostSensorData.entity(),
-//            sortDescriptors: [NSSortDescriptor(keyPath: \PostSensorData.timestamp, ascending: true)],
-//            predicate: nil
-//        ) private var coreData: FetchedResults<PostSensorData>
+    
     
     @EnvironmentObject var motionsensor: MotionSensor
     @EnvironmentObject var dataSender: SensorDataSender
@@ -241,48 +235,49 @@ struct Logger : View {
             }.background(Color.white)
         }.onAppear {
             motionsensor.startSensorUpdates(intervalSeconds: 0.1)
-            saveData.startSavingDataRegularly() {
-                saveData.savePostSurveyData()
-            }
-//            dataSender.startCollectingDataRegularly() {
-//                                dataSender.sendLogData(
-//                                    event: event,
-//                                    screenWidth: Int(screenWidth),
-//                                    screenHeight: Int(screenHeight),
-//                                    viewPosition: abs(offsetY - initOffsetY),
-//                                    taskNum: taskNum,
-//                                    questionNum: QuestionNum,
-//                                    tapNum: tapNum,
-//                                    timeCount: TimeCount,
-//                                    tapPositionX: tapPosition_x,
-//                                    tapPositionY: tapPosition_y,
-//                                    leftChoice: LeftChoice,
-//                                    rightChoice: RightChoice,
-//                                    isAnswerCorrect: isAnswerCorrect,
-//                                    responseTimeCount: ResponseTimeCount,
-//                                    responseTimeAve: response_time_ave,
-//                                    scrollCount: ScrollCount,
-//                                    scrollLength: abs(endposition - startposition),
-//                                    scrollingTime: ScrollingTime,
-//                                    scrollSpeed: ScrollSpeed,
-//                                    userStoreEmail: userStore.email,
-//                                    attitudeX: motionsensor.attitudeX,
-//                                    attitudeY: motionsensor.attitudeY,
-//                                    attitudeZ: motionsensor.attitudeZ,
-//                                    gyroX: motionsensor.gyroX,
-//                                    gyroY: motionsensor.gyroY,
-//                                    gyroZ: motionsensor.gyroZ,
-//                                    gravityX: motionsensor.gravityX,
-//                                    gravityY: motionsensor.gravityY,
-//                                    gravityZ: motionsensor.gravityZ,
-//                                    userAccX: motionsensor.userAccX,
-//                                    userAccY: motionsensor.userAccY,
-//                                    userAccZ: motionsensor.userAccZ
-//                                )
-//                            }
+            
+//            saveData.startSavingDataRegularly() {
+//                saveData.savePostSurveyData()
+//            }
+            dataSender.startCollectingDataRegularly() {
+                                dataSender.accumulateData(
+                                    event: event,
+                                    screenWidth: Int(screenWidth),
+                                    screenHeight: Int(screenHeight),
+                                    viewPosition: abs(offsetY - initOffsetY),
+                                    taskNum: taskNum,
+                                    questionNum: QuestionNum,
+                                    tapNum: tapNum,
+                                    timeCount: TimeCount,
+                                    tapPositionX: tapPosition_x,
+                                    tapPositionY: tapPosition_y,
+                                    leftChoice: LeftChoice,
+                                    rightChoice: RightChoice,
+                                    isAnswerCorrect: isAnswerCorrect,
+                                    responseTimeCount: ResponseTimeCount,
+                                    responseTimeAve: response_time_ave,
+                                    scrollCount: ScrollCount,
+                                    scrollLength: abs(endposition - startposition),
+                                    scrollingTime: ScrollingTime,
+                                    scrollSpeed: ScrollSpeed,
+                                    userStoreEmail: userStore.email,
+                                    attitudeX: motionsensor.attitudeX,
+                                    attitudeY: motionsensor.attitudeY,
+                                    attitudeZ: motionsensor.attitudeZ,
+                                    gyroX: motionsensor.gyroX,
+                                    gyroY: motionsensor.gyroY,
+                                    gyroZ: motionsensor.gyroZ,
+                                    gravityX: motionsensor.gravityX,
+                                    gravityY: motionsensor.gravityY,
+                                    gravityZ: motionsensor.gravityZ,
+                                    userAccX: motionsensor.userAccX,
+                                    userAccY: motionsensor.userAccY,
+                                    userAccZ: motionsensor.userAccZ
+                                )
+                            }
         }
         .onDisappear {
-            saveData.stopSavingData()
+//            saveData.stopSavingData()
 //                        dataSender.stopSendingData() // 表示が消えたら停止
                     }
         

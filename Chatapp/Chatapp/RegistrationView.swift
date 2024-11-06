@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+
 struct RegistrationView: View {
     @State var email = ""
     @State var password = ""
