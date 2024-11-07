@@ -40,101 +40,45 @@ class SensorDataSender: ObservableObject {
         timer?.invalidate()
         timer = nil
     }
-
-    // データ送信
-//    func sendLogData(event: String, screenWidth: Int, screenHeight: Int, viewPosition: CGFloat, taskNum: Int, questionNum: Int, tapNum: Int, timeCount: Double, tapPositionX: Double, tapPositionY: Double, leftChoice: Int, rightChoice: Int, isAnswerCorrect: Bool, responseTimeCount: Double, responseTimeAve: Double, scrollCount: Int, scrollLength: Double, scrollingTime: Double, scrollSpeed: Double, userStoreEmail: String,attitudeX: String,attitudeY: String,attitudeZ: String,gyroX: String, gyroY: String, gyroZ: String, gravityX: String, gravityY: String, gravityZ: String, userAccX: String, userAccY: String, userAccZ: String) {
-//        
-//        // UNIXタイムスタンプで現在の時間を取得
-//        let now = Date()
-//        let dateUnix: TimeInterval = now.timeIntervalSince1970
-//
-//        // 送信する内容のリストを作成
-//        let sendData = [
-//            "key": "t9eX8tyr7G_ZQk-2",
-//            "meta": [
-//                "area": 1127,
-//                "type": 1127,
-//                "sensor_id": userStoreEmail,
-//                "data_time": dateUnix
-//            ],
-//            "body": [
-//                "event": event,
-//                "screen_width": screenWidth,
-//                "screen_height": screenHeight,
-//                "view_position": abs(viewPosition),
-//                "taskNum": taskNum,
-//                "QuestionNum": questionNum,
-//                "tap_count": tapNum,
-//                "tap_interval": timeCount,
-//                "tap_position_x": tapPositionX,
-//                "tap_position_y": tapPositionY,
-//                "choice_left": leftChoice,
-//                "choice_right": rightChoice,
-//                "isAnswerCorrect": isAnswerCorrect,
-//                "response_time": responseTimeCount,
-//                "response_time_ave": responseTimeAve,
-//                "scroll_count": scrollCount,
-//                "scroll_length": abs(scrollLength),
-//                "scroll_time": scrollingTime,
-//                "scroll_speed": abs(scrollSpeed),
-//                "attitude_x": attitudeX,
-//                "attitude_y": attitudeY,
-//                "attitude_z": attitudeZ,
-//                "gyro_x": gyroX,
-//                "gyro_y": gyroY,
-//                "gyro_z": gyroZ,
-//                "gravity_x": gravityX,
-//                "gravity_y": gravityY,
-//                "gravity_z": gravityZ,
-//                "userAcc_x": userAccX,
-//                "userAcc_y": userAccY,
-//                "userAcc_z": userAccZ,
-//                
-//                
-//            ]
-//        ] as [String: Any]
-//        
-//        sendSingleData(sendData)
-//    }
     
     // データをすぐに送信せず、配列に貯めていく
-    func accumulateData(event: String, screenWidth: Int, screenHeight: Int, viewPosition: CGFloat, taskNum: Int, questionNum: Int, tapNum: Int, timeCount: Double, tapPositionX: Double, tapPositionY: Double, leftChoice: Int, rightChoice: Int, isAnswerCorrect: Bool, responseTimeCount: Double, responseTimeAve: Double, scrollCount: Int, scrollLength: Double, scrollingTime: Double, scrollSpeed: Double, userStoreEmail: String, attitudeX: String, attitudeY: String, attitudeZ: String, gyroX: String, gyroY: String, gyroZ: String, gravityX: String, gravityY: String, gravityZ: String, userAccX: String, userAccY: String, userAccZ: String) {
+    func accumulateData(event: String, screenW: Int, screenH: Int, viewPos: CGFloat, task: Int, question: Int, taps: Int, tapTime: Double, tapX: Double, tapY: Double, leftCount: Int, rightCount: Int, isCorrect: Bool, idleTime: Double, idleTimeAve: Double, scrolls: Int, scrollLen: Double, scrollTime: Double, scrollSpeed: Double, userEmail: String, attX: Double, attY: Double, attZ: Double, gyroX: Double, gyroY: Double, gyroZ: Double, gravX: Double, gravY: Double, gravZ: Double, accX: Double, accY: Double, accZ: Double) {
         
         let now = Date()
         let dateUnix: TimeInterval = now.timeIntervalSince1970
         let entry: [Any] = [
                 event,
-                screenWidth,
-                screenHeight,
-                abs(viewPosition),
-                taskNum,
-                questionNum,
-                tapNum,
-                timeCount,
-                tapPositionX,
-                tapPositionY,
-                leftChoice,
-                rightChoice,
-                isAnswerCorrect,
-                responseTimeCount,
-                responseTimeAve,
-                scrollCount,
-                abs(scrollLength),
-                scrollingTime,
+                screenW,
+                screenH,
+                abs(viewPos),
+                task,
+                question,
+                taps,
+                tapTime,
+                tapX,
+                tapY,
+                leftCount,
+                rightCount,
+                isCorrect,
+                idleTime,
+                idleTimeAve,
+                scrolls,
+                abs(scrollLen),
+                scrollTime,
                 abs(scrollSpeed),
-                userStoreEmail,
-                attitudeX,
-                attitudeY,
-                attitudeZ,
+                userEmail,
+                attX,
+                attY,
+                attZ,
                 gyroX,
                 gyroY,
                 gyroZ,
-                gravityX,
-                gravityY,
-                gravityZ,
-                userAccX,
-                userAccY,
-                userAccZ,
+                gravX,
+                gravY,
+                gravZ,
+                accX,
+                accY,
+                accZ,
                 dateUnix // UNIXタイムスタンプを含める
             ]
 
