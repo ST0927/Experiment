@@ -15,7 +15,7 @@ class DataStatus : ObservableObject {
 class SensorDataSender: ObservableObject {
     private var timer: Timer?
     private let url = URL(string: "https://datalake.iopt.jp/v1/sensor_data")!
-    private var dataQueue: [[String:Any]] = []  // データを一時的に保持する配列
+    private var dataQueue: [[Any]] = []  // データを一時的に保持する配列
 //    private var dataQueue: [[String: Any]] = []
     private let sendInterval: TimeInterval = 3.0  // n秒ごとにデータを送信
     
@@ -102,41 +102,41 @@ class SensorDataSender: ObservableObject {
         
         let now = Date()
         let dateUnix: TimeInterval = now.timeIntervalSince1970
-        let entry: [String: Any] = [
-                "event": event,
-                "screen_width": screenWidth,
-                "screen_height": screenHeight,
-                "view_position": abs(viewPosition),
-                "taskNum": taskNum,
-                "QuestionNum": questionNum,
-                "tap_count": tapNum,
-                "tap_interval": timeCount,
-                "tap_position_x": tapPositionX,
-                "tap_position_y": tapPositionY,
-                "choice_left": leftChoice,
-                "choice_right": rightChoice,
-                "isAnswerCorrect": isAnswerCorrect,
-                "response_time": responseTimeCount,
-                "response_time_ave": responseTimeAve,
-                "scroll_count": scrollCount,
-                "scroll_length": abs(scrollLength),
-                "scroll_time": scrollingTime,
-                "scroll_speed": abs(scrollSpeed),
-                "attitude_x": attitudeX,
-                "attitude_y": attitudeY,
-                "attitude_z": attitudeZ,
-                "gyro_x": gyroX,
-                "gyro_y": gyroY,
-                "gyro_z": gyroZ,
-                "gravity_x": gravityX,
-                "gravity_y": gravityY,
-                "gravity_z": gravityZ,
-                "userAcc_x": userAccX,
-                "userAcc_y": userAccY,
-                "userAcc_z": userAccZ,
-                "data_time": dateUnix // UNIXタイムスタンプを含める
+        let entry: [Any] = [
+                event,
+                screenWidth,
+                screenHeight,
+                abs(viewPosition),
+                taskNum,
+                questionNum,
+                tapNum,
+                timeCount,
+                tapPositionX,
+                tapPositionY,
+                leftChoice,
+                rightChoice,
+                isAnswerCorrect,
+                responseTimeCount,
+                responseTimeAve,
+                scrollCount,
+                abs(scrollLength),
+                scrollingTime,
+                abs(scrollSpeed),
+                userStoreEmail,
+                attitudeX,
+                attitudeY,
+                attitudeZ,
+                gyroX,
+                gyroY,
+                gyroZ,
+                gravityX,
+                gravityY,
+                gravityZ,
+                userAccX,
+                userAccY,
+                userAccZ,
+                dateUnix // UNIXタイムスタンプを含める
             ]
-//        let entry = "{event: \(event),screen_width: \(screenWidth),screen_height: \(screenHeight),view_position: \(abs(viewPosition)),taskNum: \(taskNum),QuestionNum: \(questionNum),tap_count: \(tapNum),tap_interval: \(timeCount),tap_position_x: \(tapPositionX),tap_position_y: \(tapPositionY),choice_left: \(leftChoice),choice_right: \(rightChoice),isAnswerCorrect: \(isAnswerCorrect),response_time: \(responseTimeCount),response_time_ave: \(responseTimeAve),scroll_count: \(scrollCount),scroll_length: \(abs(scrollLength)),scroll_time: \(scrollingTime),scroll_speed: \(abs(scrollSpeed)),attitude_x: \(attitudeX),attitude_y: \(attitudeY),attitude_z: \(attitudeZ),gyro_x: \(gyroX),gyro_y: \(gyroY),gyro_z: \(gyroZ),gravity_x: \(gravityX),gravity_y: \(gravityY),gravity_z: \(gravityZ),userAcc_x: \(userAccX),userAcc_y: \(userAccY),userAcc_z: \(userAccZ),data_time: \(dateUnix)},"
 
             // データをキューに追加
         dataQueue.append(entry)//        print("データを追加しました")
