@@ -8,8 +8,14 @@
 import SwiftUI
 import Combine
 import FirebaseFirestore
+import CoreData
 
 struct Logger : View {
+    
+    
+    
+    @EnvironmentObject var motionsensor: MotionSensor
+    @EnvironmentObject var dataSender: SensorDataSender
     @EnvironmentObject var timerController: TimerCount
     @EnvironmentObject var userStore: UserStore
     @EnvironmentObject var dataStatus: DataStatus
@@ -123,6 +129,7 @@ struct Logger : View {
                                  "scroll_time":ScrollingTime,
                                  "scroll_speed":abs(ScrollSpeed)
                                  ]
+                        
                         ] as [String: Any]
         
         //送信する内容をJSON形式に変更してHTTPリクエストのボディに設定
@@ -207,16 +214,94 @@ struct Logger : View {
 //                } else {
 //                    Text("回答の正誤：誤")
 //                }
-                Text("画面位置：\(abs(offsetY - initOffsetY))")
-                Text("スクロール回数：\(ScrollCount)")
-                Text("スクロール長さ：\(abs(endposition - startposition))")
-                Text("スクロール時間：\(ScrollingTime)")
-                Text("スクロール速度：\(abs(ScrollSpeed))")
-//                
+//                Text("画面位置：\(abs(offsetY - initOffsetY))")
+//                Text("スクロール回数：\(ScrollCount)")
+//                Text("スクロール長さ：\(abs(endposition - startposition))")
+//                Text("スクロール時間：\(ScrollingTime)")
+//                Text("スクロール速度：\(abs(ScrollSpeed))")
+//                Text("attitudeX:\(motionsensor.attitudeX)")
+//                Text("attitudeY:\(motionsensor.attitudeY)")
+//                Text("attitudeZ:\(motionsensor.attitudeZ)")
+//                Text("gyroX:\(motionsensor.gyroX)")
+//                Text("gyroY:\(motionsensor.gyroY)")
+//                Text("gyroZ:\(motionsensor.gyroZ)")
+//                Text("gravityX:\(motionsensor.gravityX)")
+//                Text("gravityY:\(motionsensor.gravityY)")
+//                Text("gravityZ:\(motionsensor.gravityZ)")
+//                Text("accX:\(motionsensor.userAccX)")
+//                Text("accY:\(motionsensor.userAccY)")
+//                Text("accZ:\(motionsensor.userAccZ)")
+
             }.background(Color.white)
+        }.onAppear {
+            motionsensor.startSensorUpdates(intervalSeconds: 0.1)
+            
+//            saveData.startSavingDataRegularly() {
+//                saveData.savePostSurveyData()
+//            }
+            dataSender.startCollectingDataRegularly() {
+                                dataSender.accumulateData(
+                                    event: event,
+                                    screenW: Int(screenWidth),
+                                    screenH: Int(screenHeight),
+                                    viewPos: abs(offsetY - initOffsetY),
+                                    task: taskNum,
+                                    question: QuestionNum,
+                                    taps: tapNum,
+                                    tapTime: TimeCount,
+                                    tapX: tapPosition_x,
+                                    tapY: tapPosition_y,
+                                    leftCount: LeftChoice,
+                                    rightCount: RightChoice,
+                                    isCorrect: isAnswerCorrect,
+                                    idleTime: ResponseTimeCount,
+                                    idleTimeAve: response_time_ave,
+                                    scrolls: ScrollCount,
+                                    scrollLen: abs(endposition - startposition),
+                                    scrollTime: ScrollingTime,
+                                    scrollSpeed: ScrollSpeed,
+                                    userEmail: userStore.email,
+                                    attX: motionsensor.attitudeX,
+                                    attY: motionsensor.attitudeY,
+                                    attZ: motionsensor.attitudeZ,
+                                    gyroX: motionsensor.gyroX,
+                                    gyroY: motionsensor.gyroY,
+                                    gyroZ: motionsensor.gyroZ,
+                                    gravX: motionsensor.gravityX,
+                                    gravY: motionsensor.gravityY,
+                                    gravZ: motionsensor.gravityZ,
+                                    accX: motionsensor.userAccX,
+                                    accY: motionsensor.userAccY,
+                                    accZ: motionsensor.userAccZ
+                                )
+                            }
         }
+        .onDisappear {
+//            saveData.stopSavingData()
+//                        dataSender.stopSendingData() // 表示が消えたら停止
+                    }
+        
         Choice(tapNum: $tapNum, LeftChoice: $LeftChoice, RightChoice: $RightChoice,TimeCount: $TimeCount,time: $time,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts,ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled, message_len: $message_len,  text_len:$text_len,text_len_ave:$text_len_ave,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,Delete:$Delete,offsetY:$offsetY,initOffsetY:$initOffsetY,startposition:$startposition,endposition:$endposition,ScrollCount: $ScrollCount, ScrollingTime:$ScrollingTime,ScrollSpeed:$ScrollSpeed, responseData: $responseData,isAnswerCorrect: $isAnswerCorrect,taskNum: $taskNum, timelimit: $timelimit, QuestionNum: $QuestionNum)
     }
+    
+//    func savePostSurveyData() {
+//        let newData = PostSensorData(context: viewContext)
+//        newData.userID = userStore.userID
+//        
+//        
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        newData.timestamp = formatter.string(from: Date())
+//        
+//        do {
+//            try viewContext.save()
+//            print("アンケートが保存されました")
+//        } catch {
+//            let nsError = error as NSError
+//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+//        }
+//    }
+
 }
 
 struct Choice : View {
@@ -327,6 +412,9 @@ struct Choice : View {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: sendData)
             request.httpBody = jsonData
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                    print("正しく送信されてるJSONデータ: \(jsonString)")
+                }
         } catch {
             print("Error: \(error)")
         }

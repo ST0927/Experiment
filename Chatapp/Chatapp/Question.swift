@@ -45,7 +45,7 @@ class Dataset : ObservableObject {
 //                        rows.insert(emptyRow, at: 0)
 //                    }
                 }
-                print(csvArray)
+//                print(csvArray)
             } catch {
                 print("CSVファイルの読み込みに失敗：\(error)")
             }

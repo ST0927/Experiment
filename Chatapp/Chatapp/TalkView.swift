@@ -13,6 +13,7 @@ import UIKit
 import Combine
 
 struct Talk: View {
+    
     @EnvironmentObject var Q: QuestionList
     @EnvironmentObject var userStore: UserStore
 //    @ObservedObject var dataset = Dataset()
@@ -141,6 +142,7 @@ struct Talk: View {
     
     var body: some View {
         ZStack {
+            
             Color(red:1.0,green:0.98,blue:0.94)
             VStack(alignment: .leading) {
                 ScrollViewReader { proxy in
@@ -289,6 +291,9 @@ struct Talk: View {
             }
             Logger(offsetY: $offsetY, initOffsetY: $initOffsetY, pre: $pre, current: $current, scroll: $scroll, startposition: $startposition, endposition: $endposition, ScrollingTime: $ScrollingTime, ScrollSpeed: $ScrollSpeed, UnScrollTimeCount: $UnScrollTimeCount,key_message: $key_message,key_history: $key_history,message_len: $message_len,Delete: $Delete,ResponseTimeCount: $ResponseTimeCount,ResponseTimeCounts: $ResponseTimeCounts, ButtonDisabled: $ButtonDisabled,TextfieldDisabled: $TextfieldDisabled,response_time_ave:$response_time_ave,event:$event,screenWidth:$screenWidth,screenHeight:$screenHeight,tapPosition_x:$tapPosition_x,tapPosition_y:$tapPosition_y,isAnswerCorrect:$isAnswerCorrect,taskNum:$taskNum,tapNum:$tapNum,LeftChoice:$LeftChoice,RightChoice:$RightChoice,TimeCount:$TimeCount, responseData:$responseData, ScrollCount: $ScrollCount, timelimit: $timelimit, QuestionNum: $QuestionNum)
                 .environmentObject(TimerCount())
+            
+//            EyetrackView()
+//                .allowsHitTesting(false) //スクロールだけ貫通させる
             
             VStack {
                 Spacer()
